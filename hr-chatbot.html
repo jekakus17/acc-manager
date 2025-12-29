@@ -135,7 +135,6 @@
             flex-direction: column;
             background: var(--bg-light);
             height: 100%;
-            overflow: hidden;
         }
 
         .chat-header {
@@ -176,10 +175,12 @@
         .chat-messages {
             flex: 1;
             overflow-y: auto;
+            overflow-x: hidden;
             padding: 30px;
             display: flex;
             flex-direction: column;
             gap: 20px;
+            min-height: 0;
         }
 
         .message {
