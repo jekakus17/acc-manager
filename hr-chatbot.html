@@ -45,7 +45,6 @@
             display: grid;
             grid-template-columns: 350px 1fr;
             height: calc(100vh - 40px);
-            max-height: 900px;
         }
 
         /* Боковая панель */
@@ -311,6 +310,8 @@
             gap: 15px;
             align-items: center;
             flex-shrink: 0;
+            position: sticky;
+            bottom: 0;
             z-index: 10;
         }
 
