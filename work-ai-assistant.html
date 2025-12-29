@@ -27,10 +27,12 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            overflow: hidden;
         }
 
         .container {
@@ -42,9 +44,8 @@
             overflow: hidden;
             display: grid;
             grid-template-columns: 350px 1fr;
-            height: 90vh;
-            min-height: 600px;
-            max-height: 90vh;
+            height: calc(100vh - 40px);
+            max-height: 900px;
         }
 
         /* Боковая панель */
@@ -182,13 +183,14 @@
 
         .chat-messages {
             flex: 1;
-            overflow-y: auto;
+            overflow-y: scroll;
             overflow-x: hidden;
             padding: 30px;
             display: flex;
             flex-direction: column;
             gap: 20px;
             min-height: 0;
+            -webkit-overflow-scrolling: touch;
         }
 
         .message {
@@ -317,8 +319,6 @@
             gap: 15px;
             align-items: center;
             flex-shrink: 0;
-            position: sticky;
-            bottom: 0;
             z-index: 10;
         }
 
