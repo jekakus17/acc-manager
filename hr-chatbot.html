@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR AI Ассистент - Делегируйте рутину нейросетям</title>
+    <style>
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #8b5cf6;
+            --success-color: #10b981;
+            --danger-color: #ef4444;
+            --bg-light: #f8fafc;
+            --bg-dark: #1e293b;
+            --text-dark: #0f172a;
+            --text-light: #64748b;
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            height: 90vh;
+            max-height: 800px;
+        }
+
+        /* Боковая панель */
+        .sidebar {
+            background: linear-gradient(180deg, #4f46e5 0%, #6366f1 100%);
+            color: white;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .sidebar h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .sidebar p {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .quick-actions {
+            margin-bottom: 30px;
+        }
+
+        .quick-actions h3 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .action-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 12px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+            margin-bottom: 10px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .action-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(5px);
+        }
+
+        .action-btn .emoji {
+            font-size: 20px;
+        }
+
+        .stats {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: auto;
+        }
+
+        .stats h4 {
+            font-size: 14px;
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+
+        .stat-value {
+            font-weight: bold;
+        }
+
+        /* Чат */
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            background: var(--bg-light);
+        }
+
+        .chat-header {
+            background: white;
+            padding: 20px 30px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header h2 {
+            color: var(--text-dark);
+            font-size: 20px;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success-color);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .message {
+            display: flex;
+            gap: 12px;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message.user {
+            flex-direction: row-reverse;
+        }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .message.bot .message-avatar {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .message.user .message-avatar {
+            background: var(--success-color);
+        }
+
+        .message-content {
+            max-width: 70%;
+            background: white;
+            padding: 15px 20px;
+            border-radius: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .message.user .message-content {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .message-text {
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .message-options {
+            margin-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .option-btn {
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.3s ease;
+            color: var(--text-dark);
+        }
+
+        .option-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .task-card {
+            background: var(--bg-light);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 10px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .task-card h4 {
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .task-card p {
+            color: var(--text-light);
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .task-tools {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tool-tag {
+            background: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* Форма ввода */
+        .chat-input {
+            background: white;
+            padding: 20px 30px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .input-wrapper {
+            flex: 1;
+            position: relative;
+        }
+
+        .chat-input input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 25px;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .chat-input input:focus {
+            border-color: var(--primary-color);
+        }
+
+        .send-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .send-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+        }
+
+        .send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: scale(1);
+        }
+
+        /* Typing indicator */
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+            padding: 15px;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--text-light);
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-10px); }
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                height: 100vh;
+                max-height: none;
+                border-radius: 0;
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+            .message-content {
+                max-width: 85%;
+            }
+        }
+
+        /* Скроллбар */
+        .chat-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 3px;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb:hover {
+            background: var(--text-light);
+        }
+
+        .prompt-box {
+            background: #f0f9ff;
+            border: 1px solid #0ea5e9;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            color: #0c4a6e;
+            position: relative;
+        }
+
+        .copy-prompt-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: #0ea5e9;
+            color: white;
+            border: none;
+            padding: 4px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 11px;
+        }
+
+        .copy-prompt-btn:hover {
+            background: #0284c7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Боковая панель -->
+        <div class="sidebar">
+            <h1>🤖 HR AI Ассистент</h1>
+            <p>Помогаю делегировать рутинные HR-задачи нейросетям и экономить до 20 часов в неделю</p>
+
+            <div class="quick-actions">
+                <h3>Быстрые действия</h3>
+                <button class="action-btn" onclick="quickAction('screening')">
+                    <span class="emoji">📋</span>
+                    <span>Скрининг резюме</span>
+                </button>
+                <button class="action-btn" onclick="quickAction('interview')">
+                    <span class="emoji">💬</span>
+                    <span>Подготовка к интервью</span>
+                </button>
+                <button class="action-btn" onclick="quickAction('job')">
+                    <span class="emoji">✍️</span>
+                    <span>Написать вакансию</span>
+                </button>
+                <button class="action-btn" onclick="quickAction('outreach')">
+                    <span class="emoji">📧</span>
+                    <span>Письма кандидатам</span>
+                </button>
+                <button class="action-btn" onclick="quickAction('onboarding')">
+                    <span class="emoji">🎯</span>
+                    <span>Онбординг план</span>
+                </button>
+                <button class="action-btn" onclick="quickAction('assessment')">
+                    <span class="emoji">📊</span>
+                    <span>Оценка кандидатов</span>
+                </button>
+            </div>
+
+            <div class="stats">
+                <h4>Статистика экономии</h4>
+                <div class="stat-item">
+                    <span>Задач автоматизировано:</span>
+                    <span class="stat-value" id="tasksCount">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>Часов сэкономлено:</span>
+                    <span class="stat-value" id="hoursCount">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>Промптов использовано:</span>
+                    <span class="stat-value" id="promptsCount">0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Чат -->
+        <div class="chat-container">
+            <div class="chat-header">
+                <h2>Чат с AI ассистентом</h2>
+                <div class="status">
+                    <div class="status-dot"></div>
+                    <span>Онлайн</span>
+                </div>
+            </div>
+
+            <div class="chat-messages" id="chatMessages">
+                <!-- Сообщения будут добавляться сюда -->
+            </div>
+
+            <div class="chat-input">
+                <div class="input-wrapper">
+                    <input
+                        type="text"
+                        id="messageInput"
+                        placeholder="Опишите задачу или выберите действие из меню..."
+                        onkeypress="handleKeyPress(event)"
+                    />
+                </div>
+                <button class="send-btn" onclick="sendMessage()">Отправить</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // База знаний HR-задач
+        const hrTasks = {
+            screening: {
+                title: "Скрининг резюме",
+                description: "Анализ и отбор резюме кандидатов по критериям",
+                timeSaved: 3,
+                tools: ["ChatGPT", "Claude", "Notion AI"],
+                prompt: `Проанализируй это резюме на соответствие следующим требованиям вакансии:
+
+[ВАКАНСИЯ]
+Должность: [название]
+Ключевые требования:
+- [требование 1]
+- [требование 2]
+- [требование 3]
+
+[РЕЗЮМЕ]
+[вставь текст резюме]
+
+Оцени по шкале 1-10 и дай короткое обоснование:
+1. Соответствие опыту
+2. Соответствие навыкам
+3. Соответствие образованию
+4. Общая оценка
+
+Рекомендация: Пригласить/Отклонить`
+            },
+            interview: {
+                title: "Подготовка к интервью",
+                description: "Генерация вопросов для собеседования",
+                timeSaved: 2,
+                tools: ["ChatGPT", "Claude", "Perplexity"],
+                prompt: `Сгенерируй список из 15 вопросов для интервью на позицию:
+
+Должность: [название позиции]
+Уровень: [Junior/Middle/Senior]
+Ключевые компетенции: [список]
+
+Структура вопросов:
+- 5 технических вопросов
+- 5 поведенческих вопросов (STAR метод)
+- 5 ситуационных кейсов
+
+Для каждого вопроса укажи:
+1. Сам вопрос
+2. Что проверяет
+3. Критерии хорошего ответа`
+            },
+            job: {
+                title: "Написание вакансии",
+                description: "Создание привлекательного описания вакансии",
+                timeSaved: 1.5,
+                tools: ["ChatGPT", "Jasper", "Copy.ai"],
+                prompt: `Напиши привлекательное описание вакансии:
+
+Должность: [название]
+Компания: [название и сфера]
+Локация: [город/удаленка]
+Зарплата: [вилка или "по договоренности"]
+
+Требования:
+- [требование 1]
+- [требование 2]
+
+Обязанности:
+- [обязанность 1]
+- [обязанность 2]
+
+Условия:
+- [условие 1]
+- [условие 2]
+
+Используй:
+- Продающий заголовок
+- Четкую структуру
+- Призыв к действию
+- Современный, живой язык`
+            },
+            outreach: {
+                title: "Письма кандидатам",
+                description: "Персонализированные письма для аутрич",
+                timeSaved: 2.5,
+                tools: ["ChatGPT", "Claude", "Lavender"],
+                prompt: `Напиши персонализированное письмо кандидату:
+
+Кандидат: [Имя]
+Текущая позиция: [должность в компании]
+LinkedIn профиль: [краткое резюме профиля]
+
+Наша вакансия: [название позиции]
+Почему подходит: [2-3 причины]
+
+Требования к письму:
+- Персонализация (упомянуть конкретный опыт)
+- Краткость (до 150 слов)
+- Ценностное предложение
+- Четкий призыв к действию
+- Дружелюбный тон
+
+Тема письма должна быть цепляющей.`
+            },
+            onboarding: {
+                title: "План онбординга",
+                description: "Создание плана адаптации нового сотрудника",
+                timeSaved: 3,
+                tools: ["ChatGPT", "Notion AI", "ClickUp AI"],
+                prompt: `Создай детальный план онбординга нового сотрудника:
+
+Позиция: [название]
+Отдел: [название]
+Длительность: [30/60/90 дней]
+
+План должен включать:
+
+НЕДЕЛЯ 1 (Адаптация):
+- День 1: [активности]
+- Дни 2-5: [активности]
+
+НЕДЕЛИ 2-4 (Обучение):
+- Ключевые обучения
+- Встречи с командой
+- Первые задачи
+
+МЕСЯЦ 2-3 (Интеграция):
+- Проекты
+- Цели
+- Метрики успеха
+
+Для каждого пункта укажи:
+- Что делать
+- Кто ответственный
+- Ожидаемый результат`
+            },
+            assessment: {
+                title: "Оценка кандидатов",
+                description: "Создание матрицы оценки и сравнения кандидатов",
+                timeSaved: 2,
+                tools: ["ChatGPT", "Claude", "Excel + AI"],
+                prompt: `Создай матрицу для оценки и сравнения кандидатов:
+
+Позиция: [название]
+
+Критерии оценки (с весовыми коэффициентами):
+- [критерий 1] - вес [1-5]
+- [критерий 2] - вес [1-5]
+- [критерий 3] - вес [1-5]
+
+Кандидаты для сравнения:
+1. [Имя] - [краткое резюме]
+2. [Имя] - [краткое резюме]
+3. [Имя] - [краткое резюме]
+
+Создай:
+1. Таблицу оценок по каждому критерию (1-10)
+2. Взвешенные баллы
+3. Итоговый рейтинг
+4. Рекомендацию с обоснованием`
+            }
+        };
+
+        // Общие HR-задачи для рекомендаций
+        const commonTasks = [
+            {
+                category: "Рекрутмент",
+                tasks: [
+                    "Написание вакансий",
+                    "Скрининг резюме",
+                    "Подготовка вопросов для интервью",
+                    "Оценка кандидатов",
+                    "Письма кандидатам",
+                    "Создание тестовых заданий"
+                ]
+            },
+            {
+                category: "Онбординг",
+                tasks: [
+                    "План адаптации",
+                    "Приветственные письма",
+                    "Обучающие материалы",
+                    "Чек-листы для новичков"
+                ]
+            },
+            {
+                category: "HR операции",
+                tasks: [
+                    "Ответы на типовые вопросы",
+                    "Создание HR политик",
+                    "Оформление документов",
+                    "Отчеты и аналитика"
+                ]
+            },
+            {
+                category: "Развитие",
+                tasks: [
+                    "Планы развития",
+                    "Оценка эффективности",
+                    "Обратная связь",
+                    "Обучающие программы"
+                ]
+            }
+        ];
+
+        let stats = {
+            tasks: 0,
+            hours: 0,
+            prompts: 0
+        };
+
+        // Инициализация
+        window.onload = function() {
+            addBotMessage(
+                `Привет! 👋 Я HR AI Ассистент.
+
+Помогаю рекрутерам и HR-специалистам делегировать рутинные задачи нейросетям.
+
+Что я могу:
+• Дать готовые промпты для типовых HR-задач
+• Порекомендовать лучшие AI-инструменты
+• Показать, как автоматизировать рутину
+• Рассчитать экономию времени
+
+Выберите задачу из меню слева или опишите, что вам нужно! 🚀`,
+                []
+            );
+        };
+
+        function addBotMessage(text, options = []) {
+            const messagesContainer = document.getElementById('chatMessages');
+
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message bot';
+
+            messageDiv.innerHTML = `
+                <div class="message-avatar">🤖</div>
+                <div class="message-content">
+                    <div class="message-text">${text}</div>
+                    ${options.length > 0 ? `
+                        <div class="message-options">
+                            ${options.map(opt => `
+                                <button class="option-btn" onclick="handleOption('${opt.value}')">${opt.label}</button>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+
+            messagesContainer.appendChild(messageDiv);
+            scrollToBottom();
+        }
+
+        function addUserMessage(text) {
+            const messagesContainer = document.getElementById('chatMessages');
+
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message user';
+
+            messageDiv.innerHTML = `
+                <div class="message-avatar">👤</div>
+                <div class="message-content">
+                    <div class="message-text">${text}</div>
+                </div>
+            `;
+
+            messagesContainer.appendChild(messageDiv);
+            scrollToBottom();
+        }
+
+        function addTaskCard(task, taskKey) {
+            const messagesContainer = document.getElementById('chatMessages');
+
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message bot';
+
+            const promptHtml = `
+                <div class="prompt-box">
+                    <button class="copy-prompt-btn" onclick="copyPrompt('${taskKey}')">Копировать</button>
+                    <pre style="white-space: pre-wrap; margin: 0;">${task.prompt}</pre>
+                </div>
+            `;
+
+            messageDiv.innerHTML = `
+                <div class="message-avatar">🤖</div>
+                <div class="message-content">
+                    <div class="task-card">
+                        <h4>📌 ${task.title}</h4>
+                        <p>${task.description}</p>
+                        <p><strong>⏱ Экономия времени:</strong> ~${task.timeSaved} часа</p>
+                        <p><strong>🛠 Рекомендуемые инструменты:</strong></p>
+                        <div class="task-tools">
+                            ${task.tools.map(tool => `<span class="tool-tag">${tool}</span>`).join('')}
+                        </div>
+                    </div>
+                    ${promptHtml}
+                    <div style="margin-top: 10px; font-size: 13px; color: #64748b;">
+                        💡 Скопируйте промпт, вставьте в любой AI-инструмент и заполните параметры в квадратных скобках [...]
+                    </div>
+                </div>
+            `;
+
+            messagesContainer.appendChild(messageDiv);
+            scrollToBottom();
+
+            // Обновляем статистику
+            updateStats(task.timeSaved);
+        }
+
+        function showTypingIndicator() {
+            const messagesContainer = document.getElementById('chatMessages');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message bot typing-indicator-msg';
+            typingDiv.innerHTML = `
+                <div class="message-avatar">🤖</div>
+                <div class="message-content">
+                    <div class="typing-indicator">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>
+                </div>
+            `;
+            messagesContainer.appendChild(typingDiv);
+            scrollToBottom();
+        }
+
+        function removeTypingIndicator() {
+            const typing = document.querySelector('.typing-indicator-msg');
+            if (typing) typing.remove();
+        }
+
+        function quickAction(action) {
+            const task = hrTasks[action];
+            if (task) {
+                addUserMessage(`Хочу автоматизировать: ${task.title}`);
+
+                showTypingIndicator();
+                setTimeout(() => {
+                    removeTypingIndicator();
+                    addTaskCard(task, action);
+                }, 1000);
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+
+            if (!message) return;
+
+            addUserMessage(message);
+            input.value = '';
+
+            // Простая логика ответов
+            showTypingIndicator();
+            setTimeout(() => {
+                removeTypingIndicator();
+                handleUserMessage(message);
+            }, 1000);
+        }
+
+        function handleUserMessage(message) {
+            const lowerMessage = message.toLowerCase();
+
+            // Определяем намерение пользователя
+            if (lowerMessage.includes('резюме') || lowerMessage.includes('cv') || lowerMessage.includes('скрининг')) {
+                addTaskCard(hrTasks.screening, 'screening');
+            }
+            else if (lowerMessage.includes('интервью') || lowerMessage.includes('собеседован') || lowerMessage.includes('вопрос')) {
+                addTaskCard(hrTasks.interview, 'interview');
+            }
+            else if (lowerMessage.includes('вакан') || lowerMessage.includes('job description')) {
+                addTaskCard(hrTasks.job, 'job');
+            }
+            else if (lowerMessage.includes('письм') || lowerMessage.includes('email') || lowerMessage.includes('outreach')) {
+                addTaskCard(hrTasks.outreach, 'outreach');
+            }
+            else if (lowerMessage.includes('онбординг') || lowerMessage.includes('адаптац') || lowerMessage.includes('новичк')) {
+                addTaskCard(hrTasks.onboarding, 'onboarding');
+            }
+            else if (lowerMessage.includes('оценк') || lowerMessage.includes('сравн') || lowerMessage.includes('кандидат')) {
+                addTaskCard(hrTasks.assessment, 'assessment');
+            }
+            else if (lowerMessage.includes('помощь') || lowerMessage.includes('что умеешь') || lowerMessage.includes('функци')) {
+                showAllTasks();
+            }
+            else {
+                addBotMessage(
+                    `Понял ваш запрос! Вот что я могу предложить для автоматизации:`,
+                    [
+                        { label: '📋 Скрининг резюме', value: 'screening' },
+                        { label: '💬 Подготовка к интервью', value: 'interview' },
+                        { label: '✍️ Написать вакансию', value: 'job' },
+                        { label: '📧 Письма кандидатам', value: 'outreach' }
+                    ]
+                );
+            }
+        }
+
+        function showAllTasks() {
+            let tasksHtml = '<strong>Вот все задачи, которые я могу помочь автоматизировать:</strong><br><br>';
+
+            commonTasks.forEach(category => {
+                tasksHtml += `<strong>${category.category}:</strong><br>`;
+                tasksHtml += '<ul style="margin: 5px 0 15px 20px;">';
+                category.tasks.forEach(task => {
+                    tasksHtml += `<li>${task}</li>`;
+                });
+                tasksHtml += '</ul>';
+            });
+
+            tasksHtml += '<br>Выберите задачу из меню слева или опишите свою задачу!';
+
+            addBotMessage(tasksHtml);
+        }
+
+        function handleOption(option) {
+            quickAction(option);
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function copyPrompt(taskKey) {
+            const task = hrTasks[taskKey];
+            if (task) {
+                navigator.clipboard.writeText(task.prompt).then(() => {
+                    // Визуальная обратная связь
+                    const btn = event.target;
+                    const originalText = btn.textContent;
+                    btn.textContent = '✓ Скопировано!';
+                    btn.style.background = '#10b981';
+
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                        btn.style.background = '';
+                    }, 2000);
+
+                    // Обновляем счетчик промптов
+                    stats.prompts++;
+                    document.getElementById('promptsCount').textContent = stats.prompts;
+                });
+            }
+        }
+
+        function updateStats(hoursSaved) {
+            stats.tasks++;
+            stats.hours += hoursSaved;
+
+            document.getElementById('tasksCount').textContent = stats.tasks;
+            document.getElementById('hoursCount').textContent = stats.hours.toFixed(1);
+        }
+
+        function scrollToBottom() {
+            const messagesContainer = document.getElementById('chatMessages');
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+    </script>
+</body>
+</html>
