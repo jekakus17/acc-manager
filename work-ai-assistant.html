@@ -424,12 +424,29 @@
             background: #f0f9ff;
             border: 1px solid #0ea5e9;
             padding: 12px;
+            padding-right: 80px;
             border-radius: 8px;
             margin-top: 10px;
             font-family: 'Courier New', monospace;
             font-size: 12px;
             color: #0c4a6e;
             position: relative;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .prompt-box::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .prompt-box::-webkit-scrollbar-track {
+            background: #e0f2fe;
+            border-radius: 3px;
+        }
+
+        .prompt-box::-webkit-scrollbar-thumb {
+            background: #0ea5e9;
+            border-radius: 3px;
         }
 
         .copy-prompt-btn {
@@ -1069,9 +1086,20 @@
             document.getElementById('hoursCount').textContent = stats.hours.toFixed(1);
         }
 
-        function scrollToBottom() {
+        function scrollToBottom(smooth = false) {
             const messagesContainer = document.getElementById('chatMessages');
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+            // Принудительная прокрутка с задержкой для рендеринга контента
+            setTimeout(() => {
+                if (smooth) {
+                    messagesContainer.scrollTo({
+                        top: messagesContainer.scrollHeight,
+                        behavior: 'smooth'
+                    });
+                } else {
+                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                }
+            }, 100);
         }
     </script>
 </body>
