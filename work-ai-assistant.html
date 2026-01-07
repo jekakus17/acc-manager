@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Помощник для работы - Делегируйте рутину нейросетям</title>
+    <style>
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #8b5cf6;
+            --success-color: #10b981;
+            --danger-color: #ef4444;
+            --bg-light: #f8fafc;
+            --bg-dark: #1e293b;
+            --text-dark: #0f172a;
+            --text-light: #64748b;
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            height: 90vh;
+            max-height: 800px;
+            min-height: 500px;
+        }
+
+        /* Боковая панель */
+        .sidebar {
+            background: linear-gradient(180deg, #4f46e5 0%, #6366f1 100%);
+            color: white;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .sidebar h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .sidebar p {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .quick-actions {
+            margin-bottom: 30px;
+        }
+
+        .quick-actions h3 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .action-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 12px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+            margin-bottom: 10px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .action-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(5px);
+        }
+
+        .action-btn .emoji {
+            font-size: 20px;
+        }
+
+        .category-header {
+            font-size: 12px;
+            text-transform: uppercase;
+            opacity: 0.7;
+            margin: 20px 0 10px 0;
+            letter-spacing: 1px;
+        }
+
+        .stats {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: auto;
+        }
+
+        .stats h4 {
+            font-size: 14px;
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+
+        .stat-value {
+            font-weight: bold;
+        }
+
+        /* Чат */
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            background: var(--bg-light);
+            height: 100%;
+        }
+
+        .chat-header {
+            background: white;
+            padding: 20px 30px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header h2 {
+            color: var(--text-dark);
+            font-size: 20px;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success-color);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            min-height: 0;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .message {
+            display: flex;
+            gap: 12px;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message.user {
+            flex-direction: row-reverse;
+        }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .message.bot .message-avatar {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .message.user .message-avatar {
+            background: var(--success-color);
+        }
+
+        .message-content {
+            max-width: 70%;
+            background: white;
+            padding: 15px 20px;
+            border-radius: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .message.user .message-content {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .message-text {
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .message-options {
+            margin-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .option-btn {
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.3s ease;
+            color: var(--text-dark);
+        }
+
+        .option-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .task-card {
+            background: var(--bg-light);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 10px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .task-card h4 {
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .task-card p {
+            color: var(--text-light);
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .task-tools {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tool-tag {
+            background: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* Форма ввода */
+        .chat-input {
+            background: white;
+            padding: 20px 30px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-shrink: 0;
+            position: sticky;
+            bottom: 0;
+            z-index: 10;
+        }
+
+        .input-wrapper {
+            flex: 1;
+            position: relative;
+        }
+
+        .chat-input input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 25px;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .chat-input input:focus {
+            border-color: var(--primary-color);
+        }
+
+        .send-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .send-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+        }
+
+        .send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: scale(1);
+        }
+
+        /* Typing indicator */
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+            padding: 15px;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--text-light);
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-10px); }
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                height: 100vh;
+                max-height: none;
+                border-radius: 0;
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+            .message-content {
+                max-width: 85%;
+            }
+        }
+
+        /* Скроллбар */
+        .chat-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 3px;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb:hover {
+            background: var(--text-light);
+        }
+
+        .prompt-box {
+            background: #f0f9ff;
+            border: 1px solid #0ea5e9;
+            padding: 12px;
+            padding-right: 80px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            color: #0c4a6e;
+            position: relative;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .prompt-box::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .prompt-box::-webkit-scrollbar-track {
+            background: #e0f2fe;
+            border-radius: 3px;
+        }
+
+        .prompt-box::-webkit-scrollbar-thumb {
+            background: #0ea5e9;
+            border-radius: 3px;
+        }
+
+        .copy-prompt-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: #0ea5e9;
+            color: white;
+            border: none;
+            padding: 4px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 11px;
+        }
+
+        .copy-prompt-btn:hover {
+            background: #0284c7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Боковая панель -->
+        <div class="sidebar">
+            <h1>🤖 AI Помощник</h1>
+            <p>Делегируйте рутинные офисные задачи нейросетям и экономьте до 15 часов в неделю</p>
+
+            <div class="quick-actions">
+                <div class="category-header">Документы и отчеты</div>
+                <button class="action-btn" onclick="quickAction('report')">
+                    <span class="emoji">📊</span>
+                    <span>Создать отчет</span>
+                </button>
+                <button class="action-btn" onclick="quickAction('plan')">
+                    <span class="emoji">📋</span>
+                    <span>Подготовить план</span>
+                </button>
+                <button class="action-btn" onclick="quickAction('summary')">
+                    <span class="emoji">📝</span>
+                    <span>Резюмировать текст</span>
+                </button>
+
+                <div class="category-header">Анализ данных</div>
+                <button class="action-btn" onclick="quickAction('data')">
+                    <span class="emoji">📈</span>
+                    <span>Анализ данных</span>
+                </button>
+                <button class="action-btn" onclick="quickAction('excel')">
+                    <span class="emoji">📑</span>
+                    <span>Работа с таблицами</span>
+                </button>
+
+                <div class="category-header">Коммуникация</div>
+                <button class="action-btn" onclick="quickAction('email')">
+                    <span class="emoji">✉️</span>
+                    <span>Написать письмо</span>
+                </button>
+                <button class="action-btn" onclick="quickAction('meeting')">
+                    <span class="emoji">🗓️</span>
+                    <span>Протокол встречи</span>
+                </button>
+
+                <div class="category-header">Презентации</div>
+                <button class="action-btn" onclick="quickAction('presentation')">
+                    <span class="emoji">🎯</span>
+                    <span>Структура презентации</span>
+                </button>
+            </div>
+
+            <div class="stats">
+                <h4>Статистика экономии</h4>
+                <div class="stat-item">
+                    <span>Задач автоматизировано:</span>
+                    <span class="stat-value" id="tasksCount">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>Часов сэкономлено:</span>
+                    <span class="stat-value" id="hoursCount">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>Промптов использовано:</span>
+                    <span class="stat-value" id="promptsCount">0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Чат -->
+        <div class="chat-container">
+            <div class="chat-header">
+                <h2>Чат с AI ассистентом</h2>
+                <div class="status">
+                    <div class="status-dot"></div>
+                    <span>Онлайн</span>
+                </div>
+            </div>
+
+            <div class="chat-messages" id="chatMessages">
+                <!-- Сообщения будут добавляться сюда -->
+            </div>
+
+            <div class="chat-input">
+                <div class="input-wrapper">
+                    <input
+                        type="text"
+                        id="messageInput"
+                        placeholder="Опишите задачу или выберите действие из меню..."
+                        onkeypress="handleKeyPress(event)"
+                    />
+                </div>
+                <button class="send-btn" onclick="sendMessage()">Отправить</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // База знаний рутинных задач
+        const workTasks = {
+            report: {
+                title: "Создание отчета",
+                description: "Автоматизация создания отчетов по данным",
+                timeSaved: 2,
+                tools: ["ChatGPT", "Claude", "Notion AI"],
+                prompt: `Создай структурированный отчет на основе следующих данных:
+
+ТЕМА ОТЧЕТА: [Название темы]
+
+ИСХОДНЫЕ ДАННЫЕ:
+[Вставь данные: числа, статистику, факты]
+
+ПЕРИОД: [За какой период]
+
+ЦЕЛЕВАЯ АУДИТОРИЯ: [Кто будет читать]
+
+Структура отчета должна включать:
+1. Краткое резюме (Executive Summary)
+2. Ключевые показатели и метрики
+3. Анализ тенденций
+4. Проблемные зоны (если есть)
+5. Выводы и рекомендации
+
+Используй:
+- Четкую структуру с заголовками
+- Маркированные списки для наглядности
+- Конкретные цифры и факты
+- Профессиональный деловой стиль`
+            },
+            plan: {
+                title: "Подготовка плана",
+                description: "Создание рабочих планов и стратегий",
+                timeSaved: 1.5,
+                tools: ["ChatGPT", "Claude", "ClickUp AI"],
+                prompt: `Разработай детальный план для:
+
+ЦЕЛЬ: [Что нужно достичь]
+
+КОНТЕКСТ: [Текущая ситуация, ограничения]
+
+СРОК: [Дедлайн или временные рамки]
+
+РЕСУРСЫ: [Доступные ресурсы: люди, бюджет, инструменты]
+
+План должен включать:
+1. Четкие этапы с дедлайнами
+2. Конкретные задачи для каждого этапа
+3. Ответственных за выполнение
+4. Критерии успеха (KPI)
+5. Риски и способы их минимизации
+6. Необходимые ресурсы
+
+Формат: таблица или пошаговый список с временными метками`
+            },
+            summary: {
+                title: "Резюмирование текста",
+                description: "Краткое изложение длинных документов",
+                timeSaved: 1,
+                tools: ["ChatGPT", "Claude", "Perplexity"],
+                prompt: `Создай краткое резюме следующего текста:
+
+[ВСТАВЬ ДЛИННЫЙ ТЕКСТ]
+
+Требования к резюме:
+- Объем: [100-200 слов / 3-5 ключевых пунктов / определи сам]
+- Сохрани ключевые идеи и факты
+- Используй простой и понятный язык
+- Структурируй по пунктам
+- Выдели главное
+
+Если в тексте есть цифры, решения или выводы - обязательно включи их в резюме.`
+            },
+            data: {
+                title: "Анализ данных",
+                description: "Интерпретация и анализ данных",
+                timeSaved: 3,
+                tools: ["ChatGPT", "Claude", "Code Interpreter"],
+                prompt: `Проанализируй следующие данные и дай инсайты:
+
+ДАННЫЕ:
+[Вставь данные: таблицу, список чисел, статистику]
+
+КОНТЕКСТ:
+[Что это за данные, откуда, что они показывают]
+
+ВОПРОСЫ ДЛЯ АНАЛИЗА:
+[Что нужно выяснить из этих данных]
+
+Проведи анализ:
+1. Основные тренды и паттерны
+2. Аномалии или выбросы
+3. Корреляции между показателями
+4. Сравнение с предыдущими периодами (если есть)
+5. Прогнозы на будущее
+6. Практические рекомендации
+
+Представь результаты в наглядном виде с пояснениями.`
+            },
+            excel: {
+                title: "Работа с таблицами",
+                description: "Формулы, обработка и анализ таблиц",
+                timeSaved: 2,
+                tools: ["ChatGPT", "Claude", "Excel + GPT"],
+                prompt: `Помоги с задачей в Excel/Google Sheets:
+
+ЗАДАЧА: [Что нужно сделать]
+
+ДАННЫЕ:
+[Опиши структуру таблицы: какие столбцы, что в них]
+
+ЖЕЛАЕМЫЙ РЕЗУЛЬТАТ: [Что должно получиться]
+
+Предоставь:
+1. Готовые формулы Excel с объяснениями
+2. Пошаговую инструкцию
+3. Примеры расчетов
+4. Альтернативные способы (если есть)
+5. Советы по оптимизации
+
+Если нужна сводная таблица или график - укажи как их создать.`
+            },
+            email: {
+                title: "Написание делового письма",
+                description: "Составление профессиональных писем",
+                timeSaved: 0.5,
+                tools: ["ChatGPT", "Jasper", "Copy.ai"],
+                prompt: `Напиши деловое письмо:
+
+ПОЛУЧАТЕЛЬ: [Кому: имя, должность]
+
+ЦЕЛЬ ПИСЬМА: [Зачем пишешь]
+
+КОНТЕКСТ: [Предыстория, почему важно]
+
+КЛЮЧЕВЫЕ ПУНКТЫ:
+- [Пункт 1]
+- [Пункт 2]
+- [Пункт 3]
+
+ТОН: [Формальный / Нейтральный / Дружелюбный]
+
+Требования:
+- Профессиональный стиль
+- Четкая структура
+- Конкретика (даты, цифры, факты)
+- Вежливость и уважение
+- Призыв к действию (если нужно)
+
+Длина: [краткое / среднее / подробное]`
+            },
+            meeting: {
+                title: "Протокол встречи",
+                description: "Оформление заметок и итогов встречи",
+                timeSaved: 1,
+                tools: ["ChatGPT", "Notion AI", "Otter.ai"],
+                prompt: `Создай структурированный протокол встречи:
+
+ВСТРЕЧА: [Тема встречи]
+ДАТА: [Дата]
+УЧАСТНИКИ: [Список участников]
+
+ЗАМЕТКИ/ЗАПИСЬ:
+[Вставь заметки или транскрипт встречи]
+
+Протокол должен включать:
+1. Тема и цель встречи
+2. Участники
+3. Обсужденные вопросы (кратко)
+4. Принятые решения
+5. Задачи с ответственными и дедлайнами
+6. Следующие шаги
+7. Дата следующей встречи (если назначена)
+
+Формат: профессиональный, структурированный, легко читаемый.`
+            },
+            presentation: {
+                title: "Структура презентации",
+                description: "Создание плана и содержания презентации",
+                timeSaved: 2,
+                tools: ["ChatGPT", "Gamma", "Beautiful.ai"],
+                prompt: `Создай структуру презентации:
+
+ТЕМА: [Тема презентации]
+
+ЦЕЛЬ: [Что должна достичь презентация]
+
+АУДИТОРИЯ: [Кто будет слушать]
+
+ВРЕМЯ: [Длительность выступления]
+
+КЛЮЧЕВЫЕ СООБЩЕНИЯ:
+- [Главная мысль 1]
+- [Главная мысль 2]
+- [Главная мысль 3]
+
+Создай:
+1. Структуру слайдов (с названиями)
+2. Контент для каждого слайда
+3. Рекомендации по визуализации
+4. Ключевые фразы для выступления
+5. Идеи для открытия и закрытия
+
+Требования:
+- Логичная последовательность
+- Визуальное разнообразие
+- Четкие выводы
+- Призыв к действию`
+            }
+        };
+
+        // Категории задач для справки
+        const taskCategories = [
+            {
+                category: "Документы и отчеты",
+                tasks: [
+                    "Создание отчетов",
+                    "Подготовка планов",
+                    "Резюмирование документов",
+                    "Написание заметок",
+                    "Оформление документации"
+                ]
+            },
+            {
+                category: "Анализ данных",
+                tasks: [
+                    "Анализ статистики",
+                    "Работа с таблицами Excel",
+                    "Визуализация данных",
+                    "Поиск трендов",
+                    "Прогнозирование"
+                ]
+            },
+            {
+                category: "Коммуникация",
+                tasks: [
+                    "Написание писем",
+                    "Протоколы встреч",
+                    "Ответы на вопросы",
+                    "Подготовка сообщений",
+                    "Формулировка обратной связи"
+                ]
+            },
+            {
+                category: "Презентации и выступления",
+                tasks: [
+                    "Структура презентаций",
+                    "Контент для слайдов",
+                    "Подготовка речи",
+                    "Визуализация идей"
+                ]
+            },
+            {
+                category: "Планирование",
+                tasks: [
+                    "Проектные планы",
+                    "Рабочие графики",
+                    "Приоритизация задач",
+                    "Распределение ресурсов"
+                ]
+            }
+        ];
+
+        let stats = {
+            tasks: 0,
+            hours: 0,
+            prompts: 0
+        };
+
+        // Инициализация
+        window.onload = function() {
+            addBotMessage(
+                `Привет! 👋 Я ваш AI Помощник для автоматизации офисной рутины.
+
+Помогаю делегировать повторяющиеся задачи нейросетям и экономить время.
+
+<strong>Что я умею:</strong><br>
+• Давать готовые промпты для типовых рабочих задач<br>
+• Помогать с отчетами, планами, анализом данных<br>
+• Автоматизировать работу с документами и таблицами<br>
+• Готовить письма, протоколы встреч, презентации
+
+Выберите задачу из меню слева или опишите, что вам нужно! 🚀
+
+<strong>Примеры:</strong> «нужно написать отчет», «помоги с анализом данных», «составить план проекта»`,
+                []
+            );
+        };
+
+        function addBotMessage(text, options = []) {
+            const messagesContainer = document.getElementById('chatMessages');
+
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message bot';
+
+            messageDiv.innerHTML = `
+                <div class="message-avatar">🤖</div>
+                <div class="message-content">
+                    <div class="message-text">${text}</div>
+                    ${options.length > 0 ? `
+                        <div class="message-options">
+                            ${options.map(opt => `
+                                <button class="option-btn" onclick="handleOption('${opt.value}')">${opt.label}</button>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+
+            messagesContainer.appendChild(messageDiv);
+            scrollToBottom();
+        }
+
+        function addUserMessage(text) {
+            const messagesContainer = document.getElementById('chatMessages');
+
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message user';
+
+            messageDiv.innerHTML = `
+                <div class="message-avatar">👤</div>
+                <div class="message-content">
+                    <div class="message-text">${text}</div>
+                </div>
+            `;
+
+            messagesContainer.appendChild(messageDiv);
+            scrollToBottom();
+        }
+
+        function addTaskCard(task, taskKey) {
+            const messagesContainer = document.getElementById('chatMessages');
+
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message bot';
+
+            const promptHtml = `
+                <div class="prompt-box">
+                    <button class="copy-prompt-btn" onclick="copyPrompt('${taskKey}')">Копировать</button>
+                    <pre style="white-space: pre-wrap; margin: 0;">${task.prompt}</pre>
+                </div>
+            `;
+
+            messageDiv.innerHTML = `
+                <div class="message-avatar">🤖</div>
+                <div class="message-content">
+                    <div class="task-card">
+                        <h4>📌 ${task.title}</h4>
+                        <p>${task.description}</p>
+                        <p><strong>⏱ Экономия времени:</strong> ~${task.timeSaved} часа</p>
+                        <p><strong>🛠 Рекомендуемые инструменты:</strong></p>
+                        <div class="task-tools">
+                            ${task.tools.map(tool => `<span class="tool-tag">${tool}</span>`).join('')}
+                        </div>
+                    </div>
+                    ${promptHtml}
+                    <div style="margin-top: 10px; font-size: 13px; color: #64748b;">
+                        💡 Скопируйте промпт, вставьте в ChatGPT/Claude и заполните параметры в [квадратных скобках]
+                    </div>
+                </div>
+            `;
+
+            messagesContainer.appendChild(messageDiv);
+            scrollToBottom();
+
+            // Обновляем статистику
+            updateStats(task.timeSaved);
+        }
+
+        function showTypingIndicator() {
+            const messagesContainer = document.getElementById('chatMessages');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message bot typing-indicator-msg';
+            typingDiv.innerHTML = `
+                <div class="message-avatar">🤖</div>
+                <div class="message-content">
+                    <div class="typing-indicator">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>
+                </div>
+            `;
+            messagesContainer.appendChild(typingDiv);
+            scrollToBottom();
+        }
+
+        function removeTypingIndicator() {
+            const typing = document.querySelector('.typing-indicator-msg');
+            if (typing) typing.remove();
+        }
+
+        function quickAction(action) {
+            const task = workTasks[action];
+            if (task) {
+                addUserMessage(`Хочу автоматизировать: ${task.title}`);
+
+                showTypingIndicator();
+                setTimeout(() => {
+                    removeTypingIndicator();
+                    addTaskCard(task, action);
+                }, 1000);
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+
+            if (!message) return;
+
+            addUserMessage(message);
+            input.value = '';
+
+            // Простая логика ответов
+            showTypingIndicator();
+            setTimeout(() => {
+                removeTypingIndicator();
+                handleUserMessage(message);
+            }, 1000);
+        }
+
+        function handleUserMessage(message) {
+            const lowerMessage = message.toLowerCase();
+
+            // Определяем намерение пользователя
+            if (lowerMessage.includes('отчет') || lowerMessage.includes('report')) {
+                addTaskCard(workTasks.report, 'report');
+            }
+            else if (lowerMessage.includes('план') || lowerMessage.includes('стратег') || lowerMessage.includes('plan')) {
+                addTaskCard(workTasks.plan, 'plan');
+            }
+            else if (lowerMessage.includes('резюм') || lowerMessage.includes('кратко') || lowerMessage.includes('summary')) {
+                addTaskCard(workTasks.summary, 'summary');
+            }
+            else if (lowerMessage.includes('данн') || lowerMessage.includes('анализ') || lowerMessage.includes('статистик')) {
+                addTaskCard(workTasks.data, 'data');
+            }
+            else if (lowerMessage.includes('таблиц') || lowerMessage.includes('excel') || lowerMessage.includes('формул')) {
+                addTaskCard(workTasks.excel, 'excel');
+            }
+            else if (lowerMessage.includes('письм') || lowerMessage.includes('email') || lowerMessage.includes('почт')) {
+                addTaskCard(workTasks.email, 'email');
+            }
+            else if (lowerMessage.includes('встреч') || lowerMessage.includes('протокол') || lowerMessage.includes('заметк')) {
+                addTaskCard(workTasks.meeting, 'meeting');
+            }
+            else if (lowerMessage.includes('презентац') || lowerMessage.includes('слайд') || lowerMessage.includes('выступ')) {
+                addTaskCard(workTasks.presentation, 'presentation');
+            }
+            else if (lowerMessage.includes('помощь') || lowerMessage.includes('что умеешь') || lowerMessage.includes('функци')) {
+                showAllTasks();
+            }
+            else {
+                addBotMessage(
+                    `Понял! Вот популярные задачи, которые я могу помочь автоматизировать:`,
+                    [
+                        { label: '📊 Создать отчет', value: 'report' },
+                        { label: '📋 Подготовить план', value: 'plan' },
+                        { label: '📈 Анализ данных', value: 'data' },
+                        { label: '✉️ Написать письмо', value: 'email' }
+                    ]
+                );
+            }
+        }
+
+        function showAllTasks() {
+            let tasksHtml = '<strong>Все задачи, которые можно делегировать AI:</strong><br><br>';
+
+            taskCategories.forEach(category => {
+                tasksHtml += `<strong>${category.category}:</strong><br>`;
+                tasksHtml += '<ul style="margin: 5px 0 15px 20px;">';
+                category.tasks.forEach(task => {
+                    tasksHtml += `<li>${task}</li>`;
+                });
+                tasksHtml += '</ul>';
+            });
+
+            tasksHtml += '<br>Выберите задачу из меню или опишите свою!';
+
+            addBotMessage(tasksHtml);
+        }
+
+        function handleOption(option) {
+            quickAction(option);
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function copyPrompt(taskKey) {
+            const task = workTasks[taskKey];
+            if (task) {
+                navigator.clipboard.writeText(task.prompt).then(() => {
+                    // Визуальная обратная связь
+                    const btn = event.target;
+                    const originalText = btn.textContent;
+                    btn.textContent = '✓ Скопировано!';
+                    btn.style.background = '#10b981';
+
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                        btn.style.background = '';
+                    }, 2000);
+
+                    // Обновляем счетчик промптов
+                    stats.prompts++;
+                    document.getElementById('promptsCount').textContent = stats.prompts;
+                });
+            }
+        }
+
+        function updateStats(hoursSaved) {
+            stats.tasks++;
+            stats.hours += hoursSaved;
+
+            document.getElementById('tasksCount').textContent = stats.tasks;
+            document.getElementById('hoursCount').textContent = stats.hours.toFixed(1);
+        }
+
+        function scrollToBottom(smooth = false) {
+            const messagesContainer = document.getElementById('chatMessages');
+
+            // Принудительная прокрутка с задержкой для рендеринга контента
+            setTimeout(() => {
+                if (smooth) {
+                    messagesContainer.scrollTo({
+                        top: messagesContainer.scrollHeight,
+                        behavior: 'smooth'
+                    });
+                } else {
+                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                }
+
+                // Дополнительная прокрутка через 200мс для гарантии
+                setTimeout(() => {
+                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                }, 200);
+            }, 100);
+        }
+    </script>
+</body>
+</html>
