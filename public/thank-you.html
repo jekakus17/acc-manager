@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Спасибо — Нейроуниверситет</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">⬡ Нейроуниверситет</div>
+      <div class="progress-bar">
+        <div class="progress-dot active"></div>
+        <div class="progress-dot active"></div>
+        <div class="progress-dot active"></div>
+        <span>Оплата завершена</span>
+      </div>
+      <div class="points-badge">⬡ <span id="points-value">0</span> баллов</div>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="thankyou-check">✓</div>
+      <h1>Вы в Нейроуниверситете!</h1>
+      <p class="hero-subtitle">Доступ к курсу уже открыт — письмо на вашей почте</p>
+    </section>
+
+    <!-- ЧТО ДАЛЬШЕ -->
+    <div class="steps-card">
+      <h2 style="font-size:20px;font-weight:900;margin-bottom:16px;">Что дальше</h2>
+      <div class="step-item">
+        <div class="step-number">1</div>
+        <div>
+          <strong>Проверьте почту</strong>
+          <p style="color:var(--text-secondary);font-size:14px;margin-top:4px;">Там ссылка на полный курс</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-number">2</div>
+        <div>
+          <strong>Зайдите в Нейроуниверситет</strong>
+          <p style="color:var(--text-secondary);font-size:14px;margin-top:4px;">Начните мастер-класс</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-number">3</div>
+        <div>
+          <strong>Присоединитесь к чату студентов</strong>
+          <p style="color:var(--text-secondary);font-size:14px;margin-top:4px;">Общайтесь и практикуйтесь вместе</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- REFERRAL -->
+    <div class="referral-block">
+      <h2>Поделитесь курсом с другом</h2>
+      <p style="color:var(--text-secondary);margin:8px 0 16px;">Отправьте другу ссылку на бесплатный курс — пусть он тоже начнёт</p>
+
+      <div class="copy-field">
+        <input type="text" id="referral-link-input" readonly>
+        <button class="btn btn-secondary" id="copy-referral-btn">Скопировать ссылку</button>
+      </div>
+
+      <button class="btn btn-secondary" id="share-telegram-btn" style="width:100%;margin-top:8px;">Поделиться в Telegram</button>
+
+      <p style="color:var(--text-secondary);font-size:12px;margin-top:16px;text-align:center;">Когда друг пройдёт первый урок — вы получите бонус</p>
+    </div>
+
+  </div>
+
+  <script src="/js/config.js"></script>
+  <script src="/js/tracker.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>

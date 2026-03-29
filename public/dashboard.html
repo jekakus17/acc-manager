@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Дашборд — Нейроуниверситет</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <div class="dashboard-body">
+
+    <div class="dash-header">
+      <h1>⬡ Нейроуниверситет — Аналитика</h1>
+      <div style="display:flex;gap:8px;">
+        <button class="btn btn-secondary btn-sm" id="refresh-btn">Обновить</button>
+      </div>
+    </div>
+
+    <!-- METRICS -->
+    <div class="metrics-row" id="metrics-row">
+      <div class="metric-card"><div class="metric-value" id="m-sessions">—</div><div class="metric-label">Всего сессий</div></div>
+      <div class="metric-card"><div class="metric-value" id="m-emails">—</div><div class="metric-label">С email</div></div>
+      <div class="metric-card"><div class="metric-value" id="m-buy-clicks">—</div><div class="metric-label">Нажали купить</div></div>
+      <div class="metric-card"><div class="metric-value" id="m-purchased">—</div><div class="metric-label">Купили</div></div>
+    </div>
+
+    <!-- FUNNEL -->
+    <div class="dash-section" id="funnel-section">
+      <h2>Воронка</h2>
+      <div class="funnel" id="funnel-container"></div>
+    </div>
+
+    <!-- VIDEO ANALYTICS -->
+    <div class="dash-section">
+      <h2>Видео-аналитика</h2>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;" id="video-charts-container">
+        <div><h4 style="margin-bottom:8px;">Урок 1</h4><div class="chart-container"><canvas id="video-chart-1"></canvas></div></div>
+        <div><h4 style="margin-bottom:8px;">Урок 2</h4><div class="chart-container"><canvas id="video-chart-2"></canvas></div></div>
+        <div><h4 style="margin-bottom:8px;">Урок 3</h4><div class="chart-container"><canvas id="video-chart-3"></canvas></div></div>
+      </div>
+    </div>
+
+    <!-- SURVEY -->
+    <div class="dash-section">
+      <h2>Анкета</h2>
+      <div style="display:flex;gap:16px;margin-bottom:16px;flex-wrap:wrap;">
+        <span>Начали: <strong id="survey-started">—</strong></span>
+        <span>Завершили: <strong id="survey-completed">—</strong></span>
+        <span>Бросили: <strong id="survey-abandoned">—</strong></span>
+      </div>
+      <div class="pie-grid" id="survey-pie-grid"></div>
+    </div>
+
+    <!-- SOURCES -->
+    <div class="dash-section">
+      <h2>Источники</h2>
+      <table class="dash-table" id="sources-table">
+        <thead><tr><th>utm_source</th><th>Sessions</th><th>Email</th><th>Купили</th><th>CR%</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <!-- DEVICES -->
+    <div class="dash-section">
+      <h2>Устройства</h2>
+      <table class="dash-table" id="devices-table">
+        <thead><tr><th>Тип</th><th>Sessions</th><th>Email</th><th>Купили</th><th>CR%</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <!-- POINTS -->
+    <div class="dash-section">
+      <h2>Баллы</h2>
+      <div class="metrics-row" style="margin-bottom:0;">
+        <div class="metric-card"><div class="metric-value" id="p-issued">—</div><div class="metric-label">Выдано всего</div></div>
+        <div class="metric-card"><div class="metric-value" id="p-used">—</div><div class="metric-label">Использовано</div></div>
+        <div class="metric-card"><div class="metric-value" id="p-expired">—</div><div class="metric-label">Сгорело</div></div>
+        <div class="metric-card"><div class="metric-value" id="p-active">—</div><div class="metric-label">Активных</div></div>
+      </div>
+      <p style="color:var(--text-secondary);font-size:13px;margin-top:12px;">Средний балл покупателя: <strong id="p-avg-buyer">—</strong></p>
+    </div>
+
+    <!-- REFERRALS -->
+    <div class="dash-section">
+      <h2>Рефералы</h2>
+      <div class="metrics-row" style="margin-bottom:0;">
+        <div class="metric-card"><div class="metric-value" id="ref-total">—</div><div class="metric-label">Переходов</div></div>
+        <div class="metric-card"><div class="metric-value" id="ref-survey">—</div><div class="metric-label">Заполнили анкету</div></div>
+        <div class="metric-card"><div class="metric-value" id="ref-points">—</div><div class="metric-label">Баллов выдано</div></div>
+        <div class="metric-card"><div class="metric-value" id="ref-shared">—</div><div class="metric-label">Поделились после покупки</div></div>
+      </div>
+      <div id="ref-top3" style="margin-top:12px;"></div>
+    </div>
+
+    <!-- CONTACTS -->
+    <div class="dash-section">
+      <h2>Контакты</h2>
+      <div class="dash-filters">
+        <input type="text" id="contacts-search" placeholder="Поиск по имени/email...">
+        <select id="contacts-filter">
+          <option value="all">Все</option>
+          <option value="with_points">С баллами</option>
+          <option value="lesson3">Дошли до урока 3</option>
+          <option value="buy_click">Нажали купить</option>
+        </select>
+        <button class="btn btn-secondary btn-sm" id="export-contacts-btn">Выгрузить CSV</button>
+        <button class="btn btn-secondary btn-sm" id="export-purchases-btn">Выгрузить купивших</button>
+      </div>
+      <table class="dash-table" id="contacts-table">
+        <thead>
+          <tr>
+            <th data-sort="name">Имя</th>
+            <th data-sort="email">Email</th>
+            <th data-sort="points">Баллы</th>
+            <th data-sort="lesson_source">Урок</th>
+            <th data-sort="utm_source">Источник</th>
+            <th data-sort="created_at">Дата</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <!-- DAILY CHART -->
+    <div class="dash-section">
+      <h2>По дням (30 дней)</h2>
+      <div class="chart-container" style="height:300px;">
+        <canvas id="daily-chart"></canvas>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    (function() {
+      'use strict';
+
+      var password = '';
+      var sortField = 'created_at';
+      var sortOrder = 'desc';
+      var dailyChart = null;
+      var videoCharts = {};
+
+      function init() {
+        password = prompt('Пароль:');
+        if (!password) { location.href = '/'; return; }
+
+        loadDashboard();
+        loadContacts();
+
+        document.getElementById('refresh-btn').addEventListener('click', function() {
+          loadDashboard();
+          loadContacts();
+        });
+
+        // Auto refresh every 60s
+        setInterval(function() {
+          loadDashboard();
+          loadContacts();
+        }, 60000);
+
+        // Sort
+        document.querySelectorAll('#contacts-table th[data-sort]').forEach(function(th) {
+          th.addEventListener('click', function() {
+            sortField = th.dataset.sort;
+            sortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
+            loadContacts();
+          });
+        });
+
+        // Search
+        var searchTimer;
+        document.getElementById('contacts-search').addEventListener('input', function() {
+          clearTimeout(searchTimer);
+          searchTimer = setTimeout(loadContacts, 300);
+        });
+
+        document.getElementById('contacts-filter').addEventListener('change', loadContacts);
+
+        // Exports
+        document.getElementById('export-contacts-btn').addEventListener('click', function() {
+          window.open('/api/dashboard/export/contacts?auth=' + password, '_blank');
+        });
+        document.getElementById('export-purchases-btn').addEventListener('click', function() {
+          window.open('/api/dashboard/export/purchases?auth=' + password, '_blank');
+        });
+      }
+
+      function apiFetch(url) {
+        return fetch(url, {
+          headers: { 'Authorization': 'Bearer ' + password }
+        }).then(function(r) {
+          if (r.status === 401) { alert('Неверный пароль'); location.href = '/'; return null; }
+          return r.json();
+        });
+      }
+
+      function loadDashboard() {
+        apiFetch('/api/dashboard').then(function(data) {
+          if (!data) return;
+
+          // Metrics
+          document.getElementById('m-sessions').textContent = data.metrics.totalSessions;
+          document.getElementById('m-emails').textContent = data.metrics.withEmail;
+          document.getElementById('m-buy-clicks').textContent = data.metrics.buyClicks;
+          document.getElementById('m-purchased').textContent = data.metrics.purchased;
+
+          // Funnel
+          renderFunnel(data.funnel);
+
+          // Video
+          renderVideoCharts(data.videoStats);
+
+          // Survey
+          document.getElementById('survey-started').textContent = data.surveyStats.started;
+          document.getElementById('survey-completed').textContent = data.surveyStats.completed;
+          document.getElementById('survey-abandoned').textContent = data.surveyStats.abandoned;
+          renderSurveyPies(data.surveyStats);
+
+          // Sources
+          renderTable('sources-table', data.utmSources, function(r) {
+            var cr = r.sessions > 0 ? ((r.purchases / r.sessions) * 100).toFixed(1) : '0.0';
+            return '<td>' + (r.utm_source || '—') + '</td><td>' + r.sessions + '</td><td>' + r.emails + '</td><td>' + r.purchases + '</td><td>' + cr + '%</td>';
+          });
+
+          // Devices
+          renderTable('devices-table', data.devices, function(r) {
+            var cr = r.sessions > 0 ? ((r.purchases / r.sessions) * 100).toFixed(1) : '0.0';
+            return '<td>' + (r.device_type || '—') + '</td><td>' + r.sessions + '</td><td>' + r.emails + '</td><td>' + r.purchases + '</td><td>' + cr + '%</td>';
+          });
+
+          // Points
+          document.getElementById('p-issued').textContent = fmt(data.pointsStats.issued);
+          document.getElementById('p-used').textContent = fmt(data.pointsStats.used);
+          document.getElementById('p-expired').textContent = fmt(data.pointsStats.expired);
+          document.getElementById('p-active').textContent = fmt(data.pointsStats.active);
+          document.getElementById('p-avg-buyer').textContent = fmt(data.pointsStats.avgBuyer);
+
+          // Referrals
+          document.getElementById('ref-total').textContent = data.referralStats.totalReferrals;
+          document.getElementById('ref-survey').textContent = data.referralStats.surveyCompleted;
+          document.getElementById('ref-points').textContent = fmt(data.referralStats.pointsAwarded);
+          document.getElementById('ref-shared').textContent = data.sharedAfterPurchase + ' из ' + data.purchased;
+
+          var top3Html = '<strong>Топ-3 пригласителя:</strong><br>';
+          if (data.referralStats.top3.length === 0) {
+            top3Html += '<span style="color:var(--text-secondary);">Пока нет данных</span>';
+          } else {
+            data.referralStats.top3.forEach(function(r, i) {
+              top3Html += (i + 1) + '. ' + r.ref_session_id.substring(0, 8) + '… — ' + r.friends + ' друзей, ' + r.points + ' баллов<br>';
+            });
+          }
+          document.getElementById('ref-top3').innerHTML = top3Html;
+
+          // Daily chart
+          renderDailyChart(data.dailyStats, data.dailyEmails, data.dailyPurchases);
+        });
+      }
+
+      function loadContacts() {
+        var search = document.getElementById('contacts-search').value;
+        var filter = document.getElementById('contacts-filter').value;
+        var url = '/api/dashboard/contacts?sort=' + sortField + '&order=' + sortOrder;
+        if (search) url += '&search=' + encodeURIComponent(search);
+        if (filter !== 'all') url += '&filter=' + filter;
+
+        apiFetch(url).then(function(data) {
+          if (!data) return;
+          var tbody = document.querySelector('#contacts-table tbody');
+          tbody.innerHTML = '';
+          data.contacts.forEach(function(c) {
+            var tr = document.createElement('tr');
+            tr.innerHTML = '<td>' + (c.name || '—') + '</td><td>' + c.email + '</td><td>' + c.points + '</td><td>' + (c.lesson_source || '—') + '</td><td>' + (c.utm_source || '—') + '</td><td>' + formatDate(c.created_at) + '</td>';
+            tbody.appendChild(tr);
+          });
+        });
+      }
+
+      function renderFunnel(funnel) {
+        var container = document.getElementById('funnel-container');
+        container.innerHTML = '';
+        var maxCount = funnel[0] ? funnel[0].count : 1;
+
+        funnel.forEach(function(step, i) {
+          var pct = maxCount > 0 ? (step.count / maxCount * 100) : 0;
+          var convRate = '';
+          if (i > 0 && funnel[i - 1].count > 0) {
+            convRate = Math.round(step.count / funnel[i - 1].count * 100) + '%';
+          }
+
+          if (i > 0) {
+            var arrow = document.createElement('div');
+            arrow.className = 'funnel-arrow';
+            arrow.textContent = '→ ' + convRate + ' →';
+            container.appendChild(arrow);
+          }
+
+          var row = document.createElement('div');
+          row.className = 'funnel-step';
+          row.innerHTML = '<span class="funnel-label">' + step.label + '</span>' +
+            '<div class="funnel-bar-wrap"><div class="funnel-bar" style="width:' + Math.max(2, pct) + '%"></div></div>' +
+            '<span class="funnel-value">' + step.count + ' (' + Math.round(pct) + '%)</span>';
+          container.appendChild(row);
+        });
+      }
+
+      function renderVideoCharts(videoStats) {
+        for (var lesson = 1; lesson <= 3; lesson++) {
+          var canvas = document.getElementById('video-chart-' + lesson);
+          if (!canvas) continue;
+
+          var stats = videoStats[lesson];
+          if (!stats) continue;
+
+          var labels = stats.milestones.map(function(m) { return m.percent + '%'; });
+          var values = stats.milestones.map(function(m) { return m.count; });
+
+          if (videoCharts[lesson]) videoCharts[lesson].destroy();
+
+          videoCharts[lesson] = new Chart(canvas, {
+            type: 'bar',
+            data: {
+              labels: labels,
+              datasets: [{
+                data: values,
+                backgroundColor: 'rgba(0,229,160,0.4)',
+                borderColor: '#00e5a0',
+                borderWidth: 1
+              }]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: { legend: { display: false } },
+              scales: {
+                y: { beginAtZero: true, ticks: { color: 'rgba(255,255,255,0.5)' }, grid: { color: 'rgba(255,255,255,0.06)' } },
+                x: { ticks: { color: 'rgba(255,255,255,0.5)' }, grid: { display: false } }
+              }
+            }
+          });
+        }
+      }
+
+      function renderSurveyPies(stats) {
+        var grid = document.getElementById('survey-pie-grid');
+        grid.innerHTML = '';
+
+        var categories = [
+          { title: 'Занятие', data: stats.occupations },
+          { title: 'Проблема', data: stats.pains },
+          { title: 'Источник', data: stats.sources },
+          { title: 'Цель', data: stats.goals }
+        ];
+
+        categories.forEach(function(cat) {
+          var div = document.createElement('div');
+          div.className = 'pie-item';
+          var html = '<h4>' + cat.title + '</h4>';
+          var maxVal = 0;
+          cat.data.forEach(function(d) { if (d.c > maxVal) maxVal = d.c; });
+
+          cat.data.forEach(function(d) {
+            var w = maxVal > 0 ? (d.c / maxVal * 100) : 0;
+            html += '<div class="pie-bar"><div class="pie-bar-fill" style="width:' + w + '%;min-width:4px;"></div><span>' + d.label + ' (' + d.c + ')</span></div>';
+          });
+
+          if (cat.data.length === 0) {
+            html += '<span style="color:var(--text-secondary);font-size:12px;">Нет данных</span>';
+          }
+
+          div.innerHTML = html;
+          grid.appendChild(div);
+        });
+      }
+
+      function renderTable(tableId, rows, renderRow) {
+        var tbody = document.querySelector('#' + tableId + ' tbody');
+        tbody.innerHTML = '';
+        rows.forEach(function(r) {
+          var tr = document.createElement('tr');
+          tr.innerHTML = renderRow(r);
+          tbody.appendChild(tr);
+        });
+      }
+
+      function renderDailyChart(sessions, emails, purchases) {
+        var canvas = document.getElementById('daily-chart');
+
+        // Merge all dates
+        var dateMap = {};
+        sessions.forEach(function(d) { dateMap[d.day] = dateMap[d.day] || {}; dateMap[d.day].sessions = d.sessions; });
+        emails.forEach(function(d) { dateMap[d.day] = dateMap[d.day] || {}; dateMap[d.day].emails = d.emails; });
+        purchases.forEach(function(d) { dateMap[d.day] = dateMap[d.day] || {}; dateMap[d.day].purchases = d.purchases; });
+
+        var days = Object.keys(dateMap).sort();
+        var sessData = days.map(function(d) { return (dateMap[d].sessions || 0); });
+        var emailData = days.map(function(d) { return (dateMap[d].emails || 0); });
+        var purchData = days.map(function(d) { return (dateMap[d].purchases || 0); });
+
+        if (dailyChart) dailyChart.destroy();
+
+        dailyChart = new Chart(canvas, {
+          type: 'line',
+          data: {
+            labels: days,
+            datasets: [
+              { label: 'Сессии', data: sessData, borderColor: '#00e5a0', backgroundColor: 'rgba(0,229,160,0.1)', tension: 0.3, fill: true },
+              { label: 'Email', data: emailData, borderColor: '#ffdd57', backgroundColor: 'rgba(255,221,87,0.1)', tension: 0.3, fill: true },
+              { label: 'Покупки', data: purchData, borderColor: '#ff6b6b', backgroundColor: 'rgba(255,107,107,0.1)', tension: 0.3, fill: true }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { labels: { color: '#fff' } } },
+            scales: {
+              y: { beginAtZero: true, ticks: { color: 'rgba(255,255,255,0.5)' }, grid: { color: 'rgba(255,255,255,0.06)' } },
+              x: { ticks: { color: 'rgba(255,255,255,0.5)', maxRotation: 45 }, grid: { display: false } }
+            }
+          }
+        });
+      }
+
+      function fmt(n) { return (n || 0).toLocaleString('ru-RU'); }
+      function formatDate(d) { if (!d) return '—'; return d.substring(0, 10); }
+
+      init();
+    })();
+  </script>
+</body>
+</html>
