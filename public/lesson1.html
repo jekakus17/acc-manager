@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Урок 1 — Нейроуниверситет</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">⬡ Нейроуниверситет</div>
+      <div class="progress-bar">
+        <div class="progress-dot active"></div>
+        <div class="progress-dot"></div>
+        <div class="progress-dot"></div>
+        <span>Урок 1 из 3</span>
+      </div>
+      <div class="points-badge">⬡ <span id="points-value">0</span> баллов</div>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-label">Бесплатный курс · Урок 1</div>
+      <h1>Нейросети — это новый интернет</h1>
+      <p class="hero-subtitle">Либо ты заходишь сейчас — либо опоздаешь</p>
+    </section>
+
+    <!-- VIDEO -->
+    <div class="video-wrapper">
+      <iframe id="video-player" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <!-- TIMER (hidden by default) -->
+    <div class="timer-card" id="timer-card" style="display:none;">
+      <span class="timer-icon">⏱</span>
+      <span class="timer-points-text"></span>
+      <span class="timer-value"></span>
+    </div>
+
+    <!-- ЧТО УЗНАЕТЕ -->
+    <section class="cards-section">
+      <h2>Что узнаете</h2>
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-icon">🎯</div>
+          <h3>Новый интернет</h3>
+          <p>Почему нейросети — это не мода, а новый интернет</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">⚡</div>
+          <h3>Три инструмента</h3>
+          <p>Три инструмента которые сэкономят время уже сегодня</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🚀</div>
+          <h3>Зайди первым</h3>
+          <p>Как зайти в ИИ первым — пока большинство ждёт</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SURVEY -->
+    <div class="survey-block" id="survey-block" style="display:none;" data-id="after-video-block">
+      <h2>🎁 Пройдите опрос — получите 500 баллов</h2>
+      <p class="subtitle">30 секунд · 4 вопроса</p>
+
+      <div class="survey-progress">
+        <div class="survey-progress-dot"></div>
+        <div class="survey-progress-dot"></div>
+        <div class="survey-progress-dot"></div>
+        <div class="survey-progress-dot"></div>
+      </div>
+
+      <!-- Q1 -->
+      <div class="survey-question" data-q="1">
+        <h3>Чем вы занимаетесь?</h3>
+        <div class="survey-options">
+          <div class="survey-option" data-question="occupation" data-value="student"><div class="radio-circle"></div>Учусь / выбираю куда поступить</div>
+          <div class="survey-option" data-question="occupation" data-value="employee"><div class="radio-circle"></div>Работаю в найме</div>
+          <div class="survey-option" data-question="occupation" data-value="career_change"><div class="radio-circle"></div>Хочу сменить сферу</div>
+          <div class="survey-option" data-question="occupation" data-value="freelance"><div class="radio-circle"></div>Свой бизнес / фриланс</div>
+        </div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="survey-question" data-q="2">
+        <h3>Что забирает больше всего времени?</h3>
+        <div class="survey-options">
+          <div class="survey-option" data-question="pain" data-value="routine"><div class="radio-circle"></div>Рутинные задачи на работе</div>
+          <div class="survey-option" data-question="pain" data-value="study"><div class="radio-circle"></div>Учёба и подготовка</div>
+          <div class="survey-option" data-question="pain" data-value="communication"><div class="radio-circle"></div>Переписка и документы</div>
+          <div class="survey-option" data-question="pain" data-value="content"><div class="radio-circle"></div>Создание контента</div>
+        </div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="survey-question" data-q="3">
+        <h3>Как узнали о курсе?</h3>
+        <div class="survey-options">
+          <div class="survey-option" data-question="source" data-value="telegram"><div class="radio-circle"></div>Telegram-канал «Академия Разума»</div>
+          <div class="survey-option" data-question="source" data-value="friend"><div class="radio-circle"></div>От друга</div>
+          <div class="survey-option" data-question="source" data-value="social"><div class="radio-circle"></div>Соцсети</div>
+          <div class="survey-option" data-question="source" data-value="other"><div class="radio-circle"></div>Другое</div>
+        </div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="survey-question" data-q="4">
+        <h3>Что хотите получить от нейросетей?</h3>
+        <div class="survey-options">
+          <div class="survey-option" data-question="goal" data-value="save_time"><div class="radio-circle"></div>Экономить время на работе</div>
+          <div class="survey-option" data-question="goal" data-value="career"><div class="radio-circle"></div>Сменить профессию</div>
+          <div class="survey-option" data-question="goal" data-value="earn"><div class="radio-circle"></div>Зарабатывать на ИИ</div>
+          <div class="survey-option" data-question="goal" data-value="help"><div class="radio-circle"></div>Помочь ребёнку / близким</div>
+        </div>
+        <br>
+        <button class="btn btn-primary" id="survey-submit">Отправить и получить 500 баллов →</button>
+      </div>
+    </div>
+
+    <!-- NEXT LESSON -->
+    <div class="next-lesson" id="next-lesson-section" style="display:none;">
+      <a href="/lesson2.html" class="btn btn-primary next-lesson-link" style="max-width:400px;margin:0 auto;display:flex;">Перейти к уроку 2 →</a>
+    </div>
+
+  </div>
+
+  <script src="/js/config.js"></script>
+  <script src="/js/tracker.js"></script>
+  <script>
+    // Wire up the after-video-block
+    document.addEventListener('DOMContentLoaded', function() {
+      var surveyBlock = document.getElementById('survey-block');
+      if (surveyBlock) {
+        // Create alias for after-video logic
+        var afterBlock = document.createElement('div');
+        afterBlock.id = 'after-video-block';
+        afterBlock.style.display = 'none';
+        surveyBlock.parentElement.insertBefore(afterBlock, surveyBlock);
+
+        // Override show logic
+        var origShow = function() {
+          surveyBlock.style.display = 'block';
+          surveyBlock.classList.add('fade-in');
+          afterBlock.classList.add('shown');
+          Tracker.trackEvent('survey_shown', 1);
+        };
+
+        // 30s timer or video progress
+        var shown = false;
+        var showOnce = function() {
+          if (shown) return;
+          shown = true;
+          origShow();
+        };
+
+        setTimeout(showOnce, 30000);
+        window.addEventListener('videoProgress', function(e) {
+          if (e.detail.percent >= 5) showOnce();
+        });
+      }
+    });
+  </script>
+  <script src="/js/app.js"></script>
+</body>
+</html>

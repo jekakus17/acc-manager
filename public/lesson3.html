@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Урок 3 — Нейроуниверситет</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">⬡ Нейроуниверситет</div>
+      <div class="progress-bar">
+        <div class="progress-dot active"></div>
+        <div class="progress-dot active"></div>
+        <div class="progress-dot active"></div>
+        <span>Урок 3 из 3</span>
+      </div>
+      <div class="points-badge">⬡ <span id="points-value">0</span> баллов</div>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- TIMER (hidden by default) -->
+    <div class="timer-card" id="timer-card" style="display:none;">
+      <span class="timer-icon">⏱</span>
+      <span class="timer-points-text"></span>
+      <span class="timer-value"></span>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-label">Последний урок</div>
+      <h1>Один день из моей жизни с ИИ</h1>
+      <p class="hero-subtitle">Я использую нейросети буквально во всём — и покажу как именно</p>
+    </section>
+
+    <!-- VIDEO -->
+    <div class="video-wrapper">
+      <iframe id="video-player" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <!-- ЧТО УЗНАЕТЕ -->
+    <section class="cards-section">
+      <h2>Что узнаете</h2>
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-icon">🏥</div>
+          <h3>ИИ в жизни</h3>
+          <p>Как ИИ управляет здоровьем, целями и финансами</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎵</div>
+          <h3>Создавай без навыков</h3>
+          <p>Как создать песню, книгу, сервис без технических знаний</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">💼</div>
+          <h3>Деньги в ИИ</h3>
+          <p>Почему бизнесы платят за эти навыки большие деньги</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECRET BONUS -->
+    <div class="bonus-block" id="secret-bonus" style="display:none;">
+      <h2>🔓 Вы открыли секретный бонус</h2>
+      <p style="color:var(--text-secondary);margin-top:8px;">Закрытый мастер-класс «Делегируй 5 задач за 90 минут» входит в ваш пакет бесплатно при покупке сегодня</p>
+    </div>
+
+    <!-- OFFER -->
+    <div class="offer-block" id="offer-block">
+      <h2>Нейроуниверситет — полный курс</h2>
+      <p style="color:var(--text-secondary);margin-top:4px;">Не теория. Практика с первого урока.</p>
+
+      <div class="offer-features">
+        <div class="offer-feature"><span class="check">✓</span> Мастер-класс: 5 задач на автопилот за 90 минут</div>
+        <div class="offer-feature"><span class="check">✓</span> 4 недели практики: экономия 8-13 часов в неделю</div>
+        <div class="offer-feature"><span class="check">✓</span> Боты, сайты, вайбкодинг — без программирования</div>
+        <div class="offer-feature"><span class="check">✓</span> Промтбук: 200+ готовых решений</div>
+      </div>
+
+      <div class="price-card">
+        <div class="price-old" id="price-old" style="display:none;"></div>
+        <div class="price-current" id="price-current">15 000 ₽</div>
+        <div class="price-points" id="price-points" style="display:none;"></div>
+        <div class="price-no-discount" id="price-no-discount">Пройдите уроки 1-2 чтобы получить скидку</div>
+
+        <!-- Timer inside price card -->
+        <div class="timer-card" id="offer-timer-card" style="display:none;margin-top:12px;">
+          <span class="timer-icon">⏱</span>
+          <span>Скидка сгорит через: </span>
+          <span class="timer-value" id="offer-timer-value"></span>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" id="buy-btn">Купить за 15 000 ₽ →</button>
+
+      <p class="offer-fine-print">✓ Закрытый мастер-класс включён  ·  ✓ 3 дня на возврат  ·  ✓ 180 дней доступа</p>
+    </div>
+
+  </div>
+
+  <script src="/js/config.js"></script>
+  <script src="/js/tracker.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Start offer timer if points exist
+      Tracker.getPoints(function(data) {
+        if (data.total > 0 && data.expires_at) {
+          var offerTimerCard = document.getElementById('offer-timer-card');
+          var offerTimerVal = document.getElementById('offer-timer-value');
+          if (offerTimerCard && offerTimerVal) {
+            offerTimerCard.style.display = 'flex';
+            Tracker.startPointsTimer(data.expires_at, offerTimerVal);
+          }
+        }
+      });
+    });
+  </script>
+  <script src="/js/app.js"></script>
+</body>
+</html>
