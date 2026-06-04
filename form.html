@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заявка в мини-группу по внедрению ИИ — Евгений Кусакин</title>
+    <meta name="description" content="Личное наставничество по встраиванию ИИ в работу и жизнь. Набор в первую мини-группу — 5 мест.">
+    <style>
+        :root {
+            /* Брендбук: терракот + беж */
+            --terracotta: #B85C38;
+            --terracotta-dark: #9C4A2B;
+            --terracotta-soft: #D08A6A;
+            --sand: #E7C9A9;
+            --beige: #F3E9DC;
+            --beige-deep: #EADBC8;
+            --cream: #FBF6EF;
+            --ink: #3D332B;
+            --ink-soft: #6F6157;
+            --line: #E3D3BF;
+            --olive: #8A8A5C;
+            --success: #6E8B5B;
+            --radius: 14px;
+            --shadow: 0 10px 30px rgba(122, 74, 43, 0.10);
+            --shadow-soft: 0 4px 16px rgba(122, 74, 43, 0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, sans-serif;
+            color: var(--ink);
+            background: var(--beige);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::selection { background: var(--sand); color: var(--ink); }
+
+        .wrap {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ── Шапка / оффер ── */
+        .hero {
+            position: relative;
+            background:
+                radial-gradient(1100px 400px at 80% -10%, rgba(208,138,106,0.30), transparent 60%),
+                linear-gradient(160deg, #FBF6EF 0%, #F3E9DC 100%);
+            border-bottom: 1px solid var(--line);
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            right: -120px;
+            bottom: -160px;
+            width: 360px;
+            height: 360px;
+            background: radial-gradient(circle at center, rgba(184,92,56,0.16), transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero-inner {
+            padding: 56px 20px 48px;
+            position: relative;
+            z-index: 1;
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(184, 92, 56, 0.10);
+            color: var(--terracotta-dark);
+            border: 1px solid rgba(184, 92, 56, 0.25);
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 {
+            font-size: clamp(28px, 5vw, 40px);
+            line-height: 1.18;
+            color: var(--ink);
+            letter-spacing: -0.01em;
+            margin-bottom: 18px;
+            font-weight: 800;
+        }
+
+        .hero h1 .accent { color: var(--terracotta); }
+
+        .hero .lede {
+            font-size: 18px;
+            color: var(--ink-soft);
+            max-width: 600px;
+            margin-bottom: 28px;
+        }
+
+        .facts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .fact {
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 14px 18px;
+            min-width: 130px;
+            flex: 1 1 130px;
+        }
+
+        .fact .num {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--terracotta);
+            display: block;
+            line-height: 1.1;
+        }
+
+        .fact .lbl {
+            font-size: 13px;
+            color: var(--ink-soft);
+            margin-top: 2px;
+        }
+
+        /* ── Блок «как устроено» ── */
+        .about {
+            padding: 44px 0 8px;
+        }
+
+        .about h2 {
+            font-size: 22px;
+            margin-bottom: 18px;
+            color: var(--ink);
+        }
+
+        .steps {
+            display: grid;
+            gap: 14px;
+        }
+
+        .step {
+            display: flex;
+            gap: 16px;
+            background: var(--cream);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 18px 20px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .step .dot {
+            flex: 0 0 auto;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: var(--terracotta);
+            color: #fff;
+            display: grid;
+            place-items: center;
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .step h3 {
+            font-size: 16px;
+            margin-bottom: 3px;
+            color: var(--ink);
+        }
+
+        .step p {
+            font-size: 15px;
+            color: var(--ink-soft);
+            margin: 0;
+        }
+
+        .who {
+            margin: 26px 0 6px;
+            background: linear-gradient(135deg, rgba(231,201,169,0.45), rgba(243,233,220,0.45));
+            border: 1px solid var(--line);
+            border-left: 4px solid var(--terracotta);
+            border-radius: var(--radius);
+            padding: 20px 22px;
+        }
+        .who h3 { font-size: 16px; margin-bottom: 8px; }
+        .who p { font-size: 15px; color: var(--ink-soft); margin: 0; }
+
+        /* ── Форма ── */
+        .form-card {
+            background: var(--cream);
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 36px 34px;
+            margin: 30px 0 60px;
+        }
+
+        .form-card > h2 {
+            font-size: 24px;
+            color: var(--ink);
+            margin-bottom: 6px;
+        }
+
+        .form-card > .sub {
+            color: var(--ink-soft);
+            font-size: 15px;
+            margin-bottom: 28px;
+        }
+
+        .field { margin-bottom: 26px; }
+
+        .field > label.q,
+        .field > .q {
+            display: block;
+            font-weight: 700;
+            font-size: 15.5px;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+
+        .field .hint {
+            font-size: 13.5px;
+            color: var(--ink-soft);
+            margin-bottom: 12px;
+        }
+
+        .req { color: var(--terracotta); font-weight: 700; }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        textarea,
+        select {
+            width: 100%;
+            font: inherit;
+            color: var(--ink);
+            background: #fff;
+            border: 1.5px solid var(--line);
+            border-radius: 12px;
+            padding: 13px 15px;
+            transition: border-color .18s ease, box-shadow .18s ease;
+        }
+
+        textarea { resize: vertical; min-height: 96px; }
+
+        input::placeholder, textarea::placeholder { color: #B6A593; }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--terracotta-soft);
+            box-shadow: 0 0 0 4px rgba(208, 138, 106, 0.18);
+        }
+
+        /* Радио / чекбоксы как «таблетки» */
+        .options { display: grid; gap: 10px; }
+        .options.cols { grid-template-columns: 1fr 1fr; }
+
+        .opt {
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            border: 1.5px solid var(--line);
+            background: #fff;
+            border-radius: 12px;
+            padding: 13px 15px;
+            cursor: pointer;
+            transition: border-color .15s ease, background .15s ease, box-shadow .15s ease;
+        }
+
+        .opt:hover { border-color: var(--terracotta-soft); }
+
+        .opt input { position: absolute; opacity: 0; pointer-events: none; }
+
+        .opt .box {
+            flex: 0 0 auto;
+            width: 20px;
+            height: 20px;
+            margin-top: 1px;
+            border: 2px solid var(--sand);
+            border-radius: 6px;
+            display: grid;
+            place-items: center;
+            transition: all .15s ease;
+        }
+        .opt .box.round { border-radius: 50%; }
+
+        .opt .box::after {
+            content: "";
+            width: 9px; height: 9px;
+            border-radius: 3px;
+            background: #fff;
+            transform: scale(0);
+            transition: transform .15s ease;
+        }
+        .opt .box.round::after { border-radius: 50%; }
+
+        .opt .txt { font-size: 15px; color: var(--ink); }
+        .opt .txt small { display: block; color: var(--ink-soft); font-size: 13px; font-weight: 400; margin-top: 1px; }
+
+        .opt input:checked ~ .box {
+            background: var(--terracotta);
+            border-color: var(--terracotta);
+        }
+        .opt input:checked ~ .box::after { transform: scale(1); }
+        .opt input:checked ~ .txt { font-weight: 600; }
+        .opt:has(input:checked) {
+            border-color: var(--terracotta);
+            background: rgba(184, 92, 56, 0.05);
+            box-shadow: 0 0 0 3px rgba(184, 92, 56, 0.10);
+        }
+
+        .field-error {
+            color: var(--terracotta-dark);
+            font-size: 13.5px;
+            margin-top: 8px;
+            display: none;
+        }
+        .field.invalid .field-error { display: block; }
+        .field.invalid input,
+        .field.invalid textarea,
+        .field.invalid .options { }
+        .field.invalid input:not(:focus),
+        .field.invalid textarea:not(:focus) { border-color: var(--terracotta-soft); }
+
+        .consent {
+            background: rgba(231, 201, 169, 0.30);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 16px 18px;
+        }
+
+        /* Кнопка */
+        .submit-row {
+            margin-top: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn {
+            appearance: none;
+            border: none;
+            cursor: pointer;
+            font: inherit;
+            font-weight: 700;
+            font-size: 17px;
+            color: #fff;
+            background: linear-gradient(135deg, var(--terracotta) 0%, var(--terracotta-dark) 100%);
+            padding: 16px 24px;
+            border-radius: 13px;
+            box-shadow: 0 8px 20px rgba(184, 92, 56, 0.28);
+            transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 12px 26px rgba(184, 92, 56, 0.34); }
+        .btn:active { transform: translateY(0); }
+        .btn:disabled { opacity: .65; cursor: progress; transform: none; }
+
+        .form-note {
+            text-align: center;
+            font-size: 13.5px;
+            color: var(--ink-soft);
+        }
+
+        /* ── Экран «спасибо» ── */
+        .thanks {
+            display: none;
+            text-align: center;
+            padding: 50px 20px 30px;
+        }
+        .thanks.show { display: block; animation: rise .5s ease; }
+        @keyframes rise { from { opacity: 0; transform: translateY(16px);} to { opacity: 1; transform: none; } }
+
+        .thanks .check {
+            width: 76px; height: 76px;
+            margin: 0 auto 22px;
+            border-radius: 50%;
+            background: var(--success);
+            display: grid; place-items: center;
+            box-shadow: 0 10px 24px rgba(110, 139, 91, 0.35);
+        }
+        .thanks .check svg { width: 38px; height: 38px; }
+        .thanks h2 { font-size: 26px; margin-bottom: 12px; color: var(--ink); }
+        .thanks p { color: var(--ink-soft); font-size: 16px; max-width: 460px; margin: 0 auto 10px; }
+
+        .tg-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            margin-top: 22px;
+            text-decoration: none;
+            font-weight: 700;
+            color: #fff;
+            background: var(--terracotta);
+            padding: 13px 22px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-soft);
+            transition: transform .15s ease;
+        }
+        .tg-link:hover { transform: translateY(-2px); }
+
+        .summary {
+            text-align: left;
+            max-width: 520px;
+            margin: 28px auto 0;
+            background: var(--cream);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 18px 20px;
+        }
+        .summary h4 { font-size: 14px; color: var(--ink-soft); font-weight: 600; margin-bottom: 10px; text-transform: uppercase; letter-spacing: .04em; }
+        .summary dl { display: grid; grid-template-columns: 1fr; gap: 10px; }
+        .summary .row { font-size: 14.5px; }
+        .summary .row b { color: var(--ink); }
+        .summary .row span { color: var(--ink-soft); }
+
+        /* ── Подвал ── */
+        footer {
+            border-top: 1px solid var(--line);
+            background: var(--cream);
+            padding: 26px 20px 40px;
+            text-align: center;
+        }
+        footer p { font-size: 13.5px; color: var(--ink-soft); }
+        footer .brand { font-weight: 700; color: var(--terracotta); }
+
+        @media (max-width: 560px) {
+            .hero-inner { padding: 40px 20px 36px; }
+            .form-card { padding: 26px 20px; }
+            .options.cols { grid-template-columns: 1fr; }
+            .step { padding: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ══════════ ОФФЕР ══════════ -->
+    <header class="hero">
+        <div class="hero-inner">
+            <span class="eyebrow">🗣 Набор в первую мини-группу · 5 мест</span>
+            <h1>Встрою <span class="accent">ИИ</span> под ваши задачи<br>в работе и жизни</h1>
+            <p class="lede">Не курс и не вебинар — живое личное наставничество. Четыре недели вместе встраиваем нейросети в ваш день, до результата. Оставьте заявку — анкета на пять минут.</p>
+            <div class="facts">
+                <div class="fact"><span class="num">4 недели</span><span class="lbl">плотной работы</span></div>
+                <div class="fact"><span class="num">5 мест</span><span class="lbl">беру не всех</span></div>
+                <div class="fact"><span class="num">3 процесса</span><span class="lbl">под ваш случай</span></div>
+                <div class="fact"><span class="num">24/7</span><span class="lbl">личный ИИ-агент</span></div>
+            </div>
+        </div>
+    </header>
+
+    <main class="wrap">
+
+        <!-- ── Как устроено ── -->
+        <section class="about">
+            <h2>Как это устроено</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="dot">1</div>
+                    <div>
+                        <h3>Личный созвон один на один</h3>
+                        <p>На старте спокойно разбираем именно ваш бизнес, задачи и рутины — и вместе решаем, какие три процесса будем встраивать.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="dot">2</div>
+                    <div>
+                        <h3>Групповые встречи + общий чат</h3>
+                        <p>Один созвон в неделю, четыре встречи. Между ними разбираю задачи на вашем личном примере, а не на абстрактном.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="dot">3</div>
+                    <div>
+                        <h3>Ваш ИИ-агент навсегда</h3>
+                        <p>Моя обученная копия, к которой можно обратиться 24/7 по любому вопросу. Остаётся с вами даже после потока.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="dot">4</div>
+                    <div>
+                        <h3>Результат через четыре недели</h3>
+                        <p>Три рабочих ИИ-процесса, реально встроенных в жизнь и работу — уже освобождающих несколько часов в неделю.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="who">
+                <h3>Беру не всех</h3>
+                <p>Работаю с теми, у кого есть бизнес, проект или работа с конкретными задачами, в которые ИИ можно встроить уже сейчас, — и кто готов внедрять, а не просто посмотреть и кивнуть. Стоимость первого потока — 30 000 ₽ (обычная 50 000 ₽) в обмен на включённую работу и кейс на выходе. Старт — 16 июня, вторник.</p>
+            </div>
+        </section>
+
+        <!-- ── ФОРМА ── -->
+        <section class="form-card" id="formCard">
+            <h2>Заявка на участие</h2>
+            <p class="sub">Прочитаю каждую анкету сам и позову на диагностический созвон тех, кому формат подходит. Поля со <span class="req">*</span> — обязательные.</p>
+
+            <form id="applyForm" novalidate>
+
+                <!-- Имя -->
+                <div class="field" data-required>
+                    <label class="q" for="name">Как вас зовут? <span class="req">*</span></label>
+                    <input type="text" id="name" name="name" placeholder="Имя" autocomplete="name">
+                    <div class="field-error">Напишите, пожалуйста, имя.</div>
+                </div>
+
+                <!-- Telegram -->
+                <div class="field" data-required>
+                    <label class="q" for="tg">Ваш Telegram для связи <span class="req">*</span></label>
+                    <div class="hint">Свяжусь в течение пары дней — расскажу детали и отвечу на вопросы.</div>
+                    <input type="text" id="tg" name="tg" placeholder="@username или ссылка t.me/…">
+                    <div class="field-error">Оставьте контакт в Telegram, чтобы я мог написать.</div>
+                </div>
+
+                <!-- Доп. контакт -->
+                <div class="field">
+                    <label class="q" for="contact2">Запасной контакт <span style="font-weight:400;color:var(--ink-soft)">(необязательно)</span></label>
+                    <input type="text" id="contact2" name="contact2" placeholder="Телефон или email">
+                </div>
+
+                <!-- Чем занимаетесь -->
+                <div class="field" data-required>
+                    <span class="q">Чем вы занимаетесь? <span class="req">*</span></span>
+                    <div class="hint">Чтобы понять, во что встраиваем ИИ.</div>
+                    <div class="options" data-group="role">
+                        <label class="opt"><input type="radio" name="role" value="Бизнес"><span class="box round"></span><span class="txt">У меня свой бизнес</span></label>
+                        <label class="opt"><input type="radio" name="role" value="Проект"><span class="box round"></span><span class="txt">Веду проект / самозанятость / фриланс</span></label>
+                        <label class="opt"><input type="radio" name="role" value="Работа в найме"><span class="box round"></span><span class="txt">Работа в найме с конкретными задачами</span></label>
+                        <label class="opt"><input type="radio" name="role" value="Другое"><span class="box round"></span><span class="txt">Другое</span></label>
+                    </div>
+                    <div class="field-error">Выберите один вариант.</div>
+                </div>
+
+                <!-- Описание -->
+                <div class="field" data-required>
+                    <label class="q" for="about">Расскажите коротко о своём деле и задачах <span class="req">*</span></label>
+                    <div class="hint">Сфера, чем занимаетесь день в день, что отнимает больше всего времени.</div>
+                    <textarea id="about" name="about" placeholder="Например: онлайн-школа, сам пишу контент и разбираю переписки с учениками, на это уходит полдня…"></textarea>
+                    <div class="field-error">Опишите хотя бы парой предложений — так я смогу оценить заявку.</div>
+                </div>
+
+                <!-- Что встраивать -->
+                <div class="field" data-required>
+                    <span class="q">Что хотели бы отдать ИИ в первую очередь? <span class="req">*</span></span>
+                    <div class="hint">Можно выбрать несколько — под ваш случай.</div>
+                    <div class="options cols" data-group="tasks">
+                        <label class="opt"><input type="checkbox" name="tasks" value="Подготовка контента"><span class="box"></span><span class="txt">Подготовка контента</span></label>
+                        <label class="opt"><input type="checkbox" name="tasks" value="Разбор переписок и звонков"><span class="box"></span><span class="txt">Разбор переписок и звонков с клиентами</span></label>
+                        <label class="opt"><input type="checkbox" name="tasks" value="Аналитика"><span class="box"></span><span class="txt">Аналитика</span></label>
+                        <label class="opt"><input type="checkbox" name="tasks" value="Сайты и формы"><span class="box"></span><span class="txt">Сборка простых сайтов и форм</span></label>
+                        <label class="opt"><input type="checkbox" name="tasks" value="Поиск информации"><span class="box"></span><span class="txt">Поиск информации</span></label>
+                        <label class="opt"><input type="checkbox" name="tasks" value="Личная рутина"><span class="box"></span><span class="txt">Личная рутина — учёт, планирование</span></label>
+                        <label class="opt"><input type="checkbox" name="tasks" value="Пока не знаю"><span class="box"></span><span class="txt">Пока не знаю — подскажете</span></label>
+                    </div>
+                    <div class="field-error">Отметьте хотя бы один вариант.</div>
+                </div>
+
+                <!-- Опыт с ИИ -->
+                <div class="field" data-required>
+                    <span class="q">Какой у вас сейчас опыт с нейросетями? <span class="req">*</span></span>
+                    <div class="options" data-group="experience">
+                        <label class="opt"><input type="radio" name="experience" value="Почти никакого"><span class="box round"></span><span class="txt">Почти никакого — только слышал</span></label>
+                        <label class="opt"><input type="radio" name="experience" value="Иногда пробую"><span class="box round"></span><span class="txt">Иногда что-то спрашиваю у ИИ</span></label>
+                        <label class="opt"><input type="radio" name="experience" value="Пользуюсь регулярно"><span class="box round"></span><span class="txt">Пользуюсь регулярно, хочу глубже</span></label>
+                    </div>
+                    <div class="field-error">Выберите один вариант.</div>
+                </div>
+
+                <!-- Готовность по времени -->
+                <div class="field" data-required>
+                    <span class="q">Готовы выделять время на внедрение эти 4 недели? <span class="req">*</span></span>
+                    <div class="hint">Формат живой — нужна включённая работа, а не «посмотреть и кивнуть».</div>
+                    <div class="options" data-group="time">
+                        <label class="opt"><input type="radio" name="time" value="Да, готов(а) включаться"><span class="box round"></span><span class="txt">Да, готов(а) включённо работать</span></label>
+                        <label class="opt"><input type="radio" name="time" value="Скорее да, время плотное"><span class="box round"></span><span class="txt">Скорее да, но график плотный</span></label>
+                        <label class="opt"><input type="radio" name="time" value="Пока не уверен(а)"><span class="box round"></span><span class="txt">Пока не уверен(а)</span></label>
+                    </div>
+                    <div class="field-error">Выберите один вариант.</div>
+                </div>
+
+                <!-- Почему -->
+                <div class="field">
+                    <label class="q" for="why">Что хотите получить на выходе? <span style="font-weight:400;color:var(--ink-soft)">(необязательно)</span></label>
+                    <textarea id="why" name="why" placeholder="Какой результат для вас был бы «оно того стоило»…"></textarea>
+                </div>
+
+                <!-- Согласие на кейс -->
+                <div class="field" data-required>
+                    <div class="consent">
+                        <label class="opt" style="border:none;background:transparent;padding:0;align-items:flex-start;">
+                            <input type="checkbox" name="caseConsent" value="Готов(а) дать кейс">
+                            <span class="box"></span>
+                            <span class="txt">Готов(а) дать честный кейс и отзыв по итогам потока <span class="req">*</span>
+                                <small>Условие цены первого потока — живые результаты участников.</small>
+                            </span>
+                        </label>
+                    </div>
+                    <div class="field-error">Это условие участия в первом потоке — отметьте, пожалуйста.</div>
+                </div>
+
+                <div class="submit-row">
+                    <button type="submit" class="btn" id="submitBtn">Отправить заявку →</button>
+                    <p class="form-note">После заявки свяжусь в Telegram в течение пары дней.</p>
+                </div>
+            </form>
+
+            <!-- Экран благодарности -->
+            <div class="thanks" id="thanks">
+                <div class="check">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                </div>
+                <h2>Заявка отправлена 🎉</h2>
+                <p id="thanksName">Спасибо! Я прочитаю вашу анкету сам и свяжусь в Telegram в течение пары дней — расскажу детали и позову на диагностический созвон, если формат подходит.</p>
+                <p style="font-size:14px;">Если откладывали разобраться с нейросетями «когда-нибудь» — кажется, это «когда-нибудь» как раз наступило.</p>
+
+                <a class="tg-link" id="tgLink" href="https://t.me/kusakin_school_bot" target="_blank" rel="noopener">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M21.94 4.6l-3.3 15.56c-.25 1.1-.9 1.37-1.83.85l-5.05-3.72-2.44 2.35c-.27.27-.5.5-1 .5l.36-5.15L18 6.36c.4-.36-.09-.56-.62-.2L6.1 13.36l-5-1.57c-1.08-.34-1.1-1.08.23-1.6L20.55 3.1c.9-.33 1.69.2 1.39 1.5z"/></svg>
+                    Открыть бота
+                </a>
+
+                <div class="summary" id="summary" hidden>
+                    <h4>Ваши ответы</h4>
+                    <dl id="summaryList"></dl>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p><span class="brand">Евгений Кусакин</span> · канал про чат-боты и нейросети</p>
+        <p style="margin-top:6px;">12 лет в маркетинге · 4 книги · 1800+ человек прошли через продукты</p>
+    </footer>
+
+    <script>
+    (function () {
+        const form    = document.getElementById('applyForm');
+        const thanks  = document.getElementById('thanks');
+        const formCard = document.getElementById('formCard');
+
+        // ── Валидация одного поля ──
+        function validateField(field) {
+            const group = field.querySelector('.options')?.dataset.group;
+            let ok = true;
+
+            if (group) {
+                // радио или чекбоксы
+                ok = field.querySelectorAll('input:checked').length > 0;
+            } else if (field.querySelector('input[type="checkbox"]')) {
+                ok = field.querySelector('input[type="checkbox"]').checked;
+            } else {
+                const input = field.querySelector('input, textarea');
+                ok = input && input.value.trim().length >= (input.tagName === 'TEXTAREA' ? 10 : 2);
+            }
+
+            field.classList.toggle('invalid', !ok);
+            return ok;
+        }
+
+        // Снимаем подсветку ошибки при вводе/выборе
+        form.addEventListener('input', e => {
+            const field = e.target.closest('.field');
+            if (field && field.classList.contains('invalid')) validateField(field);
+        });
+        form.addEventListener('change', e => {
+            const field = e.target.closest('.field');
+            if (field && field.classList.contains('invalid')) validateField(field);
+        });
+
+        // ── Сбор данных в читабельный вид ──
+        function collect() {
+            const fd = new FormData(form);
+            const tasks = fd.getAll('tasks');
+            return {
+                'Имя': fd.get('name')?.trim() || '—',
+                'Telegram': fd.get('tg')?.trim() || '—',
+                'Запасной контакт': fd.get('contact2')?.trim() || '—',
+                'Чем занимается': fd.get('role') || '—',
+                'О деле и задачах': fd.get('about')?.trim() || '—',
+                'Что отдать ИИ': tasks.length ? tasks.join(', ') : '—',
+                'Опыт с ИИ': fd.get('experience') || '—',
+                'Готовность по времени': fd.get('time') || '—',
+                'Что хочет получить': fd.get('why')?.trim() || '—',
+                'Кейс по итогам': fd.get('caseConsent') ? 'Да' : 'Нет'
+            };
+        }
+
+        // ── Отправка ──
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const fields = [...form.querySelectorAll('.field[data-required]')];
+            let firstBad = null;
+            fields.forEach(f => { if (!validateField(f) && !firstBad) firstBad = f; });
+
+            if (firstBad) {
+                firstBad.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+
+            const data = collect();
+
+            /* ──────────────────────────────────────────────────────────────
+               ДОСТАВКА ЗАЯВКИ.
+               Сейчас данные сохраняются в браузере (localStorage) и
+               показываются на экране «спасибо». Это рабочая заглушка.
+
+               Чтобы заявки начали приходить вам — подключите бэкенд тут:
+
+               • Formspree:  замените блок ниже на
+                   fetch('https://formspree.io/f/ВАШ_ID', {
+                     method:'POST',
+                     headers:{'Accept':'application/json'},
+                     body: new FormData(form)
+                   });
+
+               • Telegram-бот: соберите текст и откройте
+                   t.me/kusakin_school_bot?start=…  или отправьте через
+                   sendMessage Bot API со своего сервера.
+               ────────────────────────────────────────────────────────────── */
+            try {
+                const store = JSON.parse(localStorage.getItem('aiGroupApplications') || '[]');
+                store.push({ ...data, ts: new Date().toISOString() });
+                localStorage.setItem('aiGroupApplications', JSON.stringify(store));
+            } catch (_) {}
+
+            // Экран благодарности
+            const name = data['Имя'] && data['Имя'] !== '—' ? data['Имя'] : '';
+            if (name) {
+                document.getElementById('thanksName').textContent =
+                    name + ', спасибо! Я прочитаю вашу анкету сам и свяжусь в Telegram в течение пары дней — расскажу детали и позову на диагностический созвон, если формат подходит.';
+            }
+
+            // Краткая сводка
+            const list = document.getElementById('summaryList');
+            list.innerHTML = '';
+            Object.entries(data).forEach(([k, v]) => {
+                if (v && v !== '—') {
+                    const row = document.createElement('div');
+                    row.className = 'row';
+                    row.innerHTML = '<b>' + k + ':</b> <span>' + String(v).replace(/</g,'&lt;') + '</span>';
+                    list.appendChild(row);
+                }
+            });
+            document.getElementById('summary').hidden = false;
+
+            form.style.display = 'none';
+            formCard.querySelector('h2').style.display = 'none';
+            formCard.querySelector('.sub').style.display = 'none';
+            thanks.classList.add('show');
+            thanks.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    })();
+    </script>
+</body>
+</html>
