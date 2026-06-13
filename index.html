@@ -511,7 +511,7 @@
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressBar"></div>
                 </div>
-                <p><span id="completedCount">0</span> из 21 урока пройдено</p>
+                <p><span id="completedCount">0</span> из 27 уроков пройдено</p>
             </div>
 
             <ul>
@@ -580,6 +580,19 @@
                         <li><a onclick="showSection('youtube-lesson4')">Шаг 3. Анализ конкурентов</a></li>
                         <li><a onclick="showSection('youtube-lesson5')">Шаг 4. Стратегия и 100 идей</a></li>
                         <li><a onclick="showSection('youtube-lesson6')">Шаг 5. ИИ-сценарист и запуск</a></li>
+                    </ul>
+                </li>
+
+                <!-- YouTube: стратегия и контент-план -->
+                <li>
+                    <a class="module-header" onclick="toggleModule(this)">📊 YouTube: стратегия и контент-план</a>
+                    <ul class="lessons">
+                        <li><a onclick="showSection('ytstrat-lesson1')">Аудитория: сегменты и боли</a></li>
+                        <li><a onclick="showSection('ytstrat-lesson2')">Анализ конкурентов (топ-20)</a></li>
+                        <li><a onclick="showSection('ytstrat-lesson3')">Выводы и скрытые триггеры</a></li>
+                        <li><a onclick="showSection('ytstrat-lesson4')">Финальная контент-матрица</a></li>
+                        <li><a onclick="showSection('ytstrat-lesson5')">Контент-календарь на месяц</a></li>
+                        <li><a onclick="showSection('ytstrat-lesson6')">Готовый скрипт сбора данных</a></li>
                     </ul>
                 </li>
 
@@ -1909,7 +1922,434 @@ Malki Means King (AI-автоматизация), Anson Alexander.
 
                 <div class="lesson-nav">
                     <button class="btn secondary" onclick="showSection('youtube-lesson5')">← Шаг 4</button>
-                    <button class="btn" onclick="markComplete('youtube-lesson6'); showSection('home')">Завершить модуль ✓</button>
+                    <button class="btn" onclick="markComplete('youtube-lesson6'); showSection('ytstrat-lesson1')">Дальше: стратегия и контент-план →</button>
+                </div>
+            </section>
+
+            <!-- ===================================================== -->
+            <!-- МОДУЛЬ: YouTube — стратегия и контент-план (результаты) -->
+            <!-- ===================================================== -->
+
+            <!-- Урок 1: Аудитория -->
+            <section id="ytstrat-lesson1" class="content-section">
+                <h1>🎯 Аудитория: сегменты, боли и триггеры</h1>
+
+                <div class="page-toc">
+                    <h4>Содержание урока:</h4>
+                    <ul>
+                        <li><a href="#yts1-goal">Цель канала</a></li>
+                        <li><a href="#yts1-segments">3 сегмента аудитории</a></li>
+                        <li><a href="#yts1-funnel">Логика воронки на YouTube</a></li>
+                    </ul>
+                </div>
+
+                <h2 id="yts1-goal">🏁 Цель канала</h2>
+                <div class="notice info">
+                    <p><strong>Внутренняя цель:</strong> масштаб и рост канала (целимся в миллион подписчиков).<br>
+                    <strong>Коммерческая цель:</strong> стабильный трафик в клуб «НейроКус» — планка <strong>1000+ активных резидентов</strong>.</p>
+                </div>
+                <p>Под эту задачу контент должен быть не просто развлекательным, а <strong>экспертно-демонстрационным</strong>: чтобы после просмотра зритель думал «он делает нереально крутые вещи на ИИ — хочу так же, в его окружении».</p>
+
+                <h2 id="yts1-segments">👥 3 ключевых сегмента аудитории</h2>
+
+                <h3>1. Новички / эксперты / предприниматели (хотят сайт/сервис для себя)</h3>
+                <ul>
+                    <li><strong>Боли:</strong> «нет навыков кода», «студии просят 100к+ и месяц времени», «боюсь технических настроек (домен, оплаты, ТГ-уведомления)».</li>
+                    <li><strong>Триггер:</strong> экономия денег и запуск бизнеса за один вечер.</li>
+                </ul>
+
+                <h3>2. Фрилансеры / разработчики «на коленке» (хотят на этом зарабатывать)</h3>
+                <ul>
+                    <li><strong>Боли:</strong> «как продать сайт за 50–100к, если сделал за 10 минут?», «где искать клиентов?», «как юридически обезопаситься (оферты, политика конфиденциальности для ИП)?».</li>
+                    <li><strong>Триггер:</strong> сверхбыстрый чек, кратный рост дохода, механика продаж ИИ-разработки.</li>
+                </ul>
+
+                <h3>3. Технари-энтузиасты (следят за трендами)</h3>
+                <ul>
+                    <li><strong>Боли:</strong> «какая нейросеть лучше для кода?», «Claude или Gemini?», «промпт выдаёт ошибку — как заставить ИИ её исправить?».</li>
+                    <li><strong>Триггер:</strong> глубокие фишки промпт-инжиниринга, разбор обновлений, обход багов.</li>
+                </ul>
+
+                <h2 id="yts1-funnel">🔻 Логика воронки на YouTube</h2>
+                <p>На YouTube нужно совмещать широкие темы и узкие воронки:</p>
+                <ul>
+                    <li><strong>Top of Funnel</strong> (широкий охват) — ролики типа «Программисты больше не нужны». Качают медийность и приводят холодный трафик.</li>
+                    <li><strong>Middle / Bottom of Funnel</strong> — экспертные скринкасты, разборы багов, кейсы. Именно они конвертируют зрителя в резидента клуба.</li>
+                </ul>
+                <div class="notice success">
+                    <p>✅ Контент-матрица строится так, чтобы темы чередовались и работали как единая экосистема.</p>
+                </div>
+
+                <div class="lesson-nav">
+                    <button class="btn secondary" onclick="showSection('youtube-lesson6')">← Методология</button>
+                    <button class="btn" onclick="markComplete('ytstrat-lesson1'); showSection('ytstrat-lesson2')">Дальше: конкуренты →</button>
+                </div>
+            </section>
+
+            <!-- Урок 2: Анализ конкурентов топ-20 -->
+            <section id="ytstrat-lesson2" class="content-section">
+                <h1>🔬 Анализ конкурентов: топ-20 залетающих тем</h1>
+
+                <div class="page-toc">
+                    <h4>Содержание урока:</h4>
+                    <ul>
+                        <li><a href="#yts2-note">Что означают метрики</a></li>
+                        <li><a href="#yts2-table">Сравнительная таблица топ-20</a></li>
+                    </ul>
+                </div>
+
+                <h2 id="yts2-note">📐 Что означают метрики</h2>
+                <div class="notice info">
+                    <p><strong>CTR</strong> — кликабельность обложки/заголовка. <strong>Удержание</strong> — среднее время просмотра ролика. <strong>Конверсия в воронку</strong> — % зрителей, перешедших по ссылке в описании (ТГ/клуб/лид-магнит).</p>
+                </div>
+                <p>Мониторинг русско- и англоязычного YouTube в нише AI-разработки, вайбкодинга и автоматизации (каналы вроде Артур Шарифов, АйТиБорода, ТЕХНО, Alex Volkov, Prompt Engineering, Wes Roth и смежные).</p>
+
+                <h2 id="yts2-table">📊 Сравнительная таблица топ-20</h2>
+                <table>
+                    <tr>
+                        <th>№</th>
+                        <th>Заголовок конкурента</th>
+                        <th>Просмотры</th>
+                        <th>CTR</th>
+                        <th>Удержание</th>
+                        <th>Конверсия</th>
+                        <th>Почему залетело</th>
+                    </tr>
+                    <tr><td>1</td><td>Программисты ВСЁ? Как ИИ лишил работы джунов за 1 вечер</td><td>1.2 млн</td><td>~11%</td><td>48%</td><td>Низкая (1-2%)</td><td>Страх остаться без работы, хайп, кликбейт</td></tr>
+                    <tr><td>2</td><td>Создал аналог Uber за 30 минут без кода (туториал на Bolt)</td><td>450 тыс.</td><td>~8.5%</td><td>55%</td><td>Высокая (8-10%)</td><td>Осязаемый «дорогой» результат за копейки</td></tr>
+                    <tr><td>3</td><td>Забудь про ChatGPT. Эта бесплатная нейросеть пишет идеальный код</td><td>890 тыс.</td><td>~12%</td><td>42%</td><td>Средняя (3%)</td><td>Поиск «волшебной таблетки» и бесплатного софта</td></tr>
+                    <tr><td>4</td><td>Как зарабатывать $2000/мес на вайбкодинге (план для новичка)</td><td>320 тыс.</td><td>~9%</td><td>51%</td><td>Очень высокая (12%)</td><td>Финансовая мотивация, лёгкий вход в IT</td></tr>
+                    <tr><td>5</td><td>Я нанял ИИ-агента вместо фрилансера на Upwork. Результат шокировал</td><td>600 тыс.</td><td>~10%</td><td>46%</td><td>Средняя (4%)</td><td>Любопытство, сравнение человека и машины</td></tr>
+                    <tr><td>6</td><td>Claude 3.7 vs Gemini 1.5 Pro vs DeepSeek: жёсткий тест на сервис</td><td>210 тыс.</td><td>~7.5%</td><td>62%</td><td>Высокая (7%)</td><td>Техническая экспертиза, авторитет среди профи</td></tr>
+                    <tr><td>7</td><td>Как запустить веб-студию на нейросетях в одиночку с нуля</td><td>180 тыс.</td><td>~8%</td><td>53%</td><td>Очень высокая (15%)</td><td>Готовая бизнес-модель «под ключ»</td></tr>
+                    <tr><td>8</td><td>Ошибки вайбкодинга: почему твой ИИ-сайт ломается и как это исправить</td><td>95 тыс.</td><td>~6%</td><td>58%</td><td>Высокая (9%)</td><td>Решение конкретной боли тех, кто уже попробовал</td></tr>
+                    <tr><td>9</td><td>Создаю мобильное приложение в прямом эфире БЕЗ знаний кода</td><td>140 тыс.</td><td>~7%</td><td>40% (стрим)</td><td>Средняя (5%)</td><td>Реалити, пруф в реальном времени, доверие</td></tr>
+                    <tr><td>10</td><td>5 нейросетей, которые сделают за тебя всю рутину на фрилансе</td><td>510 тыс.</td><td>~10.5%</td><td>44%</td><td>Низкая (2%)</td><td>Подборка, лёгкий развлекательный контент</td></tr>
+                    <tr><td>11</td><td>Как привязать оплату и базу данных к ИИ-сайту за 10 минут</td><td>75 тыс.</td><td>~6.5%</td><td>64%</td><td>Максимальная (18%)</td><td>Самый сложный затык новичков. Жёсткая польза</td></tr>
+                    <tr><td>12</td><td>Студент заработал миллион на курсовой, написанной ИИ-агентом</td><td>730 тыс.</td><td>~13%</td><td>39%</td><td>Низкая (1%)</td><td>Истории успеха (storytelling), жёлтая пресса</td></tr>
+                    <tr><td>13</td><td>Гайд на Cursor AI: как правильно настроить идеальное рабочее место</td><td>110 тыс.</td><td>~7%</td><td>57%</td><td>Высокая (8%)</td><td>Технический туториал для «своих»</td></tr>
+                    <tr><td>14</td><td>Нейросети — это пузырь? Вся правда об ИИ-автоматизации в 2026</td><td>400 тыс.</td><td>~9.5%</td><td>47%</td><td>Низкая (1.5%)</td><td>Разрушение мифов, дискуссионный контент</td></tr>
+                    <tr><td>15</td><td>С нуля до полноценного SaaS-сервиса с помощью ИИ за выходные</td><td>280 тыс.</td><td>~8.5%</td><td>52%</td><td>Высокая (10%)</td><td>Масштаб цели, вдохновение, пошаговый трек</td></tr>
+                    <tr><td>16</td><td>Как автоматизировать отдел продаж с помощью ИИ-ботов за $10</td><td>160 тыс.</td><td>~8%</td><td>56%</td><td>Очень высокая (14%)</td><td>Твёрдый B2B-кейс, экономия для бизнеса</td></tr>
+                    <tr><td>17</td><td>Этот промпт заставит ИИ думать как senior-разработчик</td><td>340 тыс.</td><td>~11.5%</td><td>43%</td><td>Средняя (4%)</td><td>Лайфхак, быстрая ценность «копируй-вставляй»</td></tr>
+                    <tr><td>18</td><td>Вайбкодинг для глупых: полный разбор для тех, кто вообще в танке</td><td>250 тыс.</td><td>~10%</td><td>49%</td><td>Высокая (7%)</td><td>Снижение барьера страха перед технологиями</td></tr>
+                    <tr><td>19</td><td>Почему веб-дизайнеры больше не нужны (v0 и Lovable убивают Figma?)</td><td>380 тыс.</td><td>~11%</td><td>46%</td><td>Средняя (3%)</td><td>Профессиональная провокация, кликбейт для дизайнеров</td></tr>
+                    <tr><td>20</td><td>Как юридически оформить ИИ-продукт и продать его крупной компании</td><td>45 тыс.</td><td>~5%</td><td>61%</td><td>Очень высокая (16%)</td><td>Узкая супер-экспертная тема для дорогих чеков</td></tr>
+                </table>
+
+                <div class="lesson-nav">
+                    <button class="btn secondary" onclick="showSection('ytstrat-lesson1')">← Аудитория</button>
+                    <button class="btn" onclick="markComplete('ytstrat-lesson2'); showSection('ytstrat-lesson3')">Дальше: выводы →</button>
+                </div>
+            </section>
+
+            <!-- Урок 3: Выводы и скрытые триггеры -->
+            <section id="ytstrat-lesson3" class="content-section">
+                <h1>💡 Выводы из анализа рынка и скрытые триггеры</h1>
+
+                <div class="page-toc">
+                    <h4>Содержание урока:</h4>
+                    <ul>
+                        <li><a href="#yts3-key">Ключевые выводы</a></li>
+                        <li><a href="#yts3-real">Что реально залетело (прямые кейсы)</a></li>
+                        <li><a href="#yts3-hidden">3 скрытых триггера, которые нельзя упустить</a></li>
+                    </ul>
+                </div>
+
+                <h2 id="yts3-key">🔑 Ключевые выводы</h2>
+                <ul>
+                    <li><strong>Хайп приводит толпу, а «мясо» продаёт:</strong> кликбейт про «смерть профессий» (№1, №19) даёт миллионные охваты, но почти не конвертит. Конверсию в клуб (до 18%) дают ролики, решающие «последний шаг перед деньгами» (№11 — оплаты и БД; №7 — как открыть студию).</li>
+                    <li><strong>Тренд 2026 — No-Code + ИИ-агенты:</strong> простые генерации картинок и текстов надоели. В топе — ролики, где ИИ создаёт работающие экосистемы (SaaS, приложения, автоматизация). «Вайбкодинг» стал устойчивым триггером.</li>
+                    <li><strong>Главный барьер аудитории — «что делать с кодом дальше?»:</strong> удержание растёт на моментах скринкастов, где показывается преодоление ошибок. Это идеальная точка интеграции клуба: «вылезла ошибка — в клубе есть библиотека промптов-корректоров и поддержка».</li>
+                </ul>
+
+                <h2 id="yts3-real">🔥 Что реально залетело (прямые кейсы)</h2>
+                <p>Практика 2025–2026 (Riley Brown, Влад Тен, каналы про AI-SaaS и No-Code) — миллионы просмотров собирают три формата:</p>
+                <ol>
+                    <li><strong>Баттлы движков:</strong> «Bolt.new vs Lovable.dev: Build &amp; Deploy a Full CRM App with AI». Рынок перенасыщен инструментами — зритель хочет увидеть, кто выдаст рабочий продукт без багов.</li>
+                    <li><strong>«Построил приложение на $X,000/мес за 18 минут»:</strong> «I Used AI To Build This $8,000/mo App In 18 Min». Чистый «предпринимательский порно-контент» — из текста промпта рождается микро-SaaS.</li>
+                    <li><strong>Глубокие курсы для новичков:</strong> «Vibe Coding for Beginners (Full Course 2026)». YouTube вознаграждает длинные «мясные» руководства (40 мин – 1.5 ч): от промпта до деплоя на Vercel/Netlify и привязки Firebase/Supabase.</li>
+                </ol>
+
+                <h2 id="yts3-hidden">🕳️ 3 скрытых триггера, которые нельзя упустить</h2>
+                <div class="notice warning">
+                    <p><strong>1. «Вайбкодинг ломается на 500-й строчке кода».</strong> Все восторгаются первыми 5 минутами генерации, но при росте проекта (10–15 страниц) ИИ «забывает» старый код и ломает сайт. Ролик «Вайбкодинг — это обман? Как спасти проект, когда нейросеть начинает тупеть» — золотая жила и идеальное место для продажи клуба.</p>
+                </div>
+                <div class="notice warning">
+                    <p><strong>2. От «генерации сайтов» к «интеграции API и ИИ-агентов».</strong> Красивой визиткой никого не удивишь — залетают ролики, где внутри сайта работает другой ИИ (например, ИИ-ассистент клиники по API OpenAI/Anthropic). Следующий шаг после кейса с мед-сайтом: «встроил ИИ-врача, который сам продаёт услуги клиники».</p>
+                </div>
+                <div class="notice warning">
+                    <p><strong>3. Страх «платного порога».</strong> Cursor, Claude, Bolt быстро съедают бесплатные лимиты токенов — новичкам приходится платить $20–30/мес за каждую подписку. Ролики про обход лимитов, локальные модели (Ollama) и экономию токенов собирают лояльную аудиторию фрилансеров без бюджета.</p>
+                </div>
+
+                <div class="lesson-nav">
+                    <button class="btn secondary" onclick="showSection('ytstrat-lesson2')">← Конкуренты</button>
+                    <button class="btn" onclick="markComplete('ytstrat-lesson3'); showSection('ytstrat-lesson4')">Дальше: матрица →</button>
+                </div>
+            </section>
+
+            <!-- Урок 4: Финальная контент-матрица -->
+            <section id="ytstrat-lesson4" class="content-section">
+                <h1>🧩 Финальная контент-матрица (длинный формат)</h1>
+
+                <div class="page-toc">
+                    <h4>Содержание урока:</h4>
+                    <ul>
+                        <li><a href="#yts4-table">Матрица из 7 роликов</a></li>
+                        <li><a href="#yts4-rule">Правило баланса 40/40/20</a></li>
+                    </ul>
+                </div>
+
+                <h2 id="yts4-table">📋 Матрица из 7 роликов</h2>
+                <table>
+                    <tr>
+                        <th>№</th>
+                        <th>Заголовок видео</th>
+                        <th>Тип контента</th>
+                        <th>Сегмент</th>
+                        <th>Балл</th>
+                        <th>Посыл для интеграции клуба «НейроКус»</th>
+                    </tr>
+                    <tr><td>1</td><td>Вайбкодинг 2026: как создавать сайты и приложения, просто общаясь с ИИ</td><td>Широкий (трафик/хайп)</td><td>Новички, эксперты, предприниматели</td><td>10/10</td><td>Снижение страха перед кодом. «Забирайте бесплатный демо-доступ к клубу, чтобы войти в тренд первыми»</td></tr>
+                    <tr><td>2</td><td>Bolt vs Lovable vs v0: поручил трём ИИ создать один сервис. Кто без багов?</td><td>Широкий + экспертный</td><td>Технари, фрилансеры, энтузиасты</td><td>9.5/10</td><td>«Инструменты меняются каждую неделю. В клубе тестируем все апдейты и даём готовые связки»</td></tr>
+                    <tr><td>3</td><td>Создал и продал сайт за 60 000 ₽ за 1 час на глазах у клиента (реалити)</td><td>Вороночный (продажи)</td><td>Фрилансеры, разработчики, веб-дизайнеры</td><td>9.5/10</td><td>«Сделать код в ИИ — 20% задачи. Как упаковать, найти клиента и закрыть чек — учим в НейроКус»</td></tr>
+                    <tr><td>4</td><td>Вся правда про вайбкодинг: почему ИИ тупеет на 500-й строчке и как это исправить</td><td>Экспертный (удержание/доверие)</td><td>Практикующие фрилансеры, технари</td><td>9/10</td><td>«ИИ — глупый джун. Чтобы он не ломал код, нужен менеджмент. В клубе есть шаблоны промптов-корректоров»</td></tr>
+                    <tr><td>5</td><td>Как привязать к ИИ-сайту оплату, Telegram-ботов и базу данных без программиста</td><td>Экспертный (макс. удержание)</td><td>Все сегменты (продвинутый уровень)</td><td>9/10</td><td>«Не хотите ковыряться в Supabase и платёжках сами? В клубе — готовые видео-инструкции по кликам»</td></tr>
+                    <tr><td>6</td><td>Как запустить ИИ-агентство в одиночку и заменить команду из 5 человек в 2026</td><td>Вороночный (продажи)</td><td>Предприниматели, амбициозные фрилансеры</td><td>8.5/10</td><td>«Строить бизнес в одиночку тяжело. Сильное окружение и партнёры для ИИ-агентства — в клубе»</td></tr>
+                    <tr><td>7</td><td>Экономим токены: как использовать топовые ИИ для кода бесплатно и обходить лимиты</td><td>Экспертный (лояльность)</td><td>Новички, фрилансеры с небольшим бюджетом</td><td>8/10</td><td>«Собираем лайфхаки по оптимизации работы с ИИ, чтобы вы зарабатывали, а не сливали бюджет на подписки»</td></tr>
+                </table>
+
+                <h2 id="yts4-rule">⚖️ Правило баланса 40 / 40 / 20</h2>
+                <p>Чтобы канал рос к миллиону, но при этом окупался:</p>
+                <table>
+                    <tr>
+                        <th>Доля</th>
+                        <th>Тип</th>
+                        <th>Темы</th>
+                        <th>Цель</th>
+                    </tr>
+                    <tr><td><strong>40%</strong></td><td>Широкая аудитория</td><td>№1, №2</td><td>Миллионные просмотры, хайп, новые подписчики, медийность</td></tr>
+                    <tr><td><strong>40%</strong></td><td>Экспертное «мясо»</td><td>№4, №5, №7</td><td>Удержание, доверие, закрытие технических страхов</td></tr>
+                    <tr><td><strong>20%</strong></td><td>Чистая воронка</td><td>№3, №6</td><td>Реалити, кейсы, деньги — жёсткий триггер к покупке клуба</td></tr>
+                </table>
+
+                <div class="lesson-nav">
+                    <button class="btn secondary" onclick="showSection('ytstrat-lesson3')">← Выводы</button>
+                    <button class="btn" onclick="markComplete('ytstrat-lesson4'); showSection('ytstrat-lesson5')">Дальше: календарь →</button>
+                </div>
+            </section>
+
+            <!-- Урок 5: Контент-календарь -->
+            <section id="ytstrat-lesson5" class="content-section">
+                <h1>🗓️ Контент-календарь на месяц (6 длинных видео)</h1>
+
+                <div class="page-toc">
+                    <h4>Содержание урока:</h4>
+                    <ul>
+                        <li><a href="#yts5-w1">Неделя 1</a></li>
+                        <li><a href="#yts5-w2">Неделя 2</a></li>
+                        <li><a href="#yts5-w3">Неделя 3</a></li>
+                        <li><a href="#yts5-w4">Неделя 4</a></li>
+                    </ul>
+                </div>
+                <p>Сбалансированная сетка вещания, закрывающая все 4 формата: «Полные схемы», «Практические гайды», «Тренды / Инструменты», «Эксперименты / Челленджи».</p>
+
+                <h2 id="yts5-w1">🎬 Неделя 1</h2>
+                <h3>Видео 1 — «Тренды / Инструменты» (10–15 мин)</h3>
+                <ul>
+                    <li><strong>Заголовок:</strong> Вайбкодинг 2026: как создавать работающий софт без единой строчки кода.</li>
+                    <li><strong>Суть:</strong> вводный ролик, краткий обзор Bolt.new, Lovable и Claude Code; почему старая веб-разработка умирает.</li>
+                    <li><strong>Воронка:</strong> ссылка на бесплатный демо-доступ в «НейроКус» для изучения базовых промптов.</li>
+                </ul>
+                <h3>Видео 2 — «Полные схемы» (45–70 мин), главный Watch Time месяца</h3>
+                <ul>
+                    <li><strong>Заголовок:</strong> Полный курс по ИИ-автоматизации и разработке ИИ-агентов с нуля.</li>
+                    <li><strong>Суть:</strong> от настройки Cursor до создания автономного агента, который сам парсит данные и шлёт отчёты.</li>
+                </ul>
+
+                <h2 id="yts5-w2">🎬 Неделя 2</h2>
+                <h3>Видео 3 — «Эксперименты / Челленджи» (12–25 мин), вирусный потенциал</h3>
+                <ul>
+                    <li><strong>Заголовок:</strong> Я отдал управление контентом своего канала ИИ-агенту на 7 дней.</li>
+                    <li><strong>Суть:</strong> реалити — агент анализировал рынок, писал сценарии (по инструкциям из Шага 5) и к чему это привело.</li>
+                </ul>
+
+                <h2 id="yts5-w3">🎬 Неделя 3</h2>
+                <h3>Видео 4 — «Практические гайды» (15–25 мин)</h3>
+                <ul>
+                    <li><strong>Заголовок:</strong> Создал медицинский сайт за 10 минут с помощью ИИ на глазах у клиента.</li>
+                    <li><strong>Суть:</strong> мощный кейс со скринкастом: ТЗ ➡️ генерация структуры ИИ ➡️ докрутка кнопок ➡️ интеграция подвала (оферта/конфиденциальность).</li>
+                    <li><strong>Воронка:</strong> «как привязать базу данных и платёжку к этому сайту за 10 минут — пошагово в модулях клуба».</li>
+                </ul>
+
+                <h2 id="yts5-w4">🎬 Неделя 4</h2>
+                <h3>Видео 5 — «Тренды / Инструменты» (10–15 мин), закрытие технической боли</h3>
+                <ul>
+                    <li><strong>Заголовок:</strong> Почему вайбкодинг ломается на 500-й строчке кода? Как спасти проект, если ИИ тупеет.</li>
+                    <li><strong>Суть:</strong> про лимиты контекста (токены) и 3 правила промпт-инжиниринга для исправления багов.</li>
+                </ul>
+                <h3>Видео 6 — «Практические гайды» (15–25 мин), бизнес-контент</h3>
+                <ul>
+                    <li><strong>Заголовок:</strong> Как запустить ИИ-агентство в одиночку и заработать на No-Code фрилансе в 2026.</li>
+                    <li><strong>Суть:</strong> как упаковать навык генерации сайтов/ботов в дорогой чек для B2B-рынка.</li>
+                </ul>
+
+                <div class="lesson-nav">
+                    <button class="btn secondary" onclick="showSection('ytstrat-lesson4')">← Матрица</button>
+                    <button class="btn" onclick="markComplete('ytstrat-lesson5'); showSection('ytstrat-lesson6')">Дальше: готовый скрипт →</button>
+                </div>
+            </section>
+
+            <!-- Урок 6: Готовый скрипт -->
+            <section id="ytstrat-lesson6" class="content-section">
+                <h1>🐍 Готовый скрипт сбора данных канала</h1>
+
+                <div class="page-toc">
+                    <h4>Содержание урока:</h4>
+                    <ul>
+                        <li><a href="#yts6-install">Установка и настройка</a></li>
+                        <li><a href="#yts6-code">collect_channel_data.py</a></li>
+                    </ul>
+                </div>
+
+                <h2 id="yts6-install">⚙️ Установка и настройка</h2>
+                <p>Готовый скрипт учитывает специфику русскоязычных субтитров (автоматических и созданных вручную) и собирает чистый <code>.json</code> для последующего скармливания ИИ.</p>
+                <ol>
+                    <li>Создай в Cursor или VS Code файл <code>collect_channel_data.py</code>.</li>
+                    <li>Установи библиотеки:
+                        <div class="script-box">
+                            <button class="copy-btn" onclick="copyScript(this)">Копировать</button>
+                            <pre>pip install google-api-python-client youtube-transcript-api yt-dlp</pre>
+                        </div>
+                    </li>
+                    <li>Вставь свой <code>API_KEY</code> из Google Cloud Console и запусти код ниже.</li>
+                </ol>
+                <div class="notice warning">
+                    <p>⚠️ Не публикуй свой <code>API_KEY</code> в открытых репозиториях — храни его локально или в переменных окружения.</p>
+                </div>
+
+                <h2 id="yts6-code">💻 collect_channel_data.py</h2>
+                <div class="script-box">
+                    <button class="copy-btn" onclick="copyScript(this)">Копировать</button>
+                    <pre>import os
+import json
+from googleapiclient.discovery import build
+from youtube_transcript_api import YouTubeTranscriptApi
+from youtube_transcript_api._errors import TranscriptsDisabled, NoTranscriptFound
+
+# --- НАСТРОЙКИ ---
+API_KEY = "ТВОЙ_YOUTUBE_API_KEY"  # Вставь сюда ключ из Google Cloud Console
+CHANNEL_ID = "UC28c0dAPJifRsefzSSzOcxg"  # ID твоего канала
+
+youtube = build('youtube', 'v3', developerKey=API_KEY)
+
+
+def get_channel_videos(channel_id):
+    print("[*] Получение списка видео с канала...")
+    res = youtube.channels().list(id=channel_id, part='contentDetails').execute()
+    playlist_id = res['items'][0]['contentDetails']['relatedPlaylists']['uploads']
+
+    videos = []
+    next_page_token = None
+
+    while True:
+        playlist_res = youtube.playlistItems().list(
+            playlistId=playlist_id,
+            part='snippet,contentDetails',
+            maxResults=50,
+            pageToken=next_page_token
+        ).execute()
+
+        for item in playlist_res['items']:
+            videos.append({
+                'id': item['contentDetails']['videoId'],
+                'title': item['snippet']['title'],
+                'published_at': item['snippet']['publishedAt']
+            })
+
+        next_page_token = playlist_res.get('nextPageToken')
+        if not next_page_token:
+            break
+
+    print(f"[+] Найдено всего видео: {len(videos)}")
+    return videos
+
+
+def get_video_stats(video_ids):
+    print("[*] Сбор метрик для каждого видео...")
+    stats = {}
+    for i in range(0, len(video_ids), 50):
+        chunk = video_ids[i:i+50]
+        res = youtube.videos().list(id=','.join(chunk), part='statistics,contentDetails').execute()
+        for item in res['items']:
+            stats[item['id']] = {
+                'views': int(item['statistics'].get('viewCount', 0)),
+                'likes': int(item['statistics'].get('likeCount', 0)),
+                'comments': int(item['statistics'].get('commentCount', 0)),
+                'duration': item['contentDetails']['duration']
+            }
+    return stats
+
+
+def download_transcript(video_id, title, folder="transcripts"):
+    if not os.path.exists(folder):
+        os.makedirs(folder)
+
+    # Чистим название видео от запрещенных символов для имени файла
+    clean_title = "".join([c for c in title if c.isalpha() or c.isdigit() or c==' ']).rstrip()
+    filename = os.path.join(folder, f"{video_id}_{clean_title[:30]}.txt")
+
+    try:
+        srt = YouTubeTranscriptApi.get_transcript(video_id, languages=['ru', 'en'])
+        formatter = " ".join([item['text'] for item in srt])
+        with open(filename, "w", encoding="utf-8") as f:
+            f.write(formatter)
+        return True
+    except (TranscriptsDisabled, NoTranscriptFound):
+        return False
+
+
+def main():
+    videos = get_channel_videos(CHANNEL_ID)
+    video_ids = [v['id'] for v in videos]
+    stats = get_video_stats(video_ids)
+
+    final_data = []
+
+    for v in videos:
+        v_id = v['id']
+        v_stats = stats.get(v_id, {'views': 0, 'likes': 0, 'comments': 0, 'duration': 'N/A'})
+
+        print(f"[*] Обработка: {v['title']}")
+        has_transcript = download_transcript(v_id, v['title'])
+
+        final_data.append({
+            'id': v_id,
+            'title': v['title'],
+            'published_at': v['published_at'],
+            'views': v_stats['views'],
+            'likes': v_stats['likes'],
+            'comments': v_stats['comments'],
+            'duration': v_stats['duration'],
+            'transcript_downloaded': has_transcript
+        })
+
+    with open("video_stats.json", "w", encoding="utf-8") as f:
+        json.dump(final_data, f, ensure_ascii=False, indent=4)
+    print("[+] Готово! База данных video_stats.json собрана, субтитры в папке /transcripts/")
+
+
+if __name__ == "__main__":
+    main()</pre>
+                </div>
+
+                <div class="notice success">
+                    <p>🎉 <strong>Результат:</strong> файл <code>video_stats.json</code> со всей статистикой и папка <code>/transcripts/</code> с расшифровками — готовое «топливо» для анализа из предыдущего модуля.</p>
+                </div>
+
+                <div class="lesson-nav">
+                    <button class="btn secondary" onclick="showSection('ytstrat-lesson5')">← Календарь</button>
+                    <button class="btn" onclick="markComplete('ytstrat-lesson6'); showSection('home')">Завершить модуль ✓</button>
                 </div>
             </section>
 
@@ -1922,7 +2362,7 @@ Malki Means King (AI-автоматизация), Anson Alexander.
     <script>
         // Глобальные переменные
         let completedLessons = JSON.parse(localStorage.getItem('completedLessons') || '[]');
-        const totalLessons = 21;
+        const totalLessons = 27;
 
         // Показать раздел
         function showSection(sectionId) {
