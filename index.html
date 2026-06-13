@@ -511,7 +511,7 @@
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressBar"></div>
                 </div>
-                <p><span id="completedCount">0</span> из 15 уроков пройдено</p>
+                <p><span id="completedCount">0</span> из 21 урока пройдено</p>
             </div>
 
             <ul>
@@ -567,6 +567,19 @@
                         <li><a onclick="showSection('module5-lesson1')">Система мотивации</a></li>
                         <li><a onclick="showSection('module5-lesson2')">Практические кейсы</a></li>
                         <li><a onclick="showSection('module5-lesson3')">План развития</a></li>
+                    </ul>
+                </li>
+
+                <!-- Мой аккаунт в ютуб -->
+                <li>
+                    <a class="module-header" onclick="toggleModule(this)">🎬 Мой аккаунт в ютуб</a>
+                    <ul class="lessons">
+                        <li><a onclick="showSection('youtube-lesson1')">Обзор и архитектура</a></li>
+                        <li><a onclick="showSection('youtube-lesson2')">Шаг 1. Сбор базы данных канала</a></li>
+                        <li><a onclick="showSection('youtube-lesson3')">Шаг 2. Анализ удержания</a></li>
+                        <li><a onclick="showSection('youtube-lesson4')">Шаг 3. Анализ конкурентов</a></li>
+                        <li><a onclick="showSection('youtube-lesson5')">Шаг 4. Стратегия и 100 идей</a></li>
+                        <li><a onclick="showSection('youtube-lesson6')">Шаг 5. ИИ-сценарист и запуск</a></li>
                     </ul>
                 </li>
 
@@ -1521,6 +1534,385 @@
                 </div>
             </section>
 
+            <!-- ============================================= -->
+            <!-- МОДУЛЬ: Мой аккаунт в ютуб (YouTube-аналитика) -->
+            <!-- ============================================= -->
+
+            <!-- Урок 1: Обзор и архитектура -->
+            <section id="youtube-lesson1" class="content-section">
+                <h1>🎬 Мой аккаунт в ютуб: ИИ-продюсер канала</h1>
+
+                <div class="page-toc">
+                    <h4>Содержание урока:</h4>
+                    <ul>
+                        <li><a href="#yt1-case">Кейс Михаила Тимочко</a></li>
+                        <li><a href="#yt1-result">Что вы получите на выходе</a></li>
+                        <li><a href="#yt1-arch">Архитектура вашего ИИ-аналитика</a></li>
+                        <li><a href="#yt1-stack">Технический стек</a></li>
+                    </ul>
+                </div>
+
+                <h2 id="yt1-case">💡 Кейс Михаила Тимочко</h2>
+                <p>Отличный кейс Михаила Тимочко наглядно показывает, как автоматизация и правильные промпты экономят <strong>сотни тысяч рублей</strong> на консалтинге и аналитиках.</p>
+                <div class="notice info">
+                    <p>Поскольку вы используете <strong>Claude Code / Cursor</strong> и методологию <strong>Vibecoding</strong>, вы можете полностью воспроизвести этот процесс — создать собственную экосистему аналитики и генерации контента для YouTube-канала <strong>«Нейросети и чат-боты для ВСЕХ | Евгений Кусакин»</strong>.</p>
+                </div>
+                <p>Ниже — готовая техническая архитектура и шаблоны промптов, адаптированные под вашу нишу автоматизации и ИИ.</p>
+
+                <h2 id="yt1-result">🎯 Что вы получите на выходе</h2>
+                <p>Как у Михаила — полный набор рабочих артефактов:</p>
+                <ul>
+                    <li><strong>Скрипты выгрузки</strong> данных канала (Python)</li>
+                    <li><strong>Базы данных</strong> в формате <code>.json</code> со всей статистикой</li>
+                    <li><strong>Таблицы</strong> <code>.xlsx</code> с анализом конкурентов</li>
+                    <li><strong>Итоговые отчёты</strong> <code>.pdf</code> по удержанию и сценариям</li>
+                    <li><strong>Кастомного ИИ-сценариста</strong>, пишущего тексты вашим голосом</li>
+                </ul>
+
+                <h2 id="yt1-arch">🏗️ Архитектура вашего ИИ-аналитика (Python + Claude Code)</h2>
+                <p>Чтобы получить файлы, как у Михаила (скрипты выгрузки, базы данных <code>.json</code>, таблицы <code>.xlsx</code> и итоговые <code>.pdf</code>), вам понадобится локальный скрипт.</p>
+                <div class="notice warning">
+                    <p>⚠️ <strong>Важно про квоты:</strong> YouTube API имеет жёсткие квоты, поэтому для выгрузки расшифровок и базовой статистики проще всего использовать связку библиотек.</p>
+                </div>
+
+                <h2 id="yt1-stack">🧰 Технический стек</h2>
+                <table>
+                    <tr>
+                        <th>Инструмент</th>
+                        <th>Назначение</th>
+                    </tr>
+                    <tr>
+                        <td><code>yt-dlp</code></td>
+                        <td>Скачивание субтитров (расшифровок) видео</td>
+                    </tr>
+                    <tr>
+                        <td><code>google-api-python-client</code></td>
+                        <td>Официальная статистика канала через YouTube Data API v3</td>
+                    </tr>
+                    <tr>
+                        <td><code>youtube-transcript-api</code></td>
+                        <td>Альтернатива для выгрузки текстовых расшифровок</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Claude Code / Cursor</strong></td>
+                        <td>Написание скриптов и анализ данных (Vibecoding)</td>
+                    </tr>
+                </table>
+
+                <div class="lesson-nav">
+                    <button class="btn secondary" onclick="showSection('home')">← На главную</button>
+                    <button class="btn" onclick="markComplete('youtube-lesson1'); showSection('youtube-lesson2')">Следующий: Шаг 1 →</button>
+                </div>
+            </section>
+
+            <!-- Урок 2: Шаг 1. Сбор базы данных -->
+            <section id="youtube-lesson2" class="content-section">
+                <h1>📥 Шаг 1. Скрипт для сборки базы данных</h1>
+
+                <div class="page-toc">
+                    <h4>Содержание урока:</h4>
+                    <ul>
+                        <li><a href="#yt2-goal">Что делает скрипт</a></li>
+                        <li><a href="#yt2-prompt">Промпт для Claude Code / Cursor</a></li>
+                    </ul>
+                </div>
+
+                <h2 id="yt2-goal">🎯 Что делает скрипт <code>collect_channel_data.py</code></h2>
+                <p>Запустите Claude Code или Cursor в <strong>пустой папке проекта</strong> и попросите его написать скрипт, который соберёт всю базу данных вашего канала.</p>
+                <div class="notice info">
+                    <p>💡 <strong>ID вашего канала:</strong> <code>UC28c0dAPJifRsefzSSzOcxg</code> — он уже подставлен в промпт ниже.</p>
+                </div>
+
+                <h2 id="yt2-prompt">📝 Промпт для Claude Code / Cursor</h2>
+                <div class="script-box">
+                    <button class="copy-btn" onclick="copyScript(this)">Копировать</button>
+                    <pre>Напиши Python-скрипт collect_channel_data.py, который:
+
+1. Использует YouTube Data API v3 для выгрузки списка всех видео
+   с канала UC28c0dAPJifRsefzSSzOcxg.
+2. Собирает метрики: Название, ID, Просмотры, Лайки, Комментарии,
+   Дата публикации, Длительность.
+3. Использует библиотеку youtube-transcript-api (или альтернативу),
+   чтобы скачать текстовые расшифровки (субтитры) для каждого видео
+   на русском языке и сохранить их в папку /transcripts/ в формате
+   "номер_название.txt".
+4. Сохраняет всю агрегированную статистику в video_stats.json.</pre>
+                </div>
+
+                <div class="notice success">
+                    <p>✅ <strong>Результат шага:</strong> папка <code>/transcripts/</code> с текстами всех роликов и файл <code>video_stats.json</code> со статистикой.</p>
+                </div>
+
+                <div class="lesson-nav">
+                    <button class="btn secondary" onclick="showSection('youtube-lesson1')">← Обзор</button>
+                    <button class="btn" onclick="markComplete('youtube-lesson2'); showSection('youtube-lesson3')">Следующий: Шаг 2 →</button>
+                </div>
+            </section>
+
+            <!-- Урок 3: Шаг 2. Анализ удержания -->
+            <section id="youtube-lesson3" class="content-section">
+                <h1>📊 Шаг 2. Анализ вашей YouTube-студии</h1>
+
+                <div class="page-toc">
+                    <h4>Содержание урока:</h4>
+                    <ul>
+                        <li><a href="#yt3-csv">Выгрузка отчётов из Творческой студии</a></li>
+                        <li><a href="#yt3-prompt">Промпт для анализа удержания и сценариев</a></li>
+                    </ul>
+                </div>
+
+                <h2 id="yt3-csv">📤 Выгрузка CSV-отчётов</h2>
+                <p>Когда скрипт выгрузит тексты роликов, ИИ потребуются точные данные по <strong>удержанию (Retention)</strong> и <strong>CTR</strong>, которые нельзя забрать по API без OAuth-авторизации.</p>
+                <p>Сделайте так же, как Михаил: выгрузите CSV-отчёты из Творческой студии YouTube:</p>
+                <ol>
+                    <li>Откройте вкладку <strong>«Аналитика»</strong> → <strong>«Расширенный режим»</strong></li>
+                    <li>Выгрузите данные за <strong>последние 28 дней</strong></li>
+                    <li>Выгрузите данные <strong>за всё время</strong></li>
+                </ol>
+                <div class="notice info">
+                    <p>📎 Передайте в Claude/Cursor три источника: файл <code>video_stats.json</code>, папку с текстами <code>/transcripts/</code> и CSV-выгрузки.</p>
+                </div>
+
+                <h2 id="yt3-prompt">📝 Промпт для глубокого анализа удержания и сценариев</h2>
+                <div class="script-box">
+                    <button class="copy-btn" onclick="copyScript(this)">Копировать</button>
+                    <pre>Изучи текстовые расшифровки моих видео в папке /transcripts/
+и сопоставь их с таблицей аналитики (CTR, удержание, длительность).
+Сделай детальный PDF-отчёт «Анализ канала Евгения Кусакина»,
+содержащий:
+
+1. ТОП-10 и ХУДШИЕ-10 видео по удержанию с анализом структуры
+   сценария. Что отличает лучшие видео (какие хуки, личные истории
+   или механики разбора нейросетей сработали)? Что пошло не так
+   в худших (затянутое вступление, обилие скучного кода, отсутствие
+   интриги)?
+
+2. Влияние длительности: Как удержание коррелирует с хронометражем
+   в нише ИИ и автоматизации (до 15 мин, 15–35 мин, 50+ мин)?
+   Выяви «парадокс длинных видео» — дают ли наши часовые туториалы
+   по чат-ботам больший Watch Time, несмотря на низкий % удержания?
+
+3. Паттерны хуков: Разбери первые 30 секунд лучших видео. Какие
+   фразы и триггеры заставляют досматривать?</pre>
+                </div>
+
+                <div class="notice success">
+                    <p>✅ <strong>Результат шага:</strong> PDF-отчёт с разбором лучших/худших видео, влиянием длительности и работающими хуками.</p>
+                </div>
+
+                <div class="lesson-nav">
+                    <button class="btn secondary" onclick="showSection('youtube-lesson2')">← Шаг 1</button>
+                    <button class="btn" onclick="markComplete('youtube-lesson3'); showSection('youtube-lesson4')">Следующий: Шаг 3 →</button>
+                </div>
+            </section>
+
+            <!-- Урок 4: Шаг 3. Анализ конкурентов -->
+            <section id="youtube-lesson4" class="content-section">
+                <h1>🔍 Шаг 3. Анализ конкурентов в нише AI &amp; Automation</h1>
+
+                <div class="page-toc">
+                    <h4>Содержание урока:</h4>
+                    <ul>
+                        <li><a href="#yt4-players">Кого анализируем</a></li>
+                        <li><a href="#yt4-prompt">Промпт для анализа рынка</a></li>
+                    </ul>
+                </div>
+
+                <h2 id="yt4-players">🎯 Ключевые игроки рынка</h2>
+                <p>Михаил собирал базу по 20 топовым видео конкурентов. Для вашего канала выделяем ключевых игроков в СНГ и на Западе (тематика: ИИ для жизни, автоматизация бизнеса, Vibecoding, агенты).</p>
+                <table>
+                    <tr>
+                        <th>Регион</th>
+                        <th>Каналы</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Зарубежные</strong></td>
+                        <td>Kallaway (ИИ-тренды), Liam Ottley (AI-агентства), Malki Means King (AI-автоматизация), Anson Alexander</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Российские</strong></td>
+                        <td>Михаил Тимочко, Алексей Соколовский, Роман Черных (ИИ), Константин Горбунов и другие актуальные авторы в автоматизации</td>
+                    </tr>
+                </table>
+
+                <h2 id="yt4-prompt">📝 Промпт для анализа рынка</h2>
+                <div class="script-box">
+                    <button class="copy-btn" onclick="copyScript(this)">Копировать</button>
+                    <pre>Собери/изучи данные по топовым видео следующих каналов
+(выдели по 20 самых популярных и актуальных роликов
+за 2025–2026 гг.):
+
+Зарубежные: Kallaway (ИИ-тренды), Liam Ottley (AI-агентства),
+Malki Means King (AI-автоматизация), Anson Alexander.
+
+Российские: Михаил Тимочко, Алексей Соколовский, Роман Черных (ИИ),
+Константин Горбунов (или другие актуальные авторы в автоматизации).
+
+Сформируй таблицу competitors_top20.xlsx со столбцами:
+Канал, Название, Просмотры, Лайки, Длительность, Дата.
+
+Выдели 5 главных аномалий контента — какие темы или форматы
+(например, "Создал ИИ-агента за 10 минут без кода") сейчас
+взрывают рынок. Приоритизируй тех, у кого максимальный
+органический рост прямо сейчас.</pre>
+                </div>
+
+                <div class="notice success">
+                    <p>✅ <strong>Результат шага:</strong> таблица <code>competitors_top20.xlsx</code> и список из 5 «взрывных» форматов рынка.</p>
+                </div>
+
+                <div class="lesson-nav">
+                    <button class="btn secondary" onclick="showSection('youtube-lesson3')">← Шаг 2</button>
+                    <button class="btn" onclick="markComplete('youtube-lesson4'); showSection('youtube-lesson5')">Следующий: Шаг 4 →</button>
+                </div>
+            </section>
+
+            <!-- Урок 5: Шаг 4. Стратегия и 100 идей -->
+            <section id="youtube-lesson5" class="content-section">
+                <h1>🚀 Шаг 4. Итоговая стратегия и контент-матрица</h1>
+
+                <div class="page-toc">
+                    <h4>Содержание урока:</h4>
+                    <ul>
+                        <li><a href="#yt5-idea">Идея синтеза</a></li>
+                        <li><a href="#yt5-formats">4 формата контента</a></li>
+                        <li><a href="#yt5-prompt">Промпт для стратегии и 100 идей</a></li>
+                    </ul>
+                </div>
+
+                <h2 id="yt5-idea">🧬 Синтез в единую стратегию</h2>
+                <p>Соедините ваш опыт, данные канала и тренды конкурентов в единую контентную стратегию. Для канала «Нейросети и чат-боты для ВСЕХ» идеально зайдёт микс из <strong>«вечнозелёных» длинных гайдов</strong> и <strong>вирусных челленджей</strong>.</p>
+
+                <h2 id="yt5-formats">📐 4 формата контента</h2>
+                <table>
+                    <tr>
+                        <th>Формат</th>
+                        <th>Хронометраж</th>
+                        <th>Назначение / пример</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Полные схемы</strong></td>
+                        <td>45–70 мин</td>
+                        <td>Фундаментальные разборы («Полный курс по созданию ИИ-агентов с нуля в 2026»). Максимальный Watch Time.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Практические гайды</strong></td>
+                        <td>15–25 мин</td>
+                        <td>Быстрое решение проблемы («Как автоматизировать рутину в отделе продаж за 2 часа»).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Тренды / Инструменты</strong></td>
+                        <td>10–15 мин</td>
+                        <td>Разборы новых нейросетей, Claude Code, Cursor, обновлений Telegram API.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Эксперименты / Челленджи</strong></td>
+                        <td>12–25 мин</td>
+                        <td>Вирусный контент («Я отдал управление бизнесом ИИ-агенту на 7 дней: результаты»).</td>
+                    </tr>
+                </table>
+
+                <h2 id="yt5-prompt">📝 Промпт для генерации стратегии и 100 идей</h2>
+                <div class="script-box">
+                    <button class="copy-btn" onclick="copyScript(this)">Копировать</button>
+                    <pre>На основе анализа моего канала и конкурентов составь
+комплексную стратегию развития на оставшуюся часть 2026 года
+и сгенерируй 100 конкретных идей для видео.
+
+Требования к контент-матрице: Раздели контент на 4 чётких формата:
+
+1. «Полные схемы» (45–70 мин): Фундаментальные разборы
+   (например: «Полный курс по созданию ИИ-агентов с нуля в 2026»).
+   Нацелены на максимальный Watch Time.
+
+2. «Практические гайды» (15–25 мин): Быстрое решение проблемы
+   широкой аудитории (например: «Как автоматизировать рутину
+   в отделе продаж за 2 часа»).
+
+3. «Тренды / Инструменты» (10–15 мин): Разборы новых нейросетей,
+   Claude Code, Cursor, обновлений Telegram API.
+
+4. «Эксперименты / Челленджи» (12–25 мин): Вирусный контент
+   (например: «Я отдал управление своим бизнесом ИИ-агенту
+   на 7 дней: результаты»).
+
+Оформи это в виде сетки контент-календаря на месяц (6 видео)
+сбалансированной длительности и структуры. Каждую из 100 идей
+распиши в формате: «Привлекательный заголовок + Краткая
+суть/сюжетная линия».</pre>
+                </div>
+
+                <div class="notice success">
+                    <p>✅ <strong>Результат шага:</strong> контент-стратегия до конца 2026 года, календарь на месяц и 100 готовых идей для видео.</p>
+                </div>
+
+                <div class="lesson-nav">
+                    <button class="btn secondary" onclick="showSection('youtube-lesson4')">← Шаг 3</button>
+                    <button class="btn" onclick="markComplete('youtube-lesson5'); showSection('youtube-lesson6')">Следующий: Шаг 5 →</button>
+                </div>
+            </section>
+
+            <!-- Урок 6: Шаг 5. ИИ-сценарист и запуск -->
+            <section id="youtube-lesson6" class="content-section">
+                <h1>🎙️ Шаг 5. Клонирование вашего стиля речи</h1>
+
+                <div class="page-toc">
+                    <h4>Содержание урока:</h4>
+                    <ul>
+                        <li><a href="#yt6-why">Зачем нужен ИИ-сценарист</a></li>
+                        <li><a href="#yt6-prompt">Промпт для обучения ИИ-сценариста</a></li>
+                        <li><a href="#yt6-next">Что делать дальше</a></li>
+                    </ul>
+                </div>
+
+                <h2 id="yt6-why">🎯 Создание ИИ-сценариста</h2>
+                <p>Самый сильный шаг Михаила — создание кастомного промпта-инструкции для написания <strong>дословных сценариев</strong>, которые звучат естественно, а не как лекция робота.</p>
+                <div class="notice info">
+                    <p>📎 Передайте Claude <strong>10–15 текстов</strong> ваших лучших разговорных видео (где вы максимально органичны) и скормите ему промпт ниже.</p>
+                </div>
+
+                <h2 id="yt6-prompt">📝 Промпт для обучения ИИ-сценариста под ваш стиль</h2>
+                <div class="script-box">
+                    <button class="copy-btn" onclick="copyScript(this)">Копировать</button>
+                    <pre>Внимательно изучи транскрипты моих 15 самых успешных видео.
+Твоя задача — составить подробную внутреннюю инструкцию
+(системный промпт), которая позволит тебе генерировать новые
+сценарии полностью в моём стиле.
+
+Проанализируй и зафиксируй:
+
+1. Структуру ролика: Как устроена динамика? (Хук → Обозначение
+   боли → Доказательство/Кейс → Контентная часть → Призыв
+   к действию).
+
+2. Стиль речи и синтаксис: Длина предложений, использование
+   профессионального, но доступного сленга (лид-магнит, ИИ-агент,
+   парсинг, Vibecoding, промпт), динамичные рубленые фразы,
+   обращения к зрителю.
+
+3. Уровень конкретики: Какое количество примеров, цифр и реальных
+   бизнес-кейсов я привожу на каждый абстрактный тезис?
+
+Объедини это в системный регламент. Не упрощай, изучи паттерны
+во всех текстах. На выходе выдай мне этот промпт-инструкцию.</pre>
+                </div>
+
+                <h2 id="yt6-next">🏁 Что делать дальше?</h2>
+                <ol>
+                    <li>Создайте локальную папку проекта в <strong>Cursor / VS Code</strong>.</li>
+                    <li>Реализуйте <strong>Шаг 1</strong> (сборщик данных). Если не хотите писать код — вручную скачайте через любой онлайн-сервис субтитры 5–7 своих лучших роликов и загрузите их напрямую в чат.</li>
+                    <li>Двигайтесь по промптам выше по порядку.</li>
+                </ol>
+                <div class="notice success">
+                    <p>🎉 <strong>Итог:</strong> в результате вы получите кастомного ИИ-продюсера, обученного на вашей аналитике и пишущего сценарии под ваш голос.</p>
+                </div>
+
+                <div class="lesson-nav">
+                    <button class="btn secondary" onclick="showSection('youtube-lesson5')">← Шаг 4</button>
+                    <button class="btn" onclick="markComplete('youtube-lesson6'); showSection('home')">Завершить модуль ✓</button>
+                </div>
+            </section>
+
         </main>
     </div>
 
@@ -1530,7 +1922,7 @@
     <script>
         // Глобальные переменные
         let completedLessons = JSON.parse(localStorage.getItem('completedLessons') || '[]');
-        const totalLessons = 15;
+        const totalLessons = 21;
 
         // Показать раздел
         function showSection(sectionId) {
