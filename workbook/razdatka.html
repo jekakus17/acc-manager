@@ -1,62 +1,62 @@
 <title>Сайт и ИИ-продавец за 7 дней</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:wght@500;600;700&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
 
 <style>
 :root{
-  --ground:#F4F6F5;
-  --surface:#FFFFFF;
-  --surface-2:#EAEEEC;
-  --ink:#151B19;
-  --ink-soft:#5A6663;
-  --line:#D7DEDB;
-  --accent:#0B6B60;
-  --accent-soft:#E2F0ED;
-  --warn:#9A5B08;
-  --warn-soft:#FBF0DF;
-  --code-bg:#151B19;
-  --code-ink:#DCE6E3;
-  --shadow:0 1px 2px rgba(21,27,25,.05),0 8px 24px -12px rgba(21,27,25,.14);
+  --ground:#F7F0E6;
+  --surface:#FFFAF3;
+  --surface-2:#EFE4D4;
+  --ink:#2C201A;
+  --ink-soft:#7A675C;
+  --line:#DFD0BC;
+  --accent:#C0563A;
+  --accent-soft:#F6E3DB;
+  --warn:#6E7355;
+  --warn-soft:#EDEBDC;
+  --code-bg:#2A1E18;
+  --code-ink:#EFE1D2;
+  --shadow:0 1px 2px rgba(44,32,26,.05),0 10px 28px -14px rgba(44,32,26,.22);
   --measure:68ch;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --ground:#0E1413;
-    --surface:#161D1C;
-    --surface-2:#1E2624;
-    --ink:#E4EBE9;
-    --ink-soft:#94A19E;
-    --line:#2A3432;
-    --accent:#4ECDC0;
-    --accent-soft:#12302C;
-    --warn:#E0A353;
-    --warn-soft:#2B2113;
-    --code-bg:#0A0F0E;
-    --code-ink:#CFDCD9;
-    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
+    --ground:#191310;
+    --surface:#241C17;
+    --surface-2:#2E241D;
+    --ink:#F0E4D6;
+    --ink-soft:#A9968A;
+    --line:#3A2D25;
+    --accent:#E08160;
+    --accent-soft:#33201A;
+    --warn:#9BA37C;
+    --warn-soft:#24261B;
+    --code-bg:#120D0A;
+    --code-ink:#E8DACA;
+    --shadow:0 1px 2px rgba(0,0,0,.5),0 10px 28px -14px rgba(0,0,0,.7);
   }
 }
 :root[data-theme="dark"]{
-  --ground:#0E1413;
-  --surface:#161D1C;
-  --surface-2:#1E2624;
-  --ink:#E4EBE9;
-  --ink-soft:#94A19E;
-  --line:#2A3432;
-  --accent:#4ECDC0;
-  --accent-soft:#12302C;
-  --warn:#E0A353;
-  --warn-soft:#2B2113;
-  --code-bg:#0A0F0E;
-  --code-ink:#CFDCD9;
-  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
+    --ground:#191310;
+  --surface:#241C17;
+  --surface-2:#2E241D;
+  --ink:#F0E4D6;
+  --ink-soft:#A9968A;
+  --line:#3A2D25;
+  --accent:#E08160;
+  --accent-soft:#33201A;
+  --warn:#9BA37C;
+  --warn-soft:#24261B;
+  --code-bg:#120D0A;
+  --code-ink:#E8DACA;
+  --shadow:0 1px 2px rgba(0,0,0,.5),0 10px 28px -14px rgba(0,0,0,.7);
 }
 
 *{box-sizing:border-box}
 body{
   margin:0;background:var(--ground);color:var(--ink);
-  font-family:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  font-family:'Golos Text',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   font-size:17px;line-height:1.65;
 }
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
@@ -72,7 +72,7 @@ body{
 @media(min-width:1040px){
   .rail{display:block;position:sticky;top:0;height:100vh;padding:120px 0 40px;align-self:start}
   .rail p{
-    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;
     text-transform:uppercase;color:var(--ink-soft);margin:0 0 14px;
   }
   .rail a{
@@ -87,18 +87,18 @@ body{
 /* ---------- Шапка ---------- */
 .hero{padding:76px 0 44px;border-bottom:1px solid var(--line)}
 .eyebrow{
-  font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;
+  font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.16em;
   text-transform:uppercase;color:var(--accent);margin:0 0 18px;
 }
 h1{
-  font-family:'Unbounded',sans-serif;font-weight:700;
+  font-family:'Bitter',Georgia,serif;font-weight:700;
   font-size:clamp(30px,5vw,50px);line-height:1.06;letter-spacing:-.03em;
   margin:0 0 20px;text-wrap:balance;
 }
 .hero .sub{margin:0;max-width:var(--measure);color:var(--ink-soft);font-size:18.5px}
 .hero-meta{
   display:flex;flex-wrap:wrap;gap:10px;margin-top:26px;
-  font-family:'IBM Plex Mono',monospace;font-size:12.5px;
+  font-family:'JetBrains Mono',monospace;font-size:12.5px;
 }
 .hero-meta span{
   background:var(--surface);border:1px solid var(--line);border-radius:100px;
@@ -110,16 +110,16 @@ main{padding-bottom:90px}
 section{padding:52px 0;border-bottom:1px solid var(--line)}
 section:last-of-type{border-bottom:none}
 .part{
-  font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;
+  font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.16em;
   text-transform:uppercase;color:var(--ink-soft);margin:0 0 10px;
 }
 h2{
-  font-family:'Unbounded',sans-serif;font-weight:500;
+  font-family:'Bitter',Georgia,serif;font-weight:500;
   font-size:clamp(23px,3.2vw,32px);line-height:1.15;letter-spacing:-.02em;
   margin:0 0 12px;text-wrap:balance;
 }
 h3{
-  font-family:'Unbounded',sans-serif;font-weight:500;font-size:18px;
+  font-family:'Bitter',Georgia,serif;font-weight:500;font-size:18px;
   letter-spacing:-.01em;margin:38px 0 12px;line-height:1.3;
 }
 p{margin:0 0 16px;max-width:var(--measure)}
@@ -132,7 +132,7 @@ a{color:var(--accent)}
 .step{display:grid;grid-template-columns:44px minmax(0,1fr);gap:20px;padding:24px 0;border-top:1px solid var(--line)}
 .step:first-child{border-top:none;padding-top:8px}
 .step-n{
-  font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:500;
+  font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;
   color:var(--accent);background:var(--accent-soft);
   border-radius:9px;height:34px;display:grid;place-items:center;
 }
@@ -149,21 +149,21 @@ a{color:var(--accent)}
   padding:11px 16px;border-bottom:1px solid rgba(255,255,255,.09);
 }
 .prompt-top span{
-  font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.12em;
-  text-transform:uppercase;color:#8FA6A1;
+  font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:#C4A996;
 }
 .copy{
-  font-family:'IBM Plex Mono',monospace;font-size:12px;cursor:pointer;
-  background:rgba(255,255,255,.07);color:#DCE6E3;border:1px solid rgba(255,255,255,.12);
+  font-family:'JetBrains Mono',monospace;font-size:12px;cursor:pointer;
+  background:rgba(255,255,255,.07);color:#EFE1D2;border:1px solid rgba(255,255,255,.15);
   border-radius:7px;padding:5px 12px;transition:background .18s;
 }
 .copy:hover{background:rgba(255,255,255,.15)}
-.copy.done{background:var(--accent);border-color:transparent;color:#04211E}
+.copy.done{background:var(--accent);border-color:transparent;color:#FFF6EE}
 pre{
   margin:0;padding:18px 16px;overflow-x:auto;color:var(--code-ink);
-  font-family:'IBM Plex Mono',monospace;font-size:13.5px;line-height:1.62;
+  font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.62;
 }
-code{font-family:'IBM Plex Mono',monospace;font-size:.9em;background:var(--surface-2);padding:2px 6px;border-radius:5px}
+code{font-family:'JetBrains Mono',monospace;font-size:.9em;background:var(--surface-2);padding:2px 6px;border-radius:5px}
 
 /* ---------- Врезки ---------- */
 .note{
@@ -171,7 +171,7 @@ code{font-family:'IBM Plex Mono',monospace;font-size:.9em;background:var(--surfa
   padding:16px 20px;margin:22px 0;max-width:var(--measure);
 }
 .note p{margin:0;font-size:15.5px}
-.note b{color:var(--warn);font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:5px}
+.note b{color:var(--warn);font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:5px}
 .tip{background:var(--accent-soft)}
 .tip b{color:var(--accent)}
 
@@ -181,7 +181,7 @@ table{border-collapse:collapse;width:100%;font-size:15px;min-width:520px}
 th,td{padding:13px 16px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
 tr:last-child td{border-bottom:none}
 th{
-  font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.1em;
+  font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.1em;
   text-transform:uppercase;color:var(--ink-soft);font-weight:500;background:var(--surface-2);
 }
 td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
@@ -192,7 +192,7 @@ td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
 @media(min-width:760px){.days{grid-template-columns:repeat(3,1fr)}}
 .day{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;box-shadow:var(--shadow)}
 .day h3{margin:0 0 4px;font-size:16px}
-.day .when{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.day .when{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
 .day label{display:flex;gap:11px;align-items:flex-start;padding:8px 0;font-size:15px;cursor:pointer;line-height:1.45}
 .day input{
   appearance:none;flex:0 0 19px;width:19px;height:19px;margin:2px 0 0;
@@ -235,7 +235,7 @@ footer p{max-width:var(--measure)}
     <header class="hero">
       <p class="eyebrow">Раздатка · клуб НейроКус</p>
       <h1>Сайт и ИИ-продавец за 7 дней</h1>
-      <p class="sub">Всё, что показывали на эфире: промпты целиком, порядок заливки на хостинг, три варианта сборки бота и план на неделю. Открывай и делай по порядку.</p>
+      <p class="sub">Всё, что показывали на эфире: промпты целиком, порядок заливки на хостинг, два пути к ИИ-продавцу и план на неделю. Открывай и делай по порядку.</p>
       <div class="hero-meta">
         <span>Хостинг: reg.ru</span>
         <span>Сайт: 1 файл</span>
