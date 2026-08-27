@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Рабочая тетрадь НейроКус</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:wght@500;600;700&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+
+<style>
+:root{
+  --paper:#F7F0E6;
+  --paper-2:#EFE4D4;
+  --card:#FFFAF3;
+  --ink:#2C201A;
+  --ink-soft:#7A675C;
+  --line:#DFD0BC;
+  --terra:#C0563A;
+  --terra-deep:#9C4229;
+  --terra-wash:#F6E3DB;
+  --clay:#8C6A4F;
+  --olive:#6E7355;
+  --code-bg:#2A1E18;
+  --code-ink:#EFE1D2;
+  --shadow:0 1px 2px rgba(44,32,26,.05),0 10px 28px -14px rgba(44,32,26,.22);
+  --measure:66ch;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#191310;
+    --paper-2:#221A15;
+    --card:#241C17;
+    --ink:#F0E4D6;
+    --ink-soft:#A9968A;
+    --line:#3A2D25;
+    --terra:#E08160;
+    --terra-deep:#F0A184;
+    --terra-wash:#33201A;
+    --clay:#B9987A;
+    --olive:#9BA37C;
+    --code-bg:#120D0A;
+    --code-ink:#E8DACA;
+    --shadow:0 1px 2px rgba(0,0,0,.5),0 10px 28px -14px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#191310;
+  --paper-2:#221A15;
+  --card:#241C17;
+  --ink:#F0E4D6;
+  --ink-soft:#A9968A;
+  --line:#3A2D25;
+  --terra:#E08160;
+  --terra-deep:#F0A184;
+  --terra-wash:#33201A;
+  --clay:#B9987A;
+  --olive:#9BA37C;
+  --code-bg:#120D0A;
+  --code-ink:#E8DACA;
+  --shadow:0 1px 2px rgba(0,0,0,.5),0 10px 28px -14px rgba(0,0,0,.7);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:'Golos Text',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  font-size:17px;line-height:1.68;
+}
+:focus-visible{outline:2px solid var(--terra);outline-offset:3px;border-radius:4px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.wrap{max-width:820px;margin:0 auto;padding:0 22px}
+
+/* ---------- Обложка ---------- */
+.cover{
+  padding:78px 0 56px;text-align:left;
+  border-bottom:3px double var(--line);
+}
+.brand{
+  font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--terra);margin:0 0 22px;
+}
+h1{
+  font-family:'Bitter',Georgia,serif;font-weight:700;
+  font-size:clamp(34px,6vw,58px);line-height:1.04;letter-spacing:-.02em;
+  margin:0 0 18px;text-wrap:balance;
+}
+h1 em{font-style:normal;color:var(--terra)}
+.cover .sub{margin:0;max-width:var(--measure);color:var(--ink-soft);font-size:19px}
+.cover-meta{
+  display:flex;flex-wrap:wrap;gap:8px;margin-top:30px;
+  font-family:'JetBrains Mono',monospace;font-size:12px;
+}
+.cover-meta span{
+  border:1px solid var(--line);border-radius:3px;
+  padding:6px 12px;color:var(--ink-soft);background:var(--card);
+}
+
+/* ---------- Как пользоваться ---------- */
+.howto{
+  background:var(--terra-wash);border:1px solid var(--line);
+  padding:26px 28px;margin:44px 0 0;border-radius:4px;
+}
+.howto h2{font-size:19px;margin:0 0 12px}
+.howto p{margin:0 0 10px;font-size:16px}
+.howto p:last-child{margin:0}
+
+/* ---------- Модули ---------- */
+main{padding-bottom:80px}
+.module{padding:56px 0;border-bottom:1px solid var(--line)}
+.module:last-of-type{border-bottom:none}
+.mod-label{
+  display:flex;align-items:baseline;gap:12px;margin-bottom:14px;
+  font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--clay);
+}
+.mod-label b{
+  font-family:'Bitter',Georgia,serif;font-size:34px;letter-spacing:0;
+  color:var(--terra);line-height:1;font-weight:700;
+}
+h2{
+  font-family:'Bitter',Georgia,serif;font-weight:600;
+  font-size:clamp(24px,3.4vw,34px);line-height:1.16;letter-spacing:-.015em;
+  margin:0 0 14px;text-wrap:balance;
+}
+h3{
+  font-family:'Bitter',Georgia,serif;font-weight:600;font-size:19px;
+  margin:34px 0 12px;line-height:1.32;
+}
+p{margin:0 0 15px;max-width:var(--measure)}
+.lead{color:var(--ink-soft);max-width:var(--measure)}
+strong{font-weight:600}
+em.hi{font-style:normal;background:linear-gradient(transparent 62%,var(--terra-wash) 62%);padding:0 2px}
+code{font-family:'JetBrains Mono',monospace;font-size:.88em;background:var(--paper-2);padding:2px 6px;border-radius:3px}
+
+/* ---------- Промпты ---------- */
+.prompt{
+  background:var(--code-bg);border-radius:6px;margin:22px 0;overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.prompt-top{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:11px 15px;border-bottom:1px solid rgba(255,255,255,.1);
+}
+.prompt-top span{
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase;color:#C4A996;
+}
+.copy{
+  font-family:'JetBrains Mono',monospace;font-size:11.5px;cursor:pointer;
+  background:rgba(255,255,255,.08);color:#EFE1D2;border:1px solid rgba(255,255,255,.15);
+  border-radius:4px;padding:5px 12px;transition:background .18s;
+}
+.copy:hover{background:rgba(255,255,255,.18)}
+.copy.done{background:var(--terra);border-color:transparent;color:#fff}
+pre{
+  margin:0;padding:18px 15px;overflow-x:auto;color:var(--code-ink);
+  font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.64;
+}
+
+/* ---------- Задание ---------- */
+.task{
+  background:var(--card);border:1px solid var(--line);border-radius:5px;
+  padding:28px;margin:28px 0;box-shadow:var(--shadow);
+}
+.task-head{display:flex;align-items:center;gap:13px;margin-bottom:6px}
+.stamp{
+  flex:0 0 40px;width:40px;height:40px;border-radius:50%;
+  background:var(--terra);color:#fff;display:grid;place-items:center;
+  font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:500;
+}
+.task-head h3{margin:0;font-size:19px}
+.task > p{color:var(--ink-soft);font-size:16px}
+.field{margin-top:18px}
+.field label{
+  display:block;font-family:'JetBrains Mono',monospace;font-size:11px;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--clay);margin-bottom:7px;
+}
+textarea,input[type="text"]{
+  width:100%;font-family:'Golos Text',sans-serif;font-size:16px;color:var(--ink);
+  background:transparent;border:none;border-bottom:1px solid var(--line);
+  padding:6px 2px;line-height:30px;resize:vertical;
+}
+textarea{
+  background-image:repeating-linear-gradient(transparent,transparent 29px,var(--line) 29px,var(--line) 30px);
+  background-attachment:local;border-bottom:none;min-height:90px;
+}
+textarea:focus,input[type="text"]:focus{outline:none;border-bottom-color:var(--terra)}
+input[type="text"]:focus{border-bottom-width:2px;padding-bottom:5px}
+
+/* ---------- Чекбоксы ---------- */
+.check{display:flex;gap:12px;align-items:flex-start;padding:9px 0;cursor:pointer;line-height:1.5}
+.check input{
+  appearance:none;flex:0 0 20px;width:20px;height:20px;margin:3px 0 0;
+  border:1.5px solid var(--clay);border-radius:3px;background:transparent;
+  cursor:pointer;transition:background .16s,border-color .16s;position:relative;
+}
+.check input:checked{background:var(--terra);border-color:var(--terra)}
+.check input:checked::after{
+  content:'✓';position:absolute;inset:0;display:grid;place-items:center;
+  color:#fff;font-size:13px;line-height:1;
+}
+.check input:checked + span{color:var(--ink-soft);text-decoration:line-through}
+.check:hover input{border-color:var(--terra)}
+
+/* ---------- Врезки ---------- */
+.note{
+  border-left:3px solid var(--olive);background:var(--paper-2);
+  padding:16px 20px;margin:22px 0;max-width:var(--measure);border-radius:0 4px 4px 0;
+}
+.note p{margin:0;font-size:15.5px}
+.note b{
+  display:block;font-family:'JetBrains Mono',monospace;font-size:11px;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--olive);margin-bottom:5px;
+}
+.note.warn{border-left-color:var(--terra)}
+.note.warn b{color:var(--terra-deep)}
+
+/* ---------- Таблицы ---------- */
+.scroll{overflow-x:auto;margin:24px 0;border:1px solid var(--line);border-radius:5px;background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:15px;min-width:540px}
+th,td{padding:13px 16px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}
+th{
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--clay);font-weight:500;background:var(--paper-2);
+}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* ---------- Шаги ---------- */
+.steps{margin-top:24px}
+.step{display:grid;grid-template-columns:34px minmax(0,1fr);gap:16px;padding:16px 0;border-top:1px dashed var(--line)}
+.step:first-child{border-top:none}
+.step-n{
+  font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--terra);
+  padding-top:2px;font-weight:500;
+}
+.step p{margin:0}
+.step p + p{margin-top:8px}
+
+/* ---------- Финал ---------- */
+.finish{background:var(--terra-wash);border:1px solid var(--line);border-radius:5px;padding:30px;margin-top:36px}
+.finish h3{margin-top:0}
+footer{padding:34px 0 64px;color:var(--ink-soft);font-size:14.5px;border-top:3px double var(--line)}
+
+/* ---------- Печать ---------- */
+@media print{
+  body{background:#fff;color:#000;font-size:11pt}
+  .prompt{box-shadow:none;background:#f4f4f4}
+  pre{color:#000}
+  .copy,.prompt-top span{display:none}
+  .module{page-break-inside:avoid;border-bottom:1px solid #ccc}
+  .task{box-shadow:none;page-break-inside:avoid}
+  textarea{min-height:120px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="cover">
+  <p class="brand">Клуб НейроКус · рабочая тетрадь</p>
+  <h1>Сайт и ИИ-продавец<br><em>за семь дней</em></h1>
+  <p class="sub">Тетрадь к эфиру. Здесь все промпты, которые я показывал, и задания, которые нужно сделать руками. Читать необязательно — нужно заполнять.</p>
+  <div class="cover-meta">
+    <span>7 модулей</span>
+    <span>9 заданий</span>
+    <span>Ответы сохраняются</span>
+  </div>
+
+  <div class="howto">
+    <h2>Как пользоваться</h2>
+    <p>Всё, что вы впишете в поля, сохраняется прямо в браузере — можно закрыть вкладку и вернуться позже. Промпты копируются кнопкой, менять их под себя не только можно, но и нужно.</p>
+    <p>Тетрадь рассчитана на неделю, а не на один вечер. Модули 1–3 — в первые два дня, модуль 5 — на третий, остальное к выходным. И последнее: <em class="hi">задание, которое вы прочитали, но не сделали, не считается.</em></p>
+  </div>
+</header>
+
+<main>
+
+<!-- ================= 1 ================= -->
+<section class="module">
+  <div class="mod-label"><b>01</b> Модуль первый</div>
+  <h2>Собираем сайт нейросетью</h2>
+  <p class="lead">Сайт — это один файл. Его пишет нейросеть по вашему техзаданию. Чем конкретнее опишете бизнес, тем меньше будете переделывать.</p>
+
+  <h3>Что отличает рабочий промпт от бесполезного</h3>
+  <p>«Сделай мне сайт» — это не задача, это пожелание. Рабочий промпт состоит из четырёх частей: кто ты → что продаём → какие блоки нужны → в каком виде отдать файл. Уберите любую из четырёх, и получите кашу, которую придётся переделывать полчаса.</p>
+
+  <div class="task">
+    <div class="task-head"><div class="stamp">01</div><h3>Соберите данные до промпта</h3></div>
+    <p>Заполните пять полей ниже. Это то, что вы подставите в промпт вместо квадратных скобок. Пишите конкретно: не «услуги для бизнеса», а «настройка рекламы в Яндекс Директ для стоматологий».</p>
+    <div class="field"><label>Что продаём</label><input type="text" data-k="w1" placeholder="Продукт или услуга"></div>
+    <div class="field"><label>Для кого</label><input type="text" data-k="w2" placeholder="Целевая аудитория"></div>
+    <div class="field"><label>Главная выгода клиента</label><input type="text" data-k="w3" placeholder="Что человек получает"></div>
+    <div class="field"><label>Цена</label><input type="text" data-k="w4" placeholder="Точная сумма или «от ...»"></div>
+    <div class="field"><label>Куда ведём</label><input type="text" data-k="w5" placeholder="Ссылка на Telegram, WhatsApp или форму"></div>
+  </div>
+
+  <h3>Промпт для лендинга</h3>
+  <div class="prompt">
+    <div class="prompt-top"><span>Промпт 1 · генерация сайта</span><button class="copy">Скопировать</button></div>
+<pre>Ты — веб-разработчик и маркетолог. Сделай одностраничный лендинг.
+
+О БИЗНЕСЕ
+Что продаём: [ТВОЙ ПРОДУКТ ИЛИ УСЛУГА]
+Для кого: [ЦЕЛЕВАЯ АУДИТОРИЯ]
+Главная выгода клиента: [ЧТО ЧЕЛОВЕК ПОЛУЧАЕТ]
+Цена: [ЦЕНА ИЛИ «ОТ ...»]
+Куда ведём: [ССЫЛКА НА TELEGRAM / WHATSAPP / ФОРМУ]
+
+БЛОКИ СВЕРХУ ВНИЗ
+1. Первый экран: заголовок, подзаголовок, кнопка
+2. Боли клиента — 4 пункта
+3. Что получит клиент — 6 карточек
+4. Как мы работаем — 4 шага
+5. Кейс с цифрами
+6. Тарифы — 3 варианта, средний выделен
+7. Частые вопросы — 5 штук
+8. Финальный призыв с кнопкой
+
+ТЕХНИЧЕСКИЕ ТРЕБОВАНИЯ
+— один файл index.html, весь CSS внутри в теге &lt;style&gt;
+— без внешних библиотек, шрифтов и картинок из интернета
+— адаптив под телефон
+— тёмная тема, современный минимализм
+— все цвета через CSS-переменные в :root, чтобы менять в одном месте
+— комментарии в коде на русском в местах, которые чаще всего правят
+
+ТОН
+Разговорный, без канцелярита и слов «инновационный», «динамично
+развивающийся», «команда профессионалов». Пиши как живой человек.
+
+Отдай готовый файл целиком, одним куском кода.</pre>
+  </div>
+
+  <div class="task">
+    <div class="task-head"><div class="stamp">02</div><h3>Сохраните файл правильно</h3></div>
+    <p>Скопируйте код, вставьте в блокнот, сохраните как <code>index.html</code>. Сразу сделайте копию под именем <code>index-backup.html</code> — она понадобится в модуле 3.</p>
+    <label class="check"><input type="checkbox" data-k="c1"><span>Файл сохранён как index.html</span></label>
+    <label class="check"><input type="checkbox" data-k="c2"><span>Открыл его двойным кликом — сайт показывается в браузере</span></label>
+    <label class="check"><input type="checkbox" data-k="c3"><span>Сделал копию index-backup.html</span></label>
+  </div>
+
+  <div class="note warn">
+    <p><b>Частая ошибка</b>В стандартном блокноте Windows выберите «Тип файла: Все файлы», иначе получится <code>index.html.txt</code>, и сайт не откроется. Имя главной страницы всегда строго <code>index.html</code>.</p>
+  </div>
+</section>
+
+<!-- ================= 2 ================= -->
+<section class="module">
+  <div class="mod-label"><b>02</b> Модуль второй</div>
+  <h2>Выкладываем на хостинг</h2>
+  <p class="lead">Пока файл лежит у вас на компьютере, его видите только вы. Чтобы его увидели остальные, он должен лежать на компьютере, который всегда включён и всегда в интернете.</p>
+
+  <h3>Порядок действий на reg.ru</h3>
+  <div class="steps">
+    <div class="step"><div class="step-n">01</div><div><p>Личный кабинет → раздел <strong>«Хостинг»</strong> → <strong>«Файловый менеджер»</strong></p></div></div>
+    <div class="step"><div class="step-n">02</div><div><p>Откройте папку своего домена, внутри неё найдите папку <code>public_html</code></p><p>Это единственная папка, содержимое которой видно в интернете. Всё, что лежит выше неё, посетители не увидят.</p></div></div>
+    <div class="step"><div class="step-n">03</div><div><p>Кнопка <strong>«Загрузить»</strong> → выберите свой <code>index.html</code></p></div></div>
+    <div class="step"><div class="step-n">04</div><div><p>Если внутри уже лежит заглушка хостинга — <code>index.php</code> или чужой <code>index.html</code> — удалите её, иначе она будет открываться вместо вашего сайта</p></div></div>
+    <div class="step"><div class="step-n">05</div><div><p>Откройте свой домен в браузере. Сайт работает.</p></div></div>
+  </div>
+
+  <div class="task">
+    <div class="task-head"><div class="stamp">03</div><h3>Выложите сайт и запишите адрес</h3></div>
+    <p>Это главное задание всей тетради. Пока сайт не в интернете, всё остальное не имеет значения.</p>
+    <div class="field"><label>Адрес моего сайта</label><input type="text" data-k="w6" placeholder="https://"></div>
+    <label class="check"><input type="checkbox" data-k="c4"><span>Сайт открывается по адресу с телефона, не только с компьютера</span></label>
+  </div>
+
+  <div class="note">
+    <p><b>Если не открывается</b>Домен, который вы только что привязали, может «раскачиваться» до нескольких часов — это нормально. Обновите страницу через <code>Ctrl+F5</code>, а если не помогло, вернитесь к этому вечером.</p>
+  </div>
+</section>
+
+<!-- ================= 3 ================= -->
+<section class="module">
+  <div class="mod-label"><b>03</b> Модуль третий</div>
+  <h2>Правки и откат</h2>
+  <p class="lead">Это тот самый модуль, из-за которого сайты и остаются в папке «Загрузки». Задача — один раз пройти весь цикл целиком, включая поломку.</p>
+
+  <h3>Два способа править</h3>
+  <p><strong>В браузере.</strong> Файловый менеджер reg.ru → клик по <code>index.html</code> → «Редактировать» → меняете текст → «Сохранить» → <code>F5</code> на сайте. Быстрее всего.</p>
+  <p><strong>Через файл.</strong> Правите <code>index.html</code> у себя → перезаливаете в <code>public_html</code> с заменой → <code>F5</code> на сайте.</p>
+
+  <h3>Где что искать в файле</h3>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Что меняем</th><th>Где искать</th></tr></thead>
+      <tbody>
+        <tr><td>Заголовок вкладки браузера</td><td>тег <code>&lt;title&gt;</code> в самом верху</td></tr>
+        <tr><td>Главный заголовок на странице</td><td>тег <code>&lt;h1&gt;</code></td></tr>
+        <tr><td>Цвета всего сайта сразу</td><td>блок <code>:root</code>, строка <code>--accent</code></td></tr>
+        <tr><td>Ссылки на себя</td><td>поиск по <code>t.me/</code>, заменить все вхождения</td></tr>
+        <tr><td>Цены</td><td>блок с классом <code>plan</code>, строка <code>price</code></td></tr>
+        <tr><td>Вопросы и ответы</td><td>теги <code>&lt;details&gt;</code> внизу файла</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Промпт для правки через нейросеть</h3>
+  <div class="prompt">
+    <div class="prompt-top"><span>Промпт 2 · правка сайта</span><button class="copy">Скопировать</button></div>
+<pre>Вот мой файл index.html: [ВСТАВЬ КОД]
+
+Нужно: [ЧТО ПОМЕНЯТЬ]
+
+Верни файл целиком, ничего больше не меняя.
+В конце напиши список файлов, которые нужно перезалить на хостинг.</pre>
+  </div>
+  <p>Последние две строки обязательны. Без «верни файл целиком, ничего больше не меняя» модель охотно перепишет заодно половину страницы. Без списка файлов вы однажды зальёте не то.</p>
+
+  <div class="task">
+    <div class="task-head"><div class="stamp">04</div><h3>Три правки подряд</h3></div>
+    <p>Сделайте все три и каждый раз убедитесь, что изменение видно на живом сайте.</p>
+    <label class="check"><input type="checkbox" data-k="c5"><span>Поменял заголовок страницы</span></label>
+    <label class="check"><input type="checkbox" data-k="c6"><span>Поменял цвет через строку --accent в блоке :root</span></label>
+    <label class="check"><input type="checkbox" data-k="c7"><span>Заменил все ссылки t.me на свою и проверил кликом</span></label>
+  </div>
+
+  <div class="task">
+    <div class="task-head"><div class="stamp">05</div><h3>Сломайте сайт специально</h3></div>
+    <p>Да, именно так. Удалите из файла случайный кусок кода, залейте на хостинг и посмотрите на результат. А потом залейте <code>index-backup.html</code> под именем <code>index.html</code> и убедитесь, что всё вернулось.</p>
+    <p>Это единственное задание тетради, которое снимает страх навсегда. Пока вы не сломали и не починили сами, вы будете бояться трогать сайт.</p>
+    <label class="check"><input type="checkbox" data-k="c8"><span>Сломал сайт и увидел, как он поехал</span></label>
+    <label class="check"><input type="checkbox" data-k="c9"><span>Вернул копию — сайт снова работает</span></label>
+    <div class="field"><label>Сколько времени занял откат</label><input type="text" data-k="w7" placeholder="Засеките честно"></div>
+  </div>
+</section>
+
+<!-- ================= 4 ================= -->
+<section class="module">
+  <div class="mod-label"><b>04</b> Модуль четвёртый</div>
+  <h2>Хостинг, статик-хостинг и свой сервер</h2>
+  <p class="lead">Главное различие одной фразой: <em class="hi">хостинг показывает файлы, сервер выполняет программы.</em> Сайт — это файл. Бот — это программа. Поэтому живут они в разных местах.</p>
+
+  <h3>Что значит «статический сайт»</h3>
+  <p><strong>Статический</strong> — всем посетителям показывается одно и то же. Лендинг, визитка, портфолио. Сервер ничего не считает, просто отдаёт готовый файл, как библиотекарь книгу с полки. Ваш сайт из первого модуля — ровно такой.</p>
+  <p><strong>Динамический</strong> — сервер под каждого посетителя что-то вычисляет. Личный кабинет, корзина, форум, поиск по базе. При каждом заходе работает программа и лезет в базу данных.</p>
+
+  <h3>Три площадки</h3>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>&nbsp;</th><th>Обычный хостинг</th><th>Статик-хостинг</th><th>Свой сервер</th></tr></thead>
+      <tbody>
+        <tr><td>Кто это</td><td>reg.ru, Beget, Timeweb</td><td>Netlify, Vercel, GitHub Pages</td><td>VPS у любого провайдера</td></tr>
+        <tr><td>Цена в месяц</td><td class="num">150–400 ₽</td><td class="num">0 ₽</td><td class="num">300–1500 ₽</td></tr>
+        <tr><td>Как заливать</td><td>Файловый менеджер</td><td>Перетащить папку или гит</td><td>Через терминал</td></tr>
+        <tr><td>Лендинг</td><td>Да</td><td>Да</td><td>Да</td></tr>
+        <tr><td>Телеграм-бот, n8n</td><td>Нет</td><td>Нет</td><td>Да</td></tr>
+        <tr><td>Обновления и защита</td><td>Провайдер</td><td>Провайдер</td><td>Вы сами</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Что такое VPS</h3>
+  <p>Расшифровывается как «виртуальный частный сервер». <strong>Сервер</strong> — мощный компьютер в дата-центре, работает круглосуточно. <strong>Виртуальный</strong> — этот компьютер программно поделён на несколько независимых, и каждый ведёт себя как отдельная машина со своей операционной системой. <strong>Частный</strong> — выделенный вам кусок ресурсов, который не отнимут, даже если сосед по железке нагрузит свою часть.</p>
+  <p>Вы получаете IP-адрес, логин и пароль, подключаетесь по SSH — это чёрное окно терминала, где команды вводятся текстом. Никакого интерфейса с кнопками там нет: сервер пустой, кнопки некому рисовать. На практике это выглядит так: спрашиваете у нейросети, копируете команды одну за другой, ошибку копируете обратно в чат целиком.</p>
+
+  <h3>Про гит без страшных слов</h3>
+  <p>Гит — хранилище всех версий ваших файлов. Представьте документ в Word, где сохранены все черновики за всё время и в любой момент можно вернуться к версии от прошлого вторника.</p>
+  <p>Он <strong>не нужен</strong>, чтобы выложить сайт: на Netlify папку достаточно перетащить мышкой в окно браузера. Он нужен для того, что будет дальше — правка выкатывается сама, а откат к любой версии делается в один клик. То есть гит — не способ загрузки, а способ автоматизации загрузки.</p>
+
+  <div class="task">
+    <div class="task-head"><div class="stamp">06</div><h3>Выберите свою площадку</h3></div>
+    <p>Напишите, что берёте и почему. Формулировка «потому что мне нужен только сайт» — правильный ответ, а не отговорка.</p>
+    <div class="field"><label>Моя площадка и причина</label><textarea data-k="t1" rows="3"></textarea></div>
+    <div class="field"><label>Что должно появиться в моём проекте, чтобы понадобился сервер</label><textarea data-k="t2" rows="2"></textarea></div>
+  </div>
+
+  <div class="note warn">
+    <p><b>Безопасность</b>Не вставляйте FTP-пароль в чат браузерной нейросети. Если даёте доступ агенту вроде Claude Code или Cursor — заведите отдельный FTP-аккаунт с доступом только к <code>public_html</code>. Утечёт — потеряете одну папку, а не весь хостинг.</p>
+  </div>
+</section>
+
+<!-- ================= 5 ================= -->
+<section class="module">
+  <div class="mod-label"><b>05</b> Модуль пятый</div>
+  <h2>Замеры до внедрения бота</h2>
+  <p class="lead">Этот модуль стоит раньше сборки бота не случайно. Без цифр «до» вы никогда не докажете эффект «после» — ни клиенту, ни себе.</p>
+
+  <div class="task">
+    <div class="task-head"><div class="stamp">07</div><h3>Снимите пять цифр</h3></div>
+    <p>Полчаса работы, делается один раз. Если точной цифры нет — напишите честную оценку и пометку «примерно».</p>
+    <div class="field"><label>Среднее время первого ответа клиенту</label><input type="text" data-k="w8"></div>
+    <div class="field"><label>Заявок в месяц без ответа дольше суток</label><input type="text" data-k="w9"></div>
+    <div class="field"><label>Конверсия из заявки в оплату</label><input type="text" data-k="w10"></div>
+    <div class="field"><label>Часов в неделю на повторяющиеся вопросы</label><input type="text" data-k="w11"></div>
+    <div class="field"><label>Диалогов умирает на «я подумаю» без возврата</label><input type="text" data-k="w12"></div>
+  </div>
+
+  <div class="note">
+    <p><b>Зачем это нужно</b>Через месяц после запуска бота вы вернётесь к этим пяти строчкам и заполните их заново. Разница между двумя замерами и есть ваш результат — единственный, который можно кому-то показать.</p>
+  </div>
+</section>
+
+<!-- ================= 6 ================= -->
+<section class="module">
+  <div class="mod-label"><b>06</b> Модуль шестой</div>
+  <h2>ИИ-продавец: два пути</h2>
+  <p class="lead">Кнопочный бот — это меню, он маршрутизирует. ИИ-продавец понимает произвольный текст, ведёт диалог и двигает человека к цели. Разница не в технологии, а в том, кто ведёт диалог: вы заранее ветками или бот внутри ваших рамок.</p>
+
+  <div class="scroll">
+    <table>
+      <thead><tr><th>&nbsp;</th><th>Готовый сервис</th><th>Вайб-кодинг</th></tr></thead>
+      <tbody>
+        <tr><td>Инструменты</td><td>Salebot, BotHelp, Chatfuel</td><td>Claude Code, Cursor</td></tr>
+        <tr><td>Запуск</td><td class="num">Вечер</td><td class="num">1–3 дня</td></tr>
+        <tr><td>Нужен сервер</td><td>Нет</td><td>Да, VPS от 300 ₽</td></tr>
+        <tr><td>В месяц</td><td class="num">1 500–5 000 ₽</td><td class="num">800–2 500 ₽</td></tr>
+        <tr><td>Гибкость</td><td>В рамках платформы</td><td>Любая</td></tr>
+        <tr><td>Кому принадлежит</td><td>Платформе</td><td>Вам: код, данные, диалоги</td></tr>
+        <tr><td>Если сломалось</td><td>Поддержка сервиса</td><td>Чините сами</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p><strong>Начинайте с сервиса.</strong> Потратите вечер и поймёте, работает ли это в вашей нише. К вайб-кодингу переходят, когда упёрлись в потолок платформы или когда счёт за диалоги стал больше, чем сервер.</p>
+
+  <h3>Пять вещей, без которых бот получится позорным</h3>
+  <div class="steps">
+    <div class="step"><div class="step-n">01</div><div><p><strong>База знаний вместо фантазии.</strong> Прайс, условия, гарантии, частые вопросы, кейсы. Всего, чего в базе нет, бот не выдумывает.</p></div></div>
+    <div class="step"><div class="step-n">02</div><div><p><strong>Явные границы.</strong> Не называть сроки вне прайса, не давать скидки, не подтверждать наличие, не обсуждать конкурентов.</p></div></div>
+    <div class="step"><div class="step-n">03</div><div><p><strong>Точка передачи человеку.</strong> Не «когда сложно», а по конкретным триггерам: просят менеджера, спор о цене, жалоба, третий повтор вопроса.</p></div></div>
+    <div class="step"><div class="step-n">04</div><div><p><strong>Скрипты вашего лучшего менеджера.</strong> Его 20–30 переписок уже лежат в CRM и достались вам бесплатно.</p></div></div>
+    <div class="step"><div class="step-n">05</div><div><p><strong>Замер до запуска.</strong> Вы его сделали в предыдущем модуле.</p></div></div>
+  </div>
+
+  <div class="task">
+    <div class="task-head"><div class="stamp">08</div><h3>Соберите базу знаний</h3></div>
+    <p>Это работа не для нейросети, а для вас: она не знает ваших условий. Выпишите здесь то, что бот должен знать наизусть.</p>
+    <div class="field"><label>Десять самых частых вопросов клиентов</label><textarea data-k="t3" rows="6"></textarea></div>
+    <div class="field"><label>Что боту запрещено обещать</label><textarea data-k="t4" rows="3"></textarea></div>
+    <div class="field"><label>В каких случаях бот зовёт человека</label><textarea data-k="t5" rows="3"></textarea></div>
+  </div>
+</section>
+
+<!-- ================= 7 ================= -->
+<section class="module">
+  <div class="mod-label"><b>07</b> Модуль седьмой</div>
+  <h2>Промпты для бота</h2>
+  <p class="lead">Первый нужен, если пишете своего бота вайб-кодингом. Второй — системный промпт, он нужен в обоих путях одинаково.</p>
+
+  <h3>Что приготовить до вайб-кодинга</h3>
+  <div class="steps">
+    <div class="step"><div class="step-n">01</div><div><p><strong>Токен бота.</strong> В Telegram напишите <code>@BotFather</code>, команда <code>/newbot</code>.</p></div></div>
+    <div class="step"><div class="step-n">02</div><div><p><strong>Ключ API модели.</strong> Claude, GPT или российские GigaChat и YandexGPT — последние с оплатой картой РФ.</p></div></div>
+    <div class="step"><div class="step-n">03</div><div><p><strong>Сервер.</strong> VPS за 300–500 ₽/мес. На обычный хостинг бота поставить нельзя: он должен работать постоянно, а не открываться по ссылке.</p></div></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-top"><span>Промпт 3 · свой бот вайб-кодингом</span><button class="copy">Скопировать</button></div>
+<pre>Напиши телеграм-бота на Python — ИИ-продавца для моего бизнеса.
+
+ЧТО ДЕЛАЕТ БОТ
+Отвечает клиентам на вопросы о [ПРОДУКТ], квалифицирует их
+и передаёт горячих менеджеру.
+
+ТЕХНИЧЕСКИ
+— Python, библиотека aiogram
+— модель: [Claude / GPT / GigaChat] через API
+— системный промпт и база знаний — в отдельном файле,
+  чтобы я правил их без кода
+— история диалога хранится по каждому пользователю
+— если бот не знает ответа, пишет мне в Telegram уведомление
+— все ключи и токены — в файле .env, не в коде
+
+ДАЙ МНЕ
+1. Готовые файлы проекта
+2. Пошаговую инструкцию, как запустить это на сервере Ubuntu
+3. Как сделать, чтобы бот работал после перезагрузки сервера
+
+Объясняй так, будто я никогда не писал код.</pre>
+  </div>
+
+  <div class="note">
+    <p><b>Главный приём</b>Любую ошибку копируйте в чат целиком, вместе с командой, которую вводили. Не пересказывайте своими словами — модель читает текст ошибки лучше, чем ваш пересказ.</p>
+  </div>
+
+  <h3>Системный промпт — характер и рамки бота</h3>
+  <div class="prompt">
+    <div class="prompt-top"><span>Промпт 4 · системный промпт</span><button class="copy">Скопировать</button></div>
+<pre>РОЛЬ
+Ты — менеджер по продажам компании [НАЗВАНИЕ]. Общаешься в переписке,
+коротко и по-человечески. Не более 4 предложений в сообщении.
+
+ЦЕЛЬ ДИАЛОГА
+[Записать на разбор / собрать контакт / довести до оплаты]
+
+БАЗА ЗНАНИЙ
+[Прайс, условия, сроки, гарантии, частые вопросы, кейсы]
+
+ПОРЯДОК РАБОТЫ
+1. Поздоровайся и спроси, какая задача
+2. Уточни объём, сроки, бюджет — по одному вопросу за сообщение
+3. Предложи решение из базы знаний
+4. Предложи следующий шаг
+5. Возьми контакт и передай менеджеру
+
+ЗАПРЕЩЕНО
+— выдумывать цены, сроки и условия, которых нет в базе знаний
+— обещать скидки и индивидуальные условия
+— обсуждать конкурентов
+— задавать больше одного вопроса в сообщении
+— писать длинные простыни текста
+
+ЕСЛИ НЕ ЗНАЕШЬ ОТВЕТА
+Скажи «Хороший вопрос — уточню у коллеги и вернусь с ответом»
+и передай диалог менеджеру.
+
+ПОЗВАТЬ ЧЕЛОВЕКА, ЕСЛИ
+— клиент просит менеджера
+— клиент недоволен
+— начался спор о цене
+— клиент третий раз повторяет один и тот же вопрос</pre>
+  </div>
+
+  <div class="task">
+    <div class="task-head"><div class="stamp">09</div><h3>Проверьте бота тремя сообщениями</h3></div>
+    <p>Проверять надо не на удобных вопросах. Напишите боту три раза и запишите, что он ответил.</p>
+    <div class="field"><label>1. Обычный вопрос из базы знаний — что ответил</label><textarea data-k="t6" rows="2"></textarea></div>
+    <div class="field"><label>2. Возражение «дорого» — что ответил</label><textarea data-k="t7" rows="2"></textarea></div>
+    <div class="field"><label>3. Вопрос, которого в базе нет — честно передал человеку?</label><textarea data-k="t8" rows="2"></textarea></div>
+    <p style="margin-top:14px">Третий важнее первых двух. Если бот на него что-то придумал — возвращайтесь к разделу «Запрещено» и ужесточайте формулировки.</p>
+  </div>
+</section>
+
+<!-- ================= ФИНАЛ ================= -->
+<section class="module">
+  <div class="mod-label"><b>✓</b> Итог недели</div>
+  <h2>План на семь дней</h2>
+  <p class="lead">Отмечайте по мере выполнения. Галочки сохраняются в этом браузере.</p>
+
+  <div class="finish">
+    <h3>День 1–2 · сайт</h3>
+    <label class="check"><input type="checkbox" data-k="p1"><span>Собрал данные о бизнесе и сгенерировал лендинг</span></label>
+    <label class="check"><input type="checkbox" data-k="p2"><span>Сохранил index.html и сделал копию</span></label>
+    <label class="check"><input type="checkbox" data-k="p3"><span>Выложил на хостинг, сайт открывается по адресу</span></label>
+    <label class="check"><input type="checkbox" data-k="p4"><span>Сделал три правки</span></label>
+    <label class="check"><input type="checkbox" data-k="p5"><span>Сломал и починил — страха больше нет</span></label>
+
+    <h3>День 3–4 · замеры</h3>
+    <label class="check"><input type="checkbox" data-k="p6"><span>Снял пять цифр из модуля 5</span></label>
+    <label class="check"><input type="checkbox" data-k="p7"><span>Выгрузил переписки лучшего менеджера</span></label>
+    <label class="check"><input type="checkbox" data-k="p8"><span>Выписал десять частых вопросов клиентов</span></label>
+
+    <h3>День 5–7 · бот</h3>
+    <label class="check"><input type="checkbox" data-k="p9"><span>Выбрал путь: сервис или вайб-кодинг</span></label>
+    <label class="check"><input type="checkbox" data-k="p10"><span>Собрал базу знаний и границы</span></label>
+    <label class="check"><input type="checkbox" data-k="p11"><span>Заполнил системный промпт</span></label>
+    <label class="check"><input type="checkbox" data-k="p12"><span>Проверил тремя сообщениями, включая вопрос вне базы</span></label>
+  </div>
+
+  <div class="task" style="margin-top:32px">
+    <div class="task-head"><div class="stamp">→</div><h3>Что дальше</h3></div>
+    <p>Через месяц вернитесь к модулю 5 и заполните те же пять строк заново. Разница между замерами — это ваш результат, единственный, который можно кому-то показать.</p>
+    <div class="field"><label>Дата, когда вернусь к замерам</label><input type="text" data-k="w13" placeholder="Поставьте себе напоминание прямо сейчас"></div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>Рабочая тетрадь к эфиру клуба «НейроКус». Промпты — заготовки, а не догма: меняйте под себя, это и есть работа.</p>
+</footer>
+
+</div>
+
+<script>
+// Копирование промптов
+document.querySelectorAll('.copy').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var text = btn.closest('.prompt').querySelector('pre').innerText;
+    var done = function(){
+      btn.textContent = 'Готово';
+      btn.classList.add('done');
+      setTimeout(function(){ btn.textContent = 'Скопировать'; btn.classList.remove('done'); }, 1800);
+    };
+    function fallback(){
+      var ta = document.createElement('textarea');
+      ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); done(); } catch(e){ btn.textContent = 'Выделите вручную'; }
+      document.body.removeChild(ta);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, fallback);
+    } else { fallback(); }
+  });
+});
+
+// Сохранение всех ответов
+function store(el, key, prop){
+  try {
+    var saved = localStorage.getItem(key);
+    if (saved !== null) { el[prop] = (prop === 'checked') ? (saved === '1') : saved; }
+  } catch(e){}
+  var ev = (prop === 'checked') ? 'change' : 'input';
+  el.addEventListener(ev, function(){
+    try {
+      var v = (prop === 'checked') ? (el.checked ? '1' : '') : el.value;
+      v ? localStorage.setItem(key, v) : localStorage.removeItem(key);
+    } catch(e){}
+  });
+}
+document.querySelectorAll('[data-k]').forEach(function(el){
+  var key = 'nk-wb-' + el.dataset.k;
+  store(el, key, el.type === 'checkbox' ? 'checked' : 'value');
+});
+
+// Автовысота у textarea
+document.querySelectorAll('textarea').forEach(function(ta){
+  var grow = function(){ ta.style.height = 'auto'; ta.style.height = (ta.scrollHeight + 4) + 'px'; };
+  ta.addEventListener('input', grow);
+  setTimeout(grow, 60);
+});
+</script>
+</body>
+</html>
